@@ -29,31 +29,36 @@
         <!--Weather Info-->
         <div id="weatherDisplay">
             <div id="mainInfo" class="textCenter dataContainer">
-                <div id="temperature">28 C</div>
+                <div id="temperature">28 &#8451;</div>
                 <div id="weather">Light Rain</div>
                 <div id="location">Seremban, MY</div>
             </div>
 
             <div id="additionalInfo" class="dataContainer">
-                <div id="feels_like">Feels like <span>29.5 C</span></div>
-                <div id="maxTemperature">Maximun Temperature <span>31 C</span></div>
-                <div id="minTemperature">Minimum Temperature <span>28 C</span></div>
-                <div id="pressure">Pressure <span>124</span></div>
-                <div id="humidity">Humidity <span>78%</span></div>
-                <div id="visibility">Visibility <span>12.3km</span></div>
+                <div>Feels like <span id="feels_like">29.5 &#8451;</span></div>
+                <div>Maximun Temperature <span id="maxTemperature">31 &#8451;</span></div>
+                <div>Minimum Temperature <span id="minTemperature">28 &#8451;</span></div>
+                <div>Pressure <span id="pressure">124</span></div>
+                <div>Humidity <span id="humidity">78%</span></div>
+                <div>Cloudiness <span id="cloudiness">40%</span></div>
+                <div>Visibility <span id="visibility">12.3km</span></div>
             </div>
-        </div>
-
-        <div class="centerCont">
-            <button class="mainBtn">Show Forecast</button>
-        </div>
+            
+            <div class="centerCont mainBtnCont">
+                <button class="mainBtn">Show Forecast</button>
+            </div>
+            
+            <div id="forecast" class="dataContainer">
+                <div>test</div>
+            </div>
         
-        <div id="forecast" class="dataContainer">
-            <div>test</div>
         </div>
 
-        <div class="fade-in-left fixedCenter">
-            <input id="mainSearchBox" class="fixedCenter textCenter" placeholder="City name"/>
+        <div id="mainPage" class="fade-in-left fixedCenter">
+            <div class="fixedCenter">
+                <input id="mainSearchBox" class="textCenter" placeholder="City name"/>
+                <input type="submit" value="Go" class="mainBtn" onclick="getJson()"/>
+            </div>
         </div>
         <footer class="left_rightCenter">Developed by Leonlit</footer>
     </body>

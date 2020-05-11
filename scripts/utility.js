@@ -2,7 +2,7 @@ function timeFormater (unixTimestamp) {
     //buiding the time
     let symbol,
         day = "D",
-        date = new Date(unix*1000),
+        date = new Date(unixTimestamp*1000),
         hour = date.getHours(),
         minute = "0" + date.getMinutes();
     
@@ -23,3 +23,5 @@ function timeFormater (unixTimestamp) {
 
     return `${hour}:${minute} ${symbol}`;
 }
+
+let log = msg => console.log(msg);
