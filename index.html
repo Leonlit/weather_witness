@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weather App - created by leonlit</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="leonlit">
+        <meta name="description" content="A simple weather app with forecast functionality using third-party API">
+        <meta name="keywords" content="HTMl, CSS, JS, OpenWeatherMapAPI, HobbyProject">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/menu.css"/>
+        <link rel="stylesheet" href="css/dataStructuring.css"/>
+    </head>
+    <body>
+        <!--Navigation Section-->
+        <nav id="navContainer" class="fixedEle absolutePointEle">
+            <span id="mainTitle">Weather Viewer</span>
+            <div id="dropDown">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+        <div id="navItems" class="fixedEle ">
+            <li>About</li>
+            <li>Source Code</li>
+        </div>
+        <div id="shader"></div>
+        
+        <!--Weather Info-->
+        <div id="weatherDisplay">
+            <div id="mainInfo" class="textCenter dataContainer">
+                <div id="temperature">28 C</div>
+                <div id="weather">Light Rain</div>
+                <div id="location">Seremban, MY</div>
+            </div>
+
+            <div id="additionalInfo" class="dataContainer">
+                <div id="feels_like">Feels like <span>29.5 C</span></div>
+                <div id="maxTemperature">Maximun Temperature <span>31 C</span></div>
+                <div id="minTemperature">Minimum Temperature <span>28 C</span></div>
+                <div id="pressure">Pressure <span>124</span></div>
+                <div id="humidity">Humidity <span>78%</span></div>
+                <div id="visibility">Visibility <span>12.3km</span></div>
+            </div>
+        </div>
+
+        <div class="centerCont">
+            <button class="mainBtn">Show Forecast</button>
+        </div>
+        
+        <div id="forecast" class="dataContainer">
+            <div>test</div>
+        </div>
+
+        <div class="fade-in-left fixedCenter">
+            <input id="mainSearchBox" class="fixedCenter textCenter" placeholder="City name"/>
+        </div>
+        <footer class="left_rightCenter">Developed by Leonlit</footer>
+    </body>
+</html>
+
+<script src="scripts/clientRequest.js"></script>
+<script src="scripts/utility.js"></script>
