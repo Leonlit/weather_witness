@@ -13,6 +13,7 @@
 #mainInfo #temperature {
     font-size: 3em;
     font-weight: 900;
+    margin-bottom:20px;
 }
 
 #mainInfo #weather {
@@ -33,13 +34,13 @@
 #additionalInfo div {
     margin-bottom:10px;
     border-bottom: 1px solid white;
-    font-size:1.2em;
+    font-size:1em;
     padding:5px;
 }
 
 #additionalInfo span {
     float:right;
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: 900;
 }
 
@@ -71,5 +72,55 @@
 }
 
 #forecast {
-    background-color: rgb(208,230,136);
+    background-color: rgb(137, 208, 230);
+}
+
+.dataSection {
+    background-color: rgb(163, 232, 255);
+    padding:5%;
+    border-radius: 5px;
+}
+
+#firstDayDataCont {
+    width:519px;
+    height:66px;
+    margin-bottom:20px;
+}
+
+#forecastType {
+    margin-bottom:20px;
+}
+
+.forecastConfigure {
+    display: inline;
+    border: none;
+    padding:5px;
+    font-weight:900;
+    color:white;
+    background-color:rgb(136,161,230) ;
+}
+
+#forecast option {
+    font-weight: 900;
+}
+
+#forecastDay {
+    width:70px;
+}
+
+#firstDayDataCont .firstDayData {
+    color:black;
+    width:50px;
+    height:60px;
+    padding:2px;
+    display: inline-block;
+    font-size:10px;
+    font-weight: 900;
+    font-family: monospace ;
+    text-align:center;
+}
+
+.firstDayIcon {
+    width:30px;
+    height:30px;
 }

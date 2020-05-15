@@ -6,7 +6,7 @@ function getJson (param) {
 	}else {
 		place = param;
 	}
-	requestQuery = `request.php?city=${place}`;
+	requestQuery = `request.php?city=${place}&type=0`;
 
 	try {
 		fetch(requestQuery, {
@@ -43,26 +43,29 @@ let temperatureCont = document.getElementById("temperature"),
 	pressureCont = document.getElementById("pressure"),
 	humidityCont = document.getElementById("humidity"),
 	cloudinessCont = document.getElementById("cloudiness"),
-	visibilityCont = document.getElementById("visibility");
+	visibilityCont = document.getElementById("visibility")
+	mainWeatherIcon = document.getElementById("weatherIcon");
 
 function displayData (data) {
-	let icon,
-		city = data["name"],
+	let city = data["name"],
 		country = data["sys"]["country"],
 		weather = data["weather"][0]["description"],
 		temp = data["main"]["temp"] - 273.15,
 		maxTemp = data["main"]["temp_max"] - 273.15,
 		minTemp = data["main"]["temp_min"] - 273.15,
 		id = data["weather"][0]["id"],
-		unix = data["dt"], 
 		humidity = data["main"]["humidity"], 
 		pressure = data["main"]["pressure"],
 		feelsLike = data["main"]["feels_like"] - 273.15,
 		visibility = data["visibility"] /1000,
-		clouds = data["clouds"]["all"];
+		clouds = data["clouds"]["all"],
+		unix = decodedJson["dt"], 
+		iconUrl, dayOrNight, currHour;
 
-	let time = timeFormater(unix);
-	
+	currHour = getHour(unix)
+	dayOrNight = getDayOrNight(currHour);
+	iconName = getIconsName(id, dayOrNight);
+	iconUrl = `icons/${iconName}.png`
 	refreshPage();
 
 	temp = temp.toFixed(1);
@@ -73,6 +76,7 @@ function displayData (data) {
 
 	temperatureCont.innerHTML = `${temp} &#8451;`;
 	weatherCont.innerHTML = weather;
+	mainWeatherIcon
 	locationCont.innerHTML = city + ", " + country;
 
 	feelsLikeCont.innerHTML = `${feelsLike} &#8451;`;
@@ -95,4 +99,24 @@ function refreshPage () {
 	},1000);
 	weatherDetails.style.display = "block";
 	weatherDetails.classList.add("fade-in-left");
+}
+
+function getIconsName (id, DON) {
+	if (id <300 && id>=200) {
+		icon = "thunderstorm_" + DON;
+	}else if (id>=300 && id<400) {
+		icon = "drizzle";
+	}else if (id>=500 && id<600) {
+		icon = "rain_" + DON;
+	}else if (id>=600 && id <700) {
+		icon = "snow";
+	}else if (id >700 && id<800) {
+		icon = "atmosphere";
+	}else if (id == 800) {
+		icon = "clear_" + DON;
+	}else if (id==801) {
+		icon = "broken_cloud_"+DON;
+	}else if (id>801) {
+		icon = "cloud_scattered";
+	}
 }

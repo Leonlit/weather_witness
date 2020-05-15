@@ -7,10 +7,15 @@ body {
     padding:0px;
     background-image:linear-gradient(top, rgba(163, 232, 255, 0.596) 70%, rgb(137, 208, 230));
     background-image:-webkit-linear-gradient(top, rgba(163, 232, 255, 0.596) 70%, rgb(136, 208, 230));
-	min-width:100vw;
+	min-width:100%;
 	padding-top:60px;
 	background-size: cover;
 	background-repeat: no-repeat;
+}
+
+.scrollable {
+	overflow-y: hidden;
+	overflow-x: auto;
 }
 
 .fixedCenter {
@@ -77,6 +82,11 @@ body {
 	margin-left:20px;
 }
 
+#weatherIcon{
+	width:100px;
+	height:100px;
+}
+
 #dropDown {
 	float:right;
 	margin-right:20px;
@@ -134,7 +144,7 @@ body {
 footer {
 	position: absolute;
 	bottom:0;
-	width:100vw;
+	width:100%;
 	padding-top:10px;
 	padding-bottom:10px;
 	text-align: center;

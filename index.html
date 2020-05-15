@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Weather App - created by leonlit</title>
+        <title>Weather Viewer - created by leonlit</title>
         <meta charset="UTF-8">
         <meta name="author" content="leonlit">
         <meta name="description" content="A simple weather app with forecast functionality using third-party API">
@@ -30,7 +30,8 @@
         <div id="weatherDisplay">
             <div id="mainInfo" class="textCenter dataContainer">
                 <div id="temperature">28 &#8451;</div>
-                <div id="weather">Light Rain</div>
+                <img src="icons/thunderstorm_N.png"/ id="weatherIcon">
+                <div id="weather">raining</div>
                 <div id="location">Seremban, MY</div>
             </div>
 
@@ -45,11 +46,80 @@
             </div>
             
             <div class="centerCont mainBtnCont">
-                <button class="mainBtn">Show Forecast</button>
+                <button class="mainBtn" onclick="showForecast()">Show Forecast</button>
             </div>
             
             <div id="forecast" class="dataContainer">
-                <div>test</div>
+                <div id="firstDayForecast" class="dataSection">
+                    <select id="forecastType" name="forecastChoose" class="forecastConfigure"  onchange="changeForecastData()">
+                        <option value="temperature">Temperature</option>
+                        <option value="Percipitation">Percipitation</option>
+                        <option value="wind">Wind</option>
+                    </select>
+                    <select id="forecastDay" name="forecastDay" class="forecastConfigure"  onchange="changeForecastData()">
+                        <option value="1">12/5</option>
+                        <option value="2">13/5</option>
+                        <option value="3">14/5</option>
+                    </select>
+                    <div class="scrollable">
+                        <div id="firstDayDataCont">
+                            <div class="firstDayData">
+                                <div class="firstDayTime">12AM</div>
+                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="firstDatyTemp">32 &#8451;</div>
+                            </div>
+                            
+                            <div class="firstDayData">
+                                <div class="firstDayTime">12AM</div>
+                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="firstDatyTemp">32 &#8451;</div>
+                            </div>
+                            
+                            <div class="firstDayData">
+                                <div class="firstDayTime">12AM</div>
+                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="firstDatyTemp">32 &#8451;</div>
+                            </div>
+                            
+                            <div class="firstDayData">
+                                <div class="firstDayTime">12AM</div>
+                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="firstDatyTemp">32 &#8451;</div>
+                            </div>
+                            
+                            <div class="firstDayData">
+                                <div class="firstDayTime">12AM</div>
+                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="firstDatyTemp">32 &#8451;</div>
+                            </div>
+                            
+                            <div class="firstDayData">
+                                <div class="firstDayTime">12AM</div>
+                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="firstDatyTemp">32 &#8451;</div>
+                            </div>
+                            
+                            <div class="firstDayData">
+                                <div class="firstDayTime">12AM</div>
+                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="firstDatyTemp">32 &#8451;</div>
+                            </div>
+                            
+                            <div class="firstDayData">
+                                <div class="firstDayTime">12AM</div>
+                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="firstDatyTemp">32 &#8451;</div>
+                            </div>
+                            
+                            <div class="firstDayData">
+                                <div class="firstDayTime">12AM</div>
+                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="firstDatyTemp">32 &#8451;</div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
         
         </div>
@@ -60,7 +130,7 @@
                 <input type="submit" value="Go" class="mainBtn" onclick="getJson()"/>
             </div>
         </div>
-        <footer class="left_rightCenter">Developed by Leonlit</footer>
+        <footer>Developed by Leonlit</footer>
     </body>
 </html>
 
