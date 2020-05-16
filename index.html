@@ -30,7 +30,7 @@
         <div id="weatherDisplay">
             <div id="mainInfo" class="textCenter dataContainer">
                 <div id="temperature">28 &#8451;</div>
-                <img src="icons/thunderstorm_N.png"/ id="weatherIcon">
+                <img src="icons/thunderstorm_N.png" id="weatherIcon">
                 <div id="weather">raining</div>
                 <div id="location">Seremban, MY</div>
             </div>
@@ -46,15 +46,16 @@
             </div>
             
             <div class="centerCont mainBtnCont">
-                <button class="mainBtn" onclick="showForecast()">Show Forecast</button>
+                <button class="mainBtn" onclick="openCloseForecast()">Show Forecast</button>
             </div>
             
             <div id="forecast" class="dataContainer">
-                <div id="firstDayForecast" class="dataSection">
+                <div id="forecastData" class="dataSection">
                     <select id="forecastType" name="forecastChoose" class="forecastConfigure"  onchange="changeForecastData()">
                         <option value="temperature">Temperature</option>
                         <option value="Percipitation">Percipitation</option>
                         <option value="wind">Wind</option>
+                        <option value="clouds">Clouds</option>
                     </select>
                     <select id="forecastDay" name="forecastDay" class="forecastConfigure"  onchange="changeForecastData()">
                         <option value="1">12/5</option>
@@ -62,59 +63,60 @@
                         <option value="3">14/5</option>
                     </select>
                     <div class="scrollable">
-                        <div id="firstDayDataCont">
-                            <div class="firstDayData">
-                                <div class="firstDayTime">12AM</div>
-                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
-                                <div class="firstDatyTemp">32 &#8451;</div>
+                        <div id="forecastDataCont">
+                            <div class="forecastItems">
+                                <div class="forecastTime">12AM</div>
+                                <img class="forecastIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="forecastTemp">32 &#8451;</div>
+                                <div class="forecastTemp">3212 hpa</div>
                             </div>
                             
-                            <div class="firstDayData">
-                                <div class="firstDayTime">12AM</div>
-                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
-                                <div class="firstDatyTemp">32 &#8451;</div>
+                            <div class="forecastItems">
+                                <div class="forecastTime">12AM</div>
+                                <img class="forecastIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="forecastTemp">32 &#8451;</div>
+                                <div class="forecastTemp">32 hpa</div>
                             </div>
-                            
-                            <div class="firstDayData">
-                                <div class="firstDayTime">12AM</div>
-                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
-                                <div class="firstDatyTemp">32 &#8451;</div>
+
+                            <div class="forecastItems">
+                                <div class="forecastTime">12AM</div>
+                                <img class="forecastIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="forecastTemp">32 &#8451;</div>
+                                <div class="forecastTemp">32 hpa</div>
                             </div>
-                            
-                            <div class="firstDayData">
-                                <div class="firstDayTime">12AM</div>
-                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
-                                <div class="firstDatyTemp">32 &#8451;</div>
+                            <div class="forecastItems">
+                                <div class="forecastTime">12AM</div>
+                                <img class="forecastIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="forecastTemp">32 &#8451;</div>
+                                <div class="forecastTemp">32 hpa</div>
                             </div>
-                            
-                            <div class="firstDayData">
-                                <div class="firstDayTime">12AM</div>
-                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
-                                <div class="firstDatyTemp">32 &#8451;</div>
+
+                            <div class="forecastItems">
+                                <div class="forecastTime">12AM</div>
+                                <img class="forecastIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="forecastTemp">32 &#8451;</div>
+                                <div class="forecastTemp">32 hpa</div>
                             </div>
-                            
-                            <div class="firstDayData">
-                                <div class="firstDayTime">12AM</div>
-                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
-                                <div class="firstDatyTemp">32 &#8451;</div>
+
+                            <div class="forecastItems">
+                                <div class="forecastTime">12AM</div>
+                                <img class="forecastIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="forecastTemp">32 &#8451;</div>
+                                <div class="forecastTemp">32 hpa</div>
                             </div>
-                            
-                            <div class="firstDayData">
-                                <div class="firstDayTime">12AM</div>
-                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
-                                <div class="firstDatyTemp">32 &#8451;</div>
+
+                            <div class="forecastItems">
+                                <div class="forecastTime">12AM</div>
+                                <img class="forecastIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="forecastTemp">32 &#8451;</div>
+                                <div class="forecastTemp">32 hpa</div>
                             </div>
-                            
-                            <div class="firstDayData">
-                                <div class="firstDayTime">12AM</div>
-                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
-                                <div class="firstDatyTemp">32 &#8451;</div>
-                            </div>
-                            
-                            <div class="firstDayData">
-                                <div class="firstDayTime">12AM</div>
-                                <img class="firstDayIcon" src="icons/thunderstorm_N.png"/>
-                                <div class="firstDatyTemp">32 &#8451;</div>
+
+                            <div class="forecastItems">
+                                <div class="forecastTime">12AM</div>
+                                <img class="forecastIcon" src="icons/thunderstorm_N.png"/>
+                                <div class="forecastTemp">32 &#8451;</div>
+                                <div class="forecastTemp">32 hpa</div>
                             </div>
                             
                         </div>
@@ -127,7 +129,7 @@
         <div id="mainPage" class="fade-in-left fixedCenter">
             <div class="fixedCenter">
                 <input id="mainSearchBox" class="textCenter" placeholder="City name"/>
-                <input type="submit" value="Go" class="mainBtn" onclick="getJson()"/>
+                <input type="submit" value="Go" class="mainBtn" onclick="triggerData()"/>
             </div>
         </div>
         <footer>Developed by Leonlit</footer>
@@ -136,3 +138,4 @@
 
 <script src="scripts/clientRequest.js"></script>
 <script src="scripts/utility.js"></script>
+<script src="scripts/forecast.js"></script>

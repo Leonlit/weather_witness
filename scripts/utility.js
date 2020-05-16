@@ -16,7 +16,7 @@ function timeFormater (unixTimestamp) {
 //seperate function as needed for icon url construction
 function getHour (unixTime) {
     let dateObj = new Date (unixTime*1000);
-    return dateObj.getUTCHours();
+    return dateObj.getHours();
 }
 
 function  getDayType (hour) {
@@ -24,7 +24,7 @@ function  getDayType (hour) {
 }
 
 function getDayOrNight (hour) {
-    return (hour>12.00) ? "pm" : "am";
+    return (hour>12.00) ? "PM" : "AM";
 }
 
 let log = msg => console.log(msg);
