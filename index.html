@@ -45,15 +45,11 @@
                 <div>Visibility <span id="visibility">12.3km</span></div>
             </div>
             
-            <div class="centerCont mainBtnCont">
-                <button class="mainBtn" onclick="openCloseForecast()">Show Forecast</button>
-            </div>
-            
             <div id="forecast" class="dataContainer">
                 <div id="forecastData" class="dataSection">
                     <select id="forecastType" name="forecastChoose" class="forecastConfigure"  onchange="changeForecastData()">
                         <option value="temperature">Temperature</option>
-                        <option value="Percipitation">Percipitation</option>
+                        <option value="percipitation">Percipitation</option>
                         <option value="wind">Wind</option>
                     </select>
                     <select id="forecastDay" name="forecastDay" class="forecastConfigure"  onchange="changeForecastData()">

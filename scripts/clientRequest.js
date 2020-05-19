@@ -42,8 +42,9 @@ let temperatureCont = document.getElementById("temperature"),
 	footer = document.getElementsByTagName("footer")[0];
 
 function triggerData () {
+	getForecastData();
 	getJson(0).then ((message) => {
-		setupData(message);	
+		setupData(message);
 		console.log(message)
 	}).catch ((err)=>{
 		console.log(err);
@@ -61,7 +62,7 @@ function setupData (data) {
 		humidity = data["main"]["humidity"], 
 		pressure = data["main"]["pressure"],
 		feelsLike = data["main"]["feels_like"] - 273.15,
-		visibility = data["visibility"] /1000,
+		visibility = data["visibility"] / 1000,
 		clouds = data["clouds"]["all"],
 		unix = data["dt"], 
 		iconUrl, dayOrNight, currHour;

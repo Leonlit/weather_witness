@@ -8,7 +8,9 @@ function timeFormater (unixTimestamp) {
     minute = minute.substr(-2);
 
     symbol = getDayOrNight(hour);
-    hour %= 12;
+    
+    if (hour != 12) 
+        hour %= 12;
 
     return `${hour}:${minute} ${symbol}`;
 }
@@ -16,7 +18,7 @@ function timeFormater (unixTimestamp) {
 //seperate function as needed for icon url construction
 function getHour (unixTime) {
     let dateObj = new Date (unixTime*1000);
-    return dateObj.getHours();
+    return dateObj.getUTCHours();
 }
 
 function  getDayType (hour) {
@@ -24,7 +26,7 @@ function  getDayType (hour) {
 }
 
 function getDayOrNight (hour) {
-    return (hour>12.00) ? "PM" : "AM";
+    return (hour>=12.00) ? "PM" : "AM";
 }
 
 let log = msg => console.log(msg);
