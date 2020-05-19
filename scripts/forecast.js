@@ -1,5 +1,5 @@
 let forecastJson,
-	forecastShown =false;
+	forecastShown = false;
 
 let forecast = document.getElementById("forecast");
 	forecastEle = document.getElementById("forecastData"),
@@ -13,7 +13,7 @@ function openCloseForecast () {
 		forecastJson = forecastJson["list"];
 		console.log(forecastJson);
 		if (forecastJson != undefined) {
-			setForecastTemperature(0);
+			setForecastTemperature(1);
 			catchedForecastData = true;
 		}
 	}
@@ -29,28 +29,18 @@ function openCloseForecast () {
 	}
 }
 
-//will be using temperature, weater id, time, percipitation, widns, clouds and pressure
+//will be using temperature, weater id, time, percipitation, winds
 function setForecastTemperature (batch) {
-	/* need to follow this format
-	
-	<div class="forecastItems">
-        <div class="forecastTime">12AM</div>
-        <img class="forecastIcon" src="icons/thunderstorm_N.png"/>
-        <div class="forecastTemp">32 &#8451;</div>
-        <div class="forecastTemp">3212 hpa</div>
-	</div>
-	
-	*/
-
 	let resultElement = "";
 	//batch means the batch of the data, the forecast is devided to 3 days
 	//it's according to the day (batch 1 = current day forecast).
-	for (let index = batch++; index< 8 * batch; index++) {
+	for (let index = (batch - 1) * 8; index< 8 * batch; index++) {
 		let temp, weatherId, time, pressure;
 		temp = forecastJson["main"]["temp"];
 		weatherId = forecastJson["weather"]["id"];
 		time = forecastJson["dt"];
 		time = timeFormater(time);
+		pressure = forecastJson["main"]["pressure"];
 
 		let currHour = getHour(time),
 			dayOrNight = getDayOrNight(currHour),
@@ -59,10 +49,10 @@ function setForecastTemperature (batch) {
 
 		let ele = `
 			<div class="forecastItems">
-				<div class="forecastTime">${time}</div>
+				<div>${time}</div>
 				<img class="forecastIcon" src="${iconUrl}"/>
-				<div class="forecastTemp">${temp} &#8451;</div>
-				<div class="forecastTemp">${pressure} hpa</div>
+				<div>${temp} &#8451;</div>
+				<div>${pressure} hpa</div>
 			</div>
 		`
 		resultElement += ele;
@@ -71,6 +61,31 @@ function setForecastTemperature (batch) {
 	forecastDataCont.innerHTML = resultElement;
 }
 
-function setForecastTemperature () {
+function setForecastPrecipitation (batch) {
+	let resultElement = "";
+	//batch means the batch of the data, the forecast is devided to 3 days
+	//it's according to the day (batch 1 = current day forecast).
+	for (let index = (batch - 1) * 8; index< 8 * batch; index++) {
+		let rain, logo, time;
+		rain = forecastJson["rain"]["3h"];
+		weatherId = forecastJson["weather"]["id"];
+		time = forecastJson["dt"];
+		time = timeFormater(time);
 
+		if (rain != undefined) 
+			logo = "icons/waterDrop.png";
+		else 
+			logo = "icons/noWaterDrop.png";
+
+		let ele = `
+			<div class="forecastItems">
+				<div>${time}</div>
+				<img class="forecastIcon" src="${logo}"/>
+				<div>${rain} &#8451;</div>
+			</div>
+		`
+		resultElement += ele;
+	}
+	forecastDataCont.innerHTML = "";
+	forecastDataCont.innerHTML = resultElement;
 }

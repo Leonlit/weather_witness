@@ -122,7 +122,7 @@ function getIconsName (id, DON) {
 	}else if (id == 800) {
 		icon = "clear_" + DON;
 	}else if (id==801) {
-		icon = "broken_cloud_"+DON;
+		icon = "broken_clouds_"+DON;
 	}else if (id>801) {
 		icon = "cloud_scattered";
 	}
