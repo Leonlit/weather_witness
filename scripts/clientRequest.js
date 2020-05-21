@@ -1,4 +1,59 @@
 let catchedForecastData = false;
+let navOpen = false;
+
+function openClostNav() {
+	let navCont = document.getElementById("navContainer");
+	let navItems = document.getElementById("navItems");
+	let navTitle = document.getElementById("mainTitle");
+	let dropDown = document.getElementById("dropDown");
+	let navBar = dropDown.getElementsByTagName("div");
+
+	if (navOpen){
+		
+		navTitle.classList.remove("turn-white");
+		navTitle.classList.add("turn-black");
+		setTimeout(()=>{
+			navTitle.style.color = "black";
+		},400);
+
+		for (let x = 0;x<navBar.length;x++) {
+			navBar[x].classList.remove("bg-turn-white");
+			navBar[x].classList.add("bg-turn-black");
+			
+			setTimeout(()=> {
+				navBar[x].style.backgroundColor = "black";
+			}, 400);
+		}
+		navItems.classList.add("fade-out-up");
+		navItems.classList.remove("fade-in-down")
+		setTimeout(()=>{
+			navItems.style.top = "-230px";
+		}, 500);
+		navOpen = false;
+	}else {
+		
+		navTitle.classList.remove("turn-black");
+		navTitle.classList.add("turn-white");
+		setTimeout(()=>{
+			navTitle.style.color = "white";
+		}, 400);
+		for (let x = 0;x<navBar.length;x++) {
+			navBar[x].classList.remove("bg-turn-black");
+			navBar[x].classList.add("bg-turn-white");
+			
+			setTimeout(()=> {
+				navBar[x].style.backgroundColor = "white";
+			}, 400);
+		}
+
+		navItems.classList.add("fade-in-down");
+		navItems.classList.remove("fade-out-up")
+		setTimeout(()=>{
+			navItems.style.top = "0px";
+		}, 500);
+		navOpen = true;
+	}
+}
 
 function getJson (type) {
 	return new Promise ((resolve, reject)=> {

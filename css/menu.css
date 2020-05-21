@@ -101,9 +101,9 @@ body {
 }
 
 #navItems {
-	top:-150px;
-	padding-top:30px;
-	padding-bottom: 20px;
+	top:-230px;
+	padding-top:100px;
+	padding-bottom:20px;
 	height:100px;
 	background-color:rgb(64,64,64);
 	z-index:100;
@@ -177,6 +177,36 @@ footer {
 	display:hidden;
 }
 
+.fade-out-up {
+	animation-duration:0.5s;
+	animation-name:fadeOutUp;
+}
+
+.fade-in-down {
+	animation-duration:0.5s;
+	animation-name:fadeInDown;
+}
+
+.turn-white {
+	animation-duration:0.4s;
+	animation-name:turnWhite;
+}
+
+.turn-black {
+	animation-duration:0.4s;
+	animation-name:turnBlack;
+}
+
+.bg-turn-black {
+	animation-duration:0.4s;
+	animation-name:bgTurnBlack;
+}
+
+.bg-turn-white {
+	animation-duration:0.4s;
+	animation-name:bgTurnWhite;
+}
+
 @-webkit-keyframes fadeInLeft {
 	0% {
 		opacity: 0;
@@ -207,5 +237,63 @@ footer {
 	100% {
 		opacity:0;
 		transform: translateX(10px);
+	}
+}
+
+@keyframes fadeOutUp {
+	0% {
+		opacity:1;
+		top:0px;
+	}
+	100% {
+		opacity:0;
+		top:-230px;
+	}
+}
+
+@keyframes fadeInDown {
+	0% {
+		opacity:0;
+		top:-230px;
+	}
+	100% {
+		opacity:1;
+		top:0px;
+	}
+}
+
+@keyframes turnWhite {
+	0% {
+		color:black;
+	}
+	100% {
+		color:white;
+	}
+}
+
+@keyframes turnBlack {
+	0% {
+		color:white;
+	}
+	100% {
+		color:black;
+	}
+}
+
+@keyframes bgTurnBlack {
+	0% {
+		background-color:white;
+	}
+	100% {
+		background-color:black;
+	}
+}
+
+@keyframes bgTurnWhite {
+	0% {
+		background-color:black;
+	}
+	100% {
+		background-color:white;
 	}
 }

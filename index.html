@@ -12,18 +12,19 @@
     </head>
     <body>
         <!--Navigation Section-->
+        
+        <div id="navItems" class="fixedEle ">
+            <li>About</li>
+            <li>Source Code</li>
+        </div>
         <nav id="navContainer" class="fixedEle absolutePointEle">
             <span id="mainTitle">Weather Viewer</span>
-            <div id="dropDown">
+            <div id="dropDown" onclick="openClostNav()">
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
         </nav>
-        <div id="navItems" class="fixedEle ">
-            <li>About</li>
-            <li>Source Code</li>
-        </div>
         <div id="shader"></div>
         
         <!--Weather Info-->
