@@ -90,6 +90,7 @@ body {
 #dropDown {
 	float:right;
 	margin-right:20px;
+	cursor:pointer;
 }
 
 #dropDown div {
