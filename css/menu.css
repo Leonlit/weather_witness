@@ -55,6 +55,10 @@ body {
 	margin-right:auto;
 }
 
+a {
+	text-decoration: none;
+}
+
 
 /* --------------
    Mobile design (Mobile first Design)
@@ -83,6 +87,54 @@ body {
 	margin-left:20px;
 }
 
+#aboutPage{
+	margin-top:25%;
+	margin-left:5%;
+	margin-right:5%;
+	padding:5%;
+	height:75vh;
+	width:80%;
+	z-index:50;
+	border-radius:5px;
+	background-color: rgb(152, 229, 255);
+	color:black;
+	overflow-y: scroll;
+}
+
+#aboutPage h2{
+	font-size: 2.2em;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#aboutPage hr {
+	border-color:rgb(74,74,74);
+
+}
+
+#aboutPage p {
+	font-size:1.3em;
+	font-family: monospace;
+	text-align: justify;
+}
+
+#aboutPage ul li {
+	margin-top:10px;
+	font-size:1.1em;
+	font-weight:800;
+}
+
+.pageLink {
+	color:green;
+}
+
+.pageLink:visited {
+	color:grey;
+}
+
+.pageLink:hover {
+	color:orange;
+}
+
 #weatherIcon{
 	width:100px;
 	height:90px;
@@ -108,6 +160,18 @@ body {
 	height:130px;
 	background-color:rgb(64,64,64);
 	z-index:100;
+}
+
+.navLink:visited {
+	color:white;
+}
+
+.navLink {
+	cursor: pointer;
+}
+
+.navLink:hover {
+	color:orange;
 }
 
 #shader {
