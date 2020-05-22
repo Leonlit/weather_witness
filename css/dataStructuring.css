@@ -1,5 +1,5 @@
 #weatherDisplay {
-    display: none;
+    display: block;
 }
 
 .dataContainer {

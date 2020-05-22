@@ -61,7 +61,7 @@ body {
    --------------
 */
 #mainPage {
-
+	display: none;
 }
 
 #mainPage input[type=submit] {
@@ -70,9 +70,10 @@ body {
 
 #navContainer {
 	height:40px;
-	width:99%;
+	width:100%;
 	padding-top:15px;
 	z-index:100;
+	background-color: transparent;
 }
 
 #mainTitle {

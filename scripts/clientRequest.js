@@ -2,7 +2,14 @@ let catchedForecastData = false;
 let navOpen = false;
 
 window.onscroll = () => {
-	
+	let navCont = document.getElementById("navContainer");
+	let windowViewTop = window.scrollY;
+	if (windowViewTop <= 160) {
+		navCont.style.backgroundColor = `rgba(255,255,255 , ${windowViewTop/160})`;
+	}
+	if (windowViewTop >= 160) {
+		navCont.style.backgroundColor = `rgba(255,255,255, 1)`;
+	}
 }
 
 function openCloseNav() {
