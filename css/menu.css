@@ -101,12 +101,40 @@ body {
 }
 
 #navItems {
-	top:-230px;
+	top:-260px;
 	padding-top:100px;
 	padding-bottom:20px;
-	height:100px;
+	height:130px;
 	background-color:rgb(64,64,64);
 	z-index:100;
+}
+
+#shader {
+	background-color: rgba(0, 0, 0, 0.568);
+	z-index:6;
+	width:100vw;
+	height:100vh;
+}
+
+#secondarySearch {
+	background-color:rgb(74,74,74);
+	color:white;
+	font-size:1.2em;
+	padding:5px;
+	padding-left:10px;
+	width:70vw;
+	max-width:220px;
+	outline:none;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	border:3px solid rgb(104,104,104);
+	border-radius:5px;
+	transition:font-size 0.3s, font-weight 0.3s;
+	font-weight: 600;
+}
+
+#secondarySearch:focus {
+	font-size: 1.3em;
+	font-weight: 800;
 }
 
 #navItems li {
@@ -203,9 +231,40 @@ footer {
 }
 
 .bg-turn-white {
-	animation-duration:0.4s;
+	animation-duration:1s;
 	animation-name:bgTurnWhite;
 }
+
+.rotateNav45 {
+	animation-duration: 0.4s;
+	animation-name: rotateNavTo45;
+}
+
+.rotateNav-45 {
+	animation-duration: 0.4s;
+	animation-name: rotateNavTo-45;
+}
+
+.rotateBackNav45  {
+	animation-duration: 0.4s;
+	animation-name: rotateBackNavFrom45;
+}
+
+.rotateBackNav-45  {
+	animation-duration: 0.4s;
+	animation-name: rotateBackNavFrom-45;
+}
+
+.hidden {
+	animation-duration: 0.4s;
+	animation-name:eleHide;
+}
+
+.appear {
+	animation-duration: 0.4s;
+	animation-name:eleAppear;
+}
+
 
 @-webkit-keyframes fadeInLeft {
 	0% {
@@ -247,14 +306,14 @@ footer {
 	}
 	100% {
 		opacity:0;
-		top:-230px;
+		top:-260px;
 	}
 }
 
 @keyframes fadeInDown {
 	0% {
 		opacity:0;
-		top:-230px;
+		top:-260px;
 	}
 	100% {
 		opacity:1;
@@ -280,20 +339,57 @@ footer {
 	}
 }
 
-@keyframes bgTurnBlack {
+@keyframes rotateNavTo45 {
 	0% {
-		background-color:white;
+		background-color: black;
 	}
 	100% {
-		background-color:black;
+		transform:translate(0, 10px) rotate(45deg);
+		background-color: white;
 	}
 }
 
-@keyframes bgTurnWhite {
+@keyframes rotateNavTo-45 {
 	0% {
-		background-color:black;
+
+		background-color: black;
 	}
 	100% {
-		background-color:white;
+		transform:translate(0, -5px) rotate(-45deg);
+		background-color: white;
+	}
+}
+
+@keyframes rotateBackNavFrom45 {
+	0% {
+		background-color: white;
+	}
+	100% {
+		transform:translate(0, 0) rotate(0deg);
+		background-color: black;
+	}
+}
+
+@keyframes rotateBackNavFrom-45 {
+	0% {
+		background-color: white;
+	}
+	100% {
+		transform:translate(0, 0) rotate(0deg);
+		background-color: black;
+	}
+}
+
+@keyframes eleHide{
+	100% {
+		opacity: 0;
+		display:none;
+	}
+}
+
+@keyframes eleAppear{
+	100% {
+		opacity: 1;
+		display: inline-block;
 	}
 }

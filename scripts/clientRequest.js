@@ -1,57 +1,74 @@
 let catchedForecastData = false;
 let navOpen = false;
 
-function openClostNav() {
-	let navCont = document.getElementById("navContainer");
+function openCloseNav() {
 	let navItems = document.getElementById("navItems");
 	let navTitle = document.getElementById("mainTitle");
 	let dropDown = document.getElementById("dropDown");
 	let navBar = dropDown.getElementsByTagName("div");
+	let shader = document.getElementById("shader");
 
 	if (navOpen){
-		
-		navTitle.classList.remove("turn-white");
-		navTitle.classList.add("turn-black");
-		setTimeout(()=>{
-			navTitle.style.color = "black";
-		},400);
+		navTitle.className = "turn-black";
+		navBar[1].className = "appear";
+		navBar[0].className = "rotateBackNav45";
+		navBar[2].className = "rotateBackNav-45";
 
-		for (let x = 0;x<navBar.length;x++) {
-			navBar[x].classList.remove("bg-turn-white");
-			navBar[x].classList.add("bg-turn-black");
-			
-			setTimeout(()=> {
-				navBar[x].style.backgroundColor = "black";
-			}, 400);
-		}
+		shader.classList.remove("appear");
+		shader.classList.add("hidden")
+
 		navItems.classList.add("fade-out-up");
-		navItems.classList.remove("fade-in-down")
-		setTimeout(()=>{
-			navItems.style.top = "-230px";
-		}, 500);
+		navItems.classList.remove("fade-in-down");
+
 		navOpen = false;
-	}else {
-		
-		navTitle.classList.remove("turn-black");
-		navTitle.classList.add("turn-white");
+
 		setTimeout(()=>{
-			navTitle.style.color = "white";
+			navBar[0].style.transform = "translate(0, 0) rotate(0deg)";
+			navBar[2].style.transform = "translate(0, 0) rotate(0deg)";
+			navBar[0].style.backgroundColor = "black";
+			navBar[2].style.backgroundColor = "black";
+			navBar[1].style.opacity = 1;
+			shader.style.display = "none";
+			shader.style.opacity = "0";
+			navTitle.style.color = "black";
 		}, 400);
-		for (let x = 0;x<navBar.length;x++) {
-			navBar[x].classList.remove("bg-turn-black");
-			navBar[x].classList.add("bg-turn-white");
-			
-			setTimeout(()=> {
-				navBar[x].style.backgroundColor = "white";
-			}, 400);
-		}
+		
+		setTimeout(()=>{
+			navItems.style.top = "-260px";
+		}, 500);
+	
+	}else {
+		navTitle.className = "turn-white";
+		navBar[1].className = "hidden";
+		navBar[0].className = "rotateNav45";
+		navBar[2].className = "rotateNav-45";
 
 		navItems.classList.add("fade-in-down");
-		navItems.classList.remove("fade-out-up")
+		navItems.classList.remove("fade-out-up");
+
+		navOpen = true;
+
+		setTimeout(()=> {
+			navBar[1].style.opacity = 0;
+		},200)
+
+		shader.style.display = "block";
+		shader.classList.remove("hidden");
+		shader.classList.add("appear");
+		
+
+		setTimeout(()=>{
+			navBar[0].style.transform = "translate(0, 10px) rotate(45deg)";
+			navBar[2].style.transform = "translate(0, -5px) rotate(-45deg)";
+			navBar[0].style.backgroundColor = "white";
+			navBar[2].style.backgroundColor = "white";
+			shader.style.opacity = "1";
+			navTitle.style.color = "white";
+		}, 400);
+
 		setTimeout(()=>{
 			navItems.style.top = "0px";
 		}, 500);
-		navOpen = true;
 	}
 }
 

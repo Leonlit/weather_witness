@@ -16,16 +16,17 @@
         <div id="navItems" class="fixedEle ">
             <li>About</li>
             <li>Source Code</li>
+            <li><input type="text" placeholder="search city weather" id="secondarySearch"/></li>
         </div>
         <nav id="navContainer" class="fixedEle absolutePointEle">
             <span id="mainTitle">Weather Viewer</span>
-            <div id="dropDown" onclick="openClostNav()">
+            <div id="dropDown" onclick="openCloseNav()">
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
         </nav>
-        <div id="shader"></div>
+        <div id="shader" class="fixedEle absolutePointEle" onclick="openCloseNav()"></div>
         
         <!--Weather Info-->
         <div id="weatherDisplay">
