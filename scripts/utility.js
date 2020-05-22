@@ -22,11 +22,10 @@ function getHour (unixTime) {
 }
 
 function  getDayType (hour) {
-    return (hour > 19 || hour < 6) ? "N": "D";
+    console.log(hour)
+    return (hour >= 19 || hour <= 6) ? "N": "D";
 }
 
 function getDayOrNight (hour) {
     return (hour>=12.00) ? "PM" : "AM";
 }
-
-let log = msg => console.log(msg);

@@ -1,6 +1,10 @@
 let catchedForecastData = false;
 let navOpen = false;
 
+window.onscroll = () => {
+	
+}
+
 function openCloseNav() {
 	let navItems = document.getElementById("navItems");
 	let navTitle = document.getElementById("mainTitle");
@@ -13,13 +17,10 @@ function openCloseNav() {
 		navBar[1].className = "appear";
 		navBar[0].className = "rotateBackNav45";
 		navBar[2].className = "rotateBackNav-45";
-
 		shader.classList.remove("appear");
 		shader.classList.add("hidden")
-
 		navItems.classList.add("fade-out-up");
 		navItems.classList.remove("fade-in-down");
-
 		navOpen = false;
 
 		setTimeout(()=>{
@@ -42,20 +43,17 @@ function openCloseNav() {
 		navBar[1].className = "hidden";
 		navBar[0].className = "rotateNav45";
 		navBar[2].className = "rotateNav-45";
-
 		navItems.classList.add("fade-in-down");
 		navItems.classList.remove("fade-out-up");
-
 		navOpen = true;
+		shader.style.opacity = "0";
+		shader.style.display = "block";
+		shader.classList.remove("hidden");
+		shader.classList.add("appear");
 
 		setTimeout(()=> {
 			navBar[1].style.opacity = 0;
 		},200)
-
-		shader.style.display = "block";
-		shader.classList.remove("hidden");
-		shader.classList.add("appear");
-		
 
 		setTimeout(()=>{
 			navBar[0].style.transform = "translate(0, 10px) rotate(45deg)";
@@ -65,7 +63,6 @@ function openCloseNav() {
 			shader.style.opacity = "1";
 			navTitle.style.color = "white";
 		}, 400);
-
 		setTimeout(()=>{
 			navItems.style.top = "0px";
 		}, 500);
@@ -200,4 +197,8 @@ function getIconsName (id, DON) {
 		icon = "cloud_scattered";
 	}
 	return icon;
+}
+
+function openPage () {
+	openCloseNav();
 }

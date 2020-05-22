@@ -66,13 +66,16 @@ function setForecastTemperature (batch) {
 		temp = temp.toFixed(1);
 		weatherId = currJSON["weather"][0]["id"];
 		time = currJSON["dt"];
-		time = timeFormater(time);
+		
 		pressure = currJSON["main"]["pressure"];
 
 		let currHour = getHour(time),
 			dayOrNight = getDayType(currHour),
 			iconName = getIconsName(weatherId, dayOrNight),
 			iconUrl = `icons/${iconName}.png`;
+
+		console.log( dayOrNight, currHour, iconName);
+		time = timeFormater(time);
 
 		let ele = `
 			<div class="forecastItems">
@@ -94,7 +97,7 @@ function setForecastPrecipitation (batch) {
 	//batch means the batch of the data, the forecast is devided to 3 days
 	//it's according to the day (batch 1 = current day forecast).
 	for (let index = (batch - 1) * 8; index< 8 * batch; index++) {
-		let rain, logo, time, rainOrNot;
+		let rain, logo, time, rainOrNot, customStyle;
 		let currJSON = forecastJson[index];
 		time = currJSON["dt"];
 		time = timeFormater(time);
@@ -103,15 +106,17 @@ function setForecastPrecipitation (batch) {
 			rain = currJSON["rain"]["3h"];
 			logo = "icons/waterDrop.png";
 			rainOrNot = `<div style="margin-top:5px;">${rain} mm</div>`;
+			customStyle = "";
 		}catch { 
 			logo = "icons/noWaterDrop.png";
 			rainOrNot = "";
+			customStyle = `width:45px;height:47px;`
 		}
 
 		let ele = `
 			<div class="forecastItems">
 				<div>${time}</div>
-				<img class="forecastIcon" src="${logo}"/>
+				<img class="forecastIcon" src="${logo}" style="${customStyle}"/>
 				${rainOrNot}
 			</div> 
 		`

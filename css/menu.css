@@ -84,7 +84,7 @@ body {
 
 #weatherIcon{
 	width:100px;
-	height:100px;
+	height:90px;
 }
 
 #dropDown {
@@ -110,6 +110,7 @@ body {
 }
 
 #shader {
+	display:none;
 	background-color: rgba(0, 0, 0, 0.568);
 	z-index:6;
 	width:100vw;
