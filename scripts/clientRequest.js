@@ -1,9 +1,32 @@
 let catchedForecastData = false;
 let navOpen = false;
+let pageOpen = false;
 
 window.onscroll = () => {
+	adjustNavCont();
+}
+
+function openClosePage () {
+	let page = document.getElementById("aboutPage")
+	if (pageOpen) {
+		pageOpen = false;
+		page.classList.remove("fade-in-left-03");
+		page.classList.add("fade-out-03");
+		setTimeout(() => {
+			page.style.display = "none";
+		}, 300);
+	}else {
+		openCloseNav();
+		pageOpen = true;
+		page.style.display = "block";
+		page.classList.remove("fade-out-03");
+		page.classList.add("fade-in-left-03");
+	}
+}
+
+function adjustNavCont () {
 	if (!navOpen) {
-		let navCont = document.getElementById("navContainer");
+		let navCont = document.getElementById("navBg");
 		let windowViewTop = window.scrollY;
 		if (windowViewTop <= 160) {
 			navCont.style.backgroundColor = `rgba(255,255,255 , ${windowViewTop/160})`;
@@ -22,6 +45,7 @@ function openCloseNav() {
 	let shader = document.getElementById("shader");
 
 	if (navOpen){
+		adjustNavCont();
 		navTitle.className = "turn-black";
 		navBar[1].className = "appear";
 		navBar[0].className = "rotateBackNav45";
@@ -103,7 +127,7 @@ function getJson (type) {
 			//customAlert("something went wrong!!! Please make sure you enter your city name correctly or simply try again")
 			reject("Something went wrong when the server send an request to the API, Try again later");
 		}
-	});
+	});	
 }
 
 let temperatureCont = document.getElementById("temperature"),

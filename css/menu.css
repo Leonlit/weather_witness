@@ -99,6 +99,14 @@ a {
 	background-color: rgb(152, 229, 255);
 	color:black;
 	overflow-y: scroll;
+	display:none;
+}
+
+#aboutPage #close {
+	float:right;
+	font-weight: 900;
+	font-size: 2em;
+	z-index: 8;
 }
 
 #aboutPage h2{
@@ -140,6 +148,13 @@ a {
 	height:90px;
 }
 
+#navBg {
+	width:100vh;
+	height:40px;
+	padding-top: 15px;
+	z-index:4;
+}
+
 #dropDown {
 	float:right;
 	margin-right:20px;
@@ -177,7 +192,7 @@ a {
 #shader {
 	display:none;
 	background-color: rgba(0, 0, 0, 0.568);
-	z-index:6;
+	z-index:10;
 	width:100vw;
 	height:100vh;
 }
@@ -271,6 +286,21 @@ footer {
 	display:hidden;
 }
 
+.fade-in-left-03 {
+	-webkit-animation-duration: .3s;
+	animation-duration: .3s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	animation-name: fadeInLeft03;
+}
+
+.fade-out-03 {
+	animation-duration:.3s;
+	animation-name:fadeOut03;
+	opacity:0;
+	display:hidden;
+}
+
 .fade-out-up {
 	animation-duration:0.5s;
 	animation-name:fadeOutUp;
@@ -355,6 +385,28 @@ footer {
 }
 	
 @keyframes fadeOut {
+	0% {
+		opacity:1;
+		transform: translateX(0px);
+	}
+	100% {
+		opacity:0;
+		transform: translateX(10px);
+	}
+}
+
+@keyframes fadeInLeft03 {
+	0% {
+		opacity: 0;
+		transform: translateX(-10px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+	
+@keyframes fadeOut03 {
 	0% {
 		opacity:1;
 		transform: translateX(0px);
