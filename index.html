@@ -7,7 +7,8 @@
         <meta name="description" content="A simple weather app with forecast functionality using third-party API">
         <meta name="keywords" content="HTMl, CSS, JS, OpenWeatherMapAPI, HobbyProject">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/menu.css"/>
+        <link rel="stylesheet" href="css/menuMobile.css"/>
+        <link rel="stylesheet" href="css/menuTablet.css"/>
         <link rel="stylesheet" href="css/dataStructuring.css"/>
     </head>
     <body>
@@ -16,7 +17,7 @@
         <div id="navItems" class="fixedEle ">
             <li><a class="navLink" onclick="openClosePage()">About</a></li>
             <li><a class="navLink" targt="_blank" href="https://github.com/Leonlit/weather_viewer">Source Code</a></li>
-            <li><input type="text" placeholder="search city weather" id="secondarySearch"/></li>
+            <li><input type="text" placeholder="search weather" id="secondarySearch"/></li>
         </div>
         <div id="navBg" class="fixedEle absolutePointEle"></div>
         <nav id="navContainer" class="fixedEle absolutePointEle">
@@ -164,3 +165,4 @@
 <script src="scripts/clientRequest.js"></script>
 <script src="scripts/utility.js"></script>
 <script src="scripts/forecast.js"></script>
+<script src="scripts/userInteraction.js"></script>

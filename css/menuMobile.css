@@ -74,7 +74,7 @@ a {
 
 #navContainer {
 	height:40px;
-	width:100%;
+	width:100vw;
 	padding-top:15px;
 	z-index:100;
 	background-color: transparent;
@@ -94,7 +94,7 @@ a {
 	padding:5%;
 	height:75vh;
 	width:80%;
-	z-index:50;
+	z-index:9;
 	border-radius:5px;
 	background-color: rgb(152, 229, 255);
 	color:black;
@@ -149,7 +149,7 @@ a {
 }
 
 #navBg {
-	width:100vh;
+	width:100vw;
 	height:40px;
 	padding-top: 15px;
 	z-index:4;
