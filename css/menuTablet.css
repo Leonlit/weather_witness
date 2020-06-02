@@ -65,33 +65,47 @@
     }
 
     #secondarySearch {
-        background-color:rgb(74,74,74);
-        color:white;
+        background-color:transparent;
+        color:black;
         font-size:1.2em;
         padding:5px;
         padding-left:10px;
-        width:160px;
+        width: 110px;
         outline:none;
         font-family: Georgia, 'Times New Roman', Times, serif;
-        border:3px solid rgb(104,104,104);
+        border:3px solid transparent;
         border-radius:5px;
         transition:font-size 0.3s, font-weight 0.3s;
         font-weight: 600;
+        transition:0.3s border;
     }
 
     #secondarySearch:focus {
-        font-size: 1.3em;
+        border-bottom: 3px solid rgb(104,104,104);
+        font-size: 1.2em;
         font-weight: 800;
+    }
+
+    #searchIcon {
+        padding: 10px;
+        font-size:1.2em;
+        font-weight: 900;
+        text-align: center ;
+        margin-top:5px;
+        border:1px solid yellow;
+        float:right;
+        background-color: black;
+        color:white;
+        border-radius:  5px;
+        margin-left:10px;
     }
 
     #navItems li {
         display:inline-block;
         width:auto;
         color:black;
-        font-size:1em;
-        font-weight:900;
-        padding-top:10px;
-        padding-bottom:10px;
+        font-size:1.1em;
+        padding-top:5px;
         margin-left:20px;
     }
 
