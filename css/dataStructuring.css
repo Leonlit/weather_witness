@@ -128,3 +128,86 @@
     height:30px;
     margin-top:10px;
 }
+
+
+@media only screen and (min-width: 700px) {
+    .dataContainer {
+        padding:40px;
+    }
+    
+    #mainInfo div{
+        margin-top:20px;
+    }
+    
+    #mainInfo #temperature {
+        font-size: 3em;
+        font-weight: 900;
+        margin-bottom:20px;
+    }
+    
+    #mainInfo #weather {
+        font-size:1.2em;
+        font-weight:700;
+    }
+    
+    #mainInfo #location {
+        font-size:1.5em;
+        font-weight:900;
+    }
+    
+    #additionalInfo{
+        display: inline-block;
+        width:35%;
+        border-radius: 15px 15px 0px 0px ;
+    }
+    
+    #additionalInfo div {
+        margin-bottom:10px;
+        border-bottom: 1px solid white;
+        font-size:1em;
+        padding:5px;
+    }
+    
+    #forecastDataCont {
+        margin-top:20px;
+        margin-left:20px;
+        display: grid;
+        grid-column-gap:20px;
+        grid-template-columns: auto auto auto auto;
+        grid-row-gap: 30px;
+        width:100%;
+        height:auto;
+        margin-bottom:20px;
+    }
+    
+    #forecastType {
+        margin-bottom:20px;
+    }
+    
+    .forecastConfigure {
+        display: inline;
+        border: none;
+        padding:5px;
+        font-size:1.1em;
+        font-weight:900;
+        color:white;
+        background-color:rgb(136,161,230) ;
+    }
+    
+    #forecastDay {
+        width:90px;
+    }
+    
+    #forecastDataCont .forecastItems {
+        width:100px;
+        height:120px;
+        font-size:16px;
+    }
+    
+    .forecastIcon {
+        width:45px;
+        height:45px;
+        margin-top:10px;
+    }
+    
+}

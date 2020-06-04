@@ -44,6 +44,7 @@ let temperatureCont = document.getElementById("temperature"),
 function triggerData () {
 	getForecastData();
 	getJson(0).then ((message) => {
+		catchedForecastData = true;
 		setupData(message);
 		console.log(message)
 	}).catch ((err)=>{
@@ -92,13 +93,15 @@ function setupData (data) {
 	cloudinessCont.innerHTML = `${clouds} %`;
 	visibilityCont.innerHTML = `${visibility} km`;
 	footer.style.position = "relative";
+
+	document.getElementsByTagName("body")[0].style.height = "100%";
 }
 
 let mainPage = document.getElementById("mainPage")
 	weatherDetails = document.getElementById("weatherDisplay");
 
 function refreshPage () {
-	catchedForecastData =false;
+	catchedForecastData = false;
 	mainPage.classList.remove("fade-in-left");
 	mainPage.classList.add("fade-out");
 	setTimeout(()=>{
