@@ -95,7 +95,7 @@ a {
 	background-color: rgb(152, 229, 255);
 	color:black;
 	overflow-y: scroll;
-	display:none;
+	display:block;
 }
 
 #aboutPage #close {
