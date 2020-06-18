@@ -17,6 +17,7 @@ function getJson (type) {
 				if (response.status >= 200 && response.status < 300) {
 					//return data in JSON form
 					resolve(response.json());
+					
 				}else { 
 					reject (response.statusText);
 				}
@@ -44,7 +45,6 @@ let temperatureCont = document.getElementById("temperature"),
 function triggerData () {
 	getForecastData();
 	getJson(0).then ((message) => {
-		catchedForecastData = true;
 		setupData(message);
 		console.log(message)
 	}).catch ((err)=>{
@@ -53,6 +53,7 @@ function triggerData () {
 }
 
 function setupData (data) {
+	catchedForecastData = true;
 	let city = data["name"],
 		country = data["sys"]["country"],
 		weather = data["weather"][0]["description"],

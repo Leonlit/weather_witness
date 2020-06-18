@@ -61,7 +61,7 @@ a {
    --------------
 */
 #mainPage {
-	display: none;
+	display: block;
 }
 
 #mainPage input[type=submit] {
@@ -95,7 +95,7 @@ a {
 	background-color: rgb(152, 229, 255);
 	color:black;
 	overflow-y: scroll;
-	display:block;
+	display:none;
 }
 
 #aboutPage #close {
@@ -248,7 +248,7 @@ a {
 }
 
 footer {
-	position: relative;
+	position: absolute;
 	bottom:0;
 	width:100%;
 	padding-top:10px;
