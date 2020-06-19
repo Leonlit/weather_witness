@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/menuMobile.css"/>
         <link rel="stylesheet" href="css/menuTablet.css"/>
+        <link rel="stylesheet" href="css/menuDesktop.css"/>
         <link rel="stylesheet" href="css/dataStructuring.css"/>
     </head>
     <body>
@@ -128,7 +129,7 @@
 
         <div id="mainPage" class="fade-in-left fixedCenter">
             <div class="fixedCenter">
-                <input id="mainSearchBox" class="textCenter" placeholder="City name"/>
+                <input id="mainSearchBox" class="textCenter" placeholder="City name" autocomplete="off"/>
                 <input type="submit" value="Go" class="mainBtn" onclick="triggerData()"/>
             </div>
         </div>

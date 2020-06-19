@@ -97,7 +97,7 @@ function setForecastPrecipitation (batch) {
 	//batch means the batch of the data, the forecast is devided to 3 days
 	//it's according to the day (batch 1 = current day forecast).
 	for (let index = (batch - 1) * 8; index< 8 * batch; index++) {
-		let rain, logo, time, rainOrNot, customStyle;
+		let rain, logo, time, rainOrNot, addClass;
 		let currJSON = forecastJson[index];
 		time = currJSON["dt"];
 		time = timeFormater(time);
@@ -106,17 +106,17 @@ function setForecastPrecipitation (batch) {
 			rain = currJSON["rain"]["3h"];
 			logo = "icons/waterDrop.png";
 			rainOrNot = `<div style="margin-top:5px;">${rain} mm</div>`;
-			customStyle = "";
+			addClass = "forecastIcon";
 		}catch { 
 			logo = "icons/noWaterDrop.png";
 			rainOrNot = "";
-			customStyle = `width:45px;height:47px;`
+			addClass = `noRainImg`
 		}
 
 		let ele = `
 			<div class="forecastItems">
 				<div>${time}</div>
-				<img class="forecastIcon" src="${logo}" style="${customStyle}"/>
+				<img class="${addClass}" src="${logo}"/>
 				${rainOrNot}
 			</div> 
 		`

@@ -1,4 +1,5 @@
 let catchedForecastData = false;
+lockInitialAPI = false;
 
 function getJson (type) {
 	return new Promise ((resolve, reject)=> {
@@ -43,13 +44,16 @@ let temperatureCont = document.getElementById("temperature"),
 	footer = document.getElementsByTagName("footer")[0];
 
 function triggerData () {
-	getForecastData();
-	getJson(0).then ((message) => {
-		setupData(message);
-		console.log(message)
-	}).catch ((err)=>{
-		console.log(err);
-	})	
+	if (!lockInitialAPI) {
+		getForecastData();
+		getJson(0).then ((message) => {
+			setupData(message);
+			console.log(message)
+		}).catch ((err)=>{
+			console.log(err);
+		})	
+	}
+	lockInitialAPI = true;
 }
 
 function setupData (data) {

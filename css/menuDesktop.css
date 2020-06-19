@@ -1,7 +1,7 @@
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 1000px) {
 
     #aboutPage{
-        margin-top:20%;
+        margin-top:5%;
         margin-left:10%;
         margin-right:10%;
         height:80vh;
@@ -16,7 +16,6 @@
     #weatherDisplay {
         margin-top:5%;
         margin-bottom:5%;
-        width: 100vw;
         display:none ;
     }
 
