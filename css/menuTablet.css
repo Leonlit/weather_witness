@@ -1,4 +1,4 @@
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 800px) {
 
     #navContainer {
         height:55px;
@@ -9,7 +9,7 @@
     }
 
     #mainTitle {
-        font-size:2em;
+        font-size:1.8em;
         font-family: 'Times New Roman', Times, serif;
         font-weight:900;
         margin-left:40px;
@@ -31,7 +31,6 @@
     #weatherDisplay {
         margin-top:5%;
         margin-bottom:5%;
-        width: 100vw;
         display:none ;
     }
 
@@ -112,7 +111,7 @@
         width:auto;
         color:black;
         font-size:1.1em;
-        margin-top:0fmainpx;
+        margin-top:0px;
         margin-left:20px;
     }
 
