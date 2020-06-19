@@ -9,7 +9,7 @@
     }
 
     #mainTitle {
-        font-size:2em;
+        font-size:1.8em;
         font-family: 'Times New Roman', Times, serif;
         font-weight:900;
         margin-left:40px;
@@ -111,7 +111,7 @@
         width:auto;
         color:black;
         font-size:1.1em;
-        margin-top:0fmainpx;
+        margin-top:0px;
         margin-left:20px;
     }
 

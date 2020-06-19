@@ -82,8 +82,8 @@
 }
 
 #forecastDataCont {
-    width:550px;
-    height:66px;
+    width:700px;
+    height:100px;
     margin-bottom:20px;
 }
 
@@ -110,12 +110,11 @@
 
 #forecastDataCont .forecastItems {
     color:black;
-    width:60px;
-    height:80px;
+    width:80px;
+    height:100px;
     padding:2px;
     padding-top:5px;
     display: inline-block;
-    font-size:10px;
     font-weight: 900;
     font-family: monospace ;
     text-align:center;
@@ -130,10 +129,10 @@
 }
 
 .noRainImg {
-    width:35px;
-    height:37px;
-    margin-top:10px;
-    margin-bottom:10px;
+    width: 48px;
+    height: 46px;
+    margin-top: 14px;
+    margin-bottom: 0px;
 }
 
 

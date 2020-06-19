@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Weather Viewer - created by leonlit</title>
+        <title>Weather Witness - created by leonlit</title>
         <meta charset="UTF-8">
         <meta name="author" content="leonlit">
         <meta name="description" content="A simple weather app with forecast functionality using third-party API">
@@ -17,7 +17,7 @@
         
         <div id="navItems" class="fixedEle ">
             <li><a class="navLink" onclick="openClosePage()">About</a></li>
-            <li><a class="navLink" targt="_blank" href="https://github.com/Leonlit/weather_viewer">Source Code</a></li>
+            <li><a class="navLink" targt="_blank" href="https://github.com/Leonlit/weather_witness">Source Code</a></li>
             <li><input type="text" placeholder="city name" id="secondarySearch"/></li><span id="searchIcon">Go</span>
         </div>
         <div id="navBg" class="fixedEle absolutePointEle"></div>
