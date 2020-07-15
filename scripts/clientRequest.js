@@ -1,15 +1,13 @@
-let catchedForecastData = false;
-lockInitialAPI = false;
+let lockInitialAPI = false;
 
-function getJson (type) {
+function getJson (type, city) {
 	return new Promise ((resolve, reject)=> {
 		let requestQuery;
-			place = document.getElementById("mainSearchBox").value;
 			
 		if (type == 0) 
-			requestQuery = `request.php?city=${place}&type=0`;
+			requestQuery = `request.php?city=${city}&type=0`;
 		else 
-			requestQuery = `request.php?city=${place}&type=1`;
+			requestQuery = `request.php?city=${city}&type=1`;
 		try {
 			fetch(requestQuery, {
 				method: 'get', 
@@ -43,10 +41,27 @@ let temperatureCont = document.getElementById("temperature"),
 	mainWeatherIcon = document.getElementById("weatherIcon"),
 	footer = document.getElementsByTagName("footer")[0];
 
+
+function getNewData () {
+	lockInitialAPI = false;
+	document.getElementById("mainSearchBox").value = "";
+	triggerData();
+}
+
 function triggerData () {
+
+	let city = document.getElementById("mainSearchBox").value;
+	setTimeout(()=> {
+		document.getElementById("mainSearchBox").value = "";
+	}, 2000);
+	if (city == "" || city == null) {
+		city = document.getElementById("secondarySearch").value;
+	}else {
+		document.getElementById("secondarySearch").value = "";
+	}
 	if (!lockInitialAPI) {
-		getForecastData();
-		getJson(0).then ((message) => {
+		getForecastData(city);
+		getJson(0, city).then ((message) => {
 			setupData(message);
 			console.log(message)
 		}).catch ((err)=>{
@@ -57,7 +72,7 @@ function triggerData () {
 }
 
 function setupData (data) {
-	catchedForecastData = true;
+
 	let city = data["name"],
 		country = data["sys"]["country"],
 		weather = data["weather"][0]["description"],
@@ -73,47 +88,66 @@ function setupData (data) {
 		unix = data["dt"], 
 		iconUrl, dayOrNight, currHour;
 
-	currHour = getHour(unix)
-	dayOrNight = getDayType(currHour);
-	iconName = getIconsName(id, dayOrNight);
-	iconUrl = `icons/${iconName}.png`
-	refreshPage();
+	if (mainPage.style.display != "none") {
+		refreshPage();
+	}else {
+		refreshSearch();
+	}
+	setTimeout(() => {
+		
+		currHour = getHour(unix)
+		dayOrNight = getDayType(currHour);
+		iconName = getIconsName(id, dayOrNight);
+		iconUrl = `icons/${iconName}.png`;
+		
+		temp = temp.toFixed(1);
+		maxTemp = maxTemp.toFixed(1);
+		minTemp = minTemp.toFixed(1);
+		feelsLike = feelsLike.toFixed(1);
+		visibility = visibility.toFixed(2);
 
-	temp = temp.toFixed(1);
-	maxTemp = maxTemp.toFixed(1);
-	minTemp = minTemp.toFixed(1);
-	feelsLike = feelsLike.toFixed(1);
-	visibility = visibility.toFixed(2);
+		temperatureCont.innerHTML = `${temp} &#8451;`;
+		weatherCont.innerHTML = weather;
+		mainWeatherIcon.src=iconUrl;
+		locationCont.innerHTML = city + ", " + country;
 
-	temperatureCont.innerHTML = `${temp} &#8451;`;
-	weatherCont.innerHTML = weather;
-	mainWeatherIcon.src=iconUrl;
-	locationCont.innerHTML = city + ", " + country;
+		feelsLikeCont.innerHTML = `${feelsLike} &#8451;`;
+		maxTempCont.innerHTML = `${maxTemp} &#8451;`;
+		minTempCont.innerHTML = `${minTemp} &#8451;`;
+		pressureCont.innerHTML = `${pressure} hpa`;
+		humidityCont.innerHTML = `${humidity} %`;
+		cloudinessCont.innerHTML = `${clouds} %`;
+		visibilityCont.innerHTML = `${visibility} km`;
+		footer.style.position = "relative";
 
-	feelsLikeCont.innerHTML = `${feelsLike} &#8451;`;
-	maxTempCont.innerHTML = `${maxTemp} &#8451;`;
-	minTempCont.innerHTML = `${minTemp} &#8451;`;
-	pressureCont.innerHTML = `${pressure} hpa`;
-	humidityCont.innerHTML = `${humidity} %`;
-	cloudinessCont.innerHTML = `${clouds} %`;
-	visibilityCont.innerHTML = `${visibility} km`;
-	footer.style.position = "relative";
-
-	document.getElementsByTagName("body")[0].style.height = "100%";
+		document.getElementsByTagName("body")[0].style.height = "100%";
+	}, 500);
 }
 
 let mainPage = document.getElementById("mainPage")
 	weatherDetails = document.getElementById("weatherDisplay");
 
 function refreshPage () {
-	catchedForecastData = false;
 	mainPage.classList.remove("fade-in-left");
 	mainPage.classList.add("fade-out");
 	setTimeout(()=>{
 		mainPage.style.display = "none";
-	},1000);
+	}, 1000);
 	weatherDetails.style.display = "block";
 	weatherDetails.classList.add("fade-in-left");
+}
+
+function refreshSearch() {
+	console.log("test");
+	weatherDetails.classList.remove("fade-in-left");
+	weatherDetails.classList.add("fade-out");
+	setTimeout(() => {
+		weatherDetails.classList.remove("fade-out");
+		weatherDetails.classList.add("fade-in-left");
+		weatherDetails.style.display = "block";	
+	}, 1000);
+	
+
 }
 
 function getIconsName (id, DON) {

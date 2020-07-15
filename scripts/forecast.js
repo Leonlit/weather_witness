@@ -6,9 +6,9 @@ let forecast = document.getElementById("forecast");
 	forecastDataCont = document.getElementById("forecastDataCont");
 
 
-function getForecastData () {
+function getForecastData (city) {
 	//when the data haven't been fetched
-	getJson(1).then ((message) => {
+	getJson(1, city).then ((message) => {
 		changeForecastData(message);
 		console.log(message)
 	}).catch ((err)=>{
@@ -21,7 +21,7 @@ function setOptionDate (date, month) {
 	let cont = document.getElementById("forecastDay");
 	let option = cont.getElementsByTagName("option");
 	for (let x = 0; x< 3;x++) {
-		option[x].innerHTML = `${date++} / ${month}`
+		option[x].innerHTML = `${date++} / ${month} - ${date} / ${month}`
 	}
 }
 

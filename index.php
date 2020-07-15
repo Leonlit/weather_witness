@@ -18,7 +18,7 @@
         <div id="navItems" class="fixedEle ">
             <li><a class="navLink" onclick="openClosePage()">About</a></li>
             <li><a class="navLink" targt="_blank" href="https://github.com/Leonlit/weather_witness">Source Code</a></li>
-            <li><input type="text" placeholder="city name" id="secondarySearch"/></li><span id="searchIcon">Go</span>
+            <li><input type="text" placeholder="city name" id="secondarySearch"/></li><span id="searchIcon" onclick="getNewData()">Go</span>
         </div>
         <div id="navBg" class="fixedEle absolutePointEle"></div>
         <nav id="navContainer" class="fixedEle absolutePointEle">

@@ -3,7 +3,6 @@ body {
     padding:0px;
     background-image:linear-gradient(top, rgba(163, 232, 255, 0.596) 70%, rgb(137, 208, 230));
     background-image:-webkit-linear-gradient(top, rgba(163, 232, 255, 0.596) 70%, rgb(136, 208, 230));
-	min-width:100%;
 	padding-top:60px;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -53,6 +52,18 @@ body {
 
 a {
 	text-decoration: none;
+}
+
+@media only screen and (min-width: 300px) {
+	body {
+		min-height:90vh;
+	}
+}
+
+@media only screen and (min-width: 400px) {
+	body {
+		min-height:91vh;
+	}
 }
 
 
@@ -140,8 +151,8 @@ a {
 }
 
 #weatherIcon{
-	width:100px;
-	height:90px;
+	width:95px;
+	height:95px;
 }
 
 #navBg {
@@ -256,7 +267,7 @@ footer {
 	text-align: center;
 	font-weight: 900;
 	font-size:12px;
-	font-family:verdana;
+	font-family:monospace;
 	background-color: rgb(66,165,195) ;
 	color:white;
 }

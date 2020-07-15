@@ -1,4 +1,37 @@
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1100px) {
+
+    body {
+        min-height:85vh;
+    }
+
+    @media only screen and (min-width:1400px) {
+        body {
+            min-height:95vh;
+        }
+    }
+
+    #secondarySearch {
+        width: 210px;
+        border:3px solid transparent;
+        border-bottom:3px solid rgb(104,104,104);
+        border-radius:5px;
+        transition:font-size 0.3s, font-weight 0.3s;
+        transition:0.3s border;
+        margin-left:30px;
+    }
+
+    #navItems{
+        margin-right:50px;
+    }
+
+    .navLink {
+        margin-right:20px;
+    }
+
+    li .navLink:hover {
+        color:rgb(108, 186, 250);
+        transform: scale(2.5);
+    }
 
     #aboutPage{
         margin-top:5%;

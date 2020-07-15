@@ -1,5 +1,9 @@
 @media only screen and (min-width: 800px) {
 
+    body {
+        min-height:95vh;
+    }
+
     #navContainer {
         height:55px;
         width:100vw;

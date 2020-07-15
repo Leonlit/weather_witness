@@ -105,7 +105,9 @@
 }
 
 #forecastDay {
-    width:70px;
+    display:block;
+    width:140px;
+    margin-bottom:50px;
 }
 
 #forecastDataCont .forecastItems {
@@ -202,7 +204,8 @@
     }
     
     #forecastDay {
-        width:90px;
+        width:170px;
+        display:inline-block;
     }
     
     #forecastDataCont .forecastItems {
@@ -267,7 +270,8 @@
     }
     
     #forecastDay {
-        width:90px;
+        width:170px;
+        display: inline-block;
     }
     
     #forecastDataCont .forecastItems {
