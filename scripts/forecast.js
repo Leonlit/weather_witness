@@ -20,7 +20,7 @@ function setOptionDate (date, month) {
 	month++;
 	let cont = document.getElementById("forecastDay");
 	let option = cont.getElementsByTagName("option");
-	for (let x = 0; x< 3;x++) {
+	for (let x = 0; x< 5;x++) {
 		option[x].innerHTML = `${date++} / ${month} - ${date} / ${month}`
 	}
 }

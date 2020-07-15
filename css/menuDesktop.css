@@ -10,6 +10,27 @@
         }
     }
 
+        /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+        max-height:10px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background:transparent;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #4ab7d9;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #c8e9f3; 
+    }
+
     #secondarySearch {
         width: 210px;
         border:3px solid transparent;
@@ -40,6 +61,7 @@
         height:80vh;
         max-height:700px;
         width:70%;
+        z-index: 10;
     }
 
     #aboutPage h2{

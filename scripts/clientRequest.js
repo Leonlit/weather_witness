@@ -46,6 +46,8 @@ function getNewData () {
 	lockInitialAPI = false;
 	document.getElementById("mainSearchBox").value = "";
 	triggerData();
+	if (navOpen) openCloseNav();
+	document.getElementById("secondarySearch").value = "";
 }
 
 function triggerData () {

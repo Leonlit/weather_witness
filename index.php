@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/menuTablet.css"/>
         <link rel="stylesheet" href="css/menuDesktop.css"/>
         <link rel="stylesheet" href="css/dataStructuring.css"/>
+        <link rel="stylesheet" href="css/animation.css"/>
     </head>
     <body>
         <!--Navigation Section-->
@@ -22,7 +23,7 @@
         </div>
         <div id="navBg" class="fixedEle absolutePointEle"></div>
         <nav id="navContainer" class="fixedEle absolutePointEle">
-            <span id="mainTitle">Weather Viewer</span>
+            <span id="mainTitle">Weather Witness</span>
             <div id="dropDown" onclick="openCloseNav()">
                 <div></div>
                 <div></div>
@@ -62,6 +63,8 @@
                         <option value="1">12/5</option>
                         <option value="2">13/5</option>
                         <option value="3">14/5</option>
+                        <option value="4">14/5</option>
+                        <option value="5">14/5</option>
                     </select>
                     <div class="scrollable">
                         <div id="forecastDataCont">

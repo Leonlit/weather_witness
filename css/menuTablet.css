@@ -97,6 +97,7 @@
         float:right;
         background-color: black;
         border:2px solid transparent;
+        position:initial;
         color:white;
         border-radius:  5px;
         margin-left:10px;
