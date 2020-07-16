@@ -1,9 +1,4 @@
 @media only screen and (min-width: 800px) {
-
-    body {
-        min-height:95vh;
-    }
-
     #navContainer {
         height:55px;
         width:100vw;
@@ -124,6 +119,15 @@
         color:black;
     }
 
+    .navLink {
+        color:black;
+    }
+
+    .navLink:hover {
+        color:rgb(108, 186, 250);
+        transform: scale(2.5);
+    }
+
     #mainSearchBox {
         width:30vw;
         height:25px;
@@ -134,14 +138,14 @@
         background-color: white;
         font-family: monospace;
         font-weight: 900;
-        transition: width 0.3s, height 0.3s, box-shadow 0.3s, font-size 0.3s;
+        transition-duration:0.3s;
     }
 
     #mainSearchBox:focus {
         width:35vw;
         height:35px;
         font-size:2.2em;
-        box-shadow: 0px 4px 3px grey;
+        box-shadow: 0px 4px 5px grey;
     }
 
     

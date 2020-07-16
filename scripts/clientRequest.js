@@ -47,7 +47,6 @@ function getNewData () {
 	document.getElementById("mainSearchBox").value = "";
 	triggerData();
 	if (navOpen) openCloseNav();
-	document.getElementById("secondarySearch").value = "";
 }
 
 function triggerData () {
@@ -58,6 +57,7 @@ function triggerData () {
 	}, 2000);
 	if (city == "" || city == null) {
 		city = document.getElementById("secondarySearch").value;
+		document.getElementById("secondarySearch").value = "";
 	}else {
 		document.getElementById("secondarySearch").value = "";
 	}
@@ -74,7 +74,7 @@ function triggerData () {
 }
 
 function setupData (data) {
-
+	document.getElementsByTagName("body")[0].style.paddingTop = "60px";
 	let city = data["name"],
 		country = data["sys"]["country"],
 		weather = data["weather"][0]["description"],

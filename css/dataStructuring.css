@@ -105,7 +105,7 @@
 }
 
 #forecastDay {
-    display:block;
+    display:inline-block;
     width:140px;
     margin-bottom:50px;
 }
@@ -205,7 +205,6 @@
     
     #forecastDay {
         width:170px;
-        display:inline-block;
     }
     
     #forecastDataCont .forecastItems {

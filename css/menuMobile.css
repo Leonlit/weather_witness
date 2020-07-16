@@ -3,7 +3,7 @@ body {
     padding:0px;
     background-image:linear-gradient(top, rgba(163, 232, 255, 0.596) 70%, rgb(137, 208, 230));
     background-image:-webkit-linear-gradient(top, rgba(163, 232, 255, 0.596) 70%, rgb(137, 208, 230));
-	padding-top:60px;
+	padding-top:0px;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -80,10 +80,22 @@ a {
 	font-family: 'Times New Roman', Times, serif;
 	font-weight:900;
 	margin-left:20px;
+	cursor:pointer;
+	color:black;
+	transition-duration:0.3s;
+}
+
+#mainTitle:visited {
+	color:black;
+}
+
+#mainTitle:hover {
+	text-shadow:0px 0px 5px black;
+	color:rgb(236, 236, 236);
 }
 
 #aboutPage{
-	margin-top:25%;
+	margin-top:15%;
 	margin-left:5%;
 	margin-right:5%;
 	padding:5%;
@@ -186,10 +198,13 @@ a {
 
 .navLink {
 	cursor: pointer;
+	color:white;
+	transition:0.3s;
 }
 
 .navLink:hover {
-	color:orange;
+	color:rgb(108, 186, 250);
+	transform: scale(2.5);
 }
 
 #shader {
@@ -244,14 +259,15 @@ a {
 	background-color: white;
 	font-family: monospace;
 	font-weight: 900;
-	transition: width 0.3s, height 0.3s, box-shadow 0.3s, font-size 0.3s;
+	transition-duration: 0.3s;
 }
 
 #mainSearchBox:focus {
+	outline-width: 0;
 	width:55vw;
 	height:35px;
 	font-size:2.2em;
-	box-shadow: 0px 4px 3px grey;
+	box-shadow: 0px 4px 5px grey;
 }
 
 #searchIcon {
@@ -292,20 +308,12 @@ footer {
 
 
 @media only screen and (min-width: 300px) {
-	body {
-		min-height:90vh;
-	}
-
 	#searchIcon {
 		right: 35px;
 	}
 }
 
 @media only screen and (min-width: 400px) {
-	body {
-		min-height:91vh;
-	}
-
 	#searchIcon {
 		right: 30px;
 	}
@@ -318,7 +326,6 @@ footer {
 }
 
 @media only screen and (min-width:700px) {
-	
 	#searchIcon {
 		right: 55%;
 	}

@@ -18,8 +18,8 @@
         
         <div id="navItems" class="fixedEle ">
             <li><a class="navLink" onclick="openClosePage()">About</a></li>
-            <li><a class="navLink" targt="_blank" href="https://github.com/Leonlit/weather_witness">Source Code</a></li>
-            <li><input type="text" placeholder="city name" id="secondarySearch"/></li><span id="searchIcon" onclick="getNewData()">Go</span>
+            <li><a class="navLink" target="_blank" href="https://github.com/Leonlit/weather_witness">Source Code</a></li>
+            <li onkeyup="isEnterSecondary(event)"><input type="text" placeholder="city name" id="secondarySearch" /></li><span id="searchIcon" onclick="getNewData()">Go</span>
         </div>
         <div id="navBg" class="fixedEle absolutePointEle"></div>
         <nav id="navContainer" class="fixedEle absolutePointEle">
@@ -132,7 +132,7 @@
 
         <div id="mainPage" class="fade-in-left fixedCenter">
             <div class="fixedCenter">
-                <input id="mainSearchBox" class="textCenter" placeholder="City name" autocomplete="off"/>
+                <input id="mainSearchBox" class="textCenter" placeholder="City name" autocomplete="off" onkeyup="isEnterMain(event)"/>
                 <input type="submit" value="Go" class="mainBtn" onclick="triggerData()"/>
             </div>
         </div>
@@ -150,6 +150,17 @@
                     <li>Wind - shows the wind direction and speed</li>
                 </ul><br>
                 The data are also separated by date of 3 different days.
+            </p>
+
+            <h2>Credits</h2>
+            <p>
+                Weather icon from <a href="https://www.iconfinder.com/dooder" target="_blank">dooder from iconfinder</a><br><br>
+
+                No water drop Icon made by <a href="https://www.flaticon.com/free-icon/no-water_1174794?term=no%20water&page=1&position=19" title="phatplus">phatplus</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a><br><br>
+
+                Water drop icons made by <a href="https://www.iconfinder.com/kirill.kazachek" title="Kirill Kazachek">Kirill Kazachek</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a><br><br>
+
+                Wind arrow icons made by <a href="http://tumanova.cat/" title="Lyolya">Lyolya</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a><br><br>
             </p>
 
             <h2>Contact Me</h2>

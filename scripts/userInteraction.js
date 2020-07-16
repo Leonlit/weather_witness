@@ -4,7 +4,19 @@ let navDisabled = false;
 let pageDisabled = false;
 
 window.onscroll = () => {
-	if (screen.width < 700) adjustNavCont();
+	if (screen.width < 800) adjustNavCont();
+}
+
+function isEnterSecondary (event) {
+	if (event.key === "Enter") {
+		getNewData();
+	}
+}
+
+function isEnterMain (event) {
+	if (event.key === "Enter") {
+		triggerData();
+	}
 }
 
 function openClosePage () {
