@@ -100,7 +100,7 @@ function setupData (data) {
 	if (!initial) {
 		time = 800;
 	}else {
-		time = 600;
+		time = 100;
 		initial = false;
 	}
 	setTimeout(() => {
