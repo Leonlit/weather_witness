@@ -1,4 +1,4 @@
-let lockInitialAPI = false;
+let lockInitialAPI = false, initial = true;
 
 function getJson (type, city) {
 	return new Promise ((resolve, reject)=> {
@@ -95,8 +95,15 @@ function setupData (data) {
 	}else {
 		refreshSearch();
 	}
+
+	let time;
+	if (!initial) {
+		time = 800;
+	}else {
+		time = 600;
+		initial = false;
+	}
 	setTimeout(() => {
-		
 		currHour = getHour(unix)
 		dayOrNight = getDayType(currHour);
 		iconName = getIconsName(id, dayOrNight);
@@ -123,7 +130,7 @@ function setupData (data) {
 		footer.style.position = "relative";
 
 		document.getElementsByTagName("body")[0].style.height = "100%";
-	}, 500);
+	}, time);
 }
 
 let mainPage = document.getElementById("mainPage")
