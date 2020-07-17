@@ -4,7 +4,7 @@
 	$query = "";
 	//if both city and getProcess is set with values, construct and request the API URL and pass it to client 
 	if (isset($_GET["city"]) && isset($_GET["type"])) {
-		$city = $_GET["city"];
+		$city = filter_var($_GET["city"], FILTER_SANITIZE_STRING);
 		$key = "";
 		try {
 			$key = getenv('weatherAPI');

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php?>
 <html>
     <head>
         <title>Weather Witness - created by leonlit</title>
