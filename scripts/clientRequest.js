@@ -22,7 +22,6 @@ function getJson (type, city) {
 				}
 			})
 		}catch {
-			//customAlert("something went wrong!!! Please make sure you enter your city name correctly or simply try again")
 			reject("Something went wrong when the server send an request to the API, Try again later");
 		}
 	});	
@@ -41,7 +40,7 @@ let temperatureCont = document.getElementById("temperature"),
 	mainWeatherIcon = document.getElementById("weatherIcon"),
 	footer = document.getElementsByTagName("footer")[0];
 
-
+//used when the secondary search field is used
 function getNewData () {
 	lockInitialAPI = false;
 	document.getElementById("mainSearchBox").value = "";
@@ -73,6 +72,7 @@ function triggerData () {
 	lockInitialAPI = true;
 }
 
+//stting up the data into their appropriate location
 function setupData (data) {
 	document.getElementsByTagName("body")[0].style.paddingTop = "60px";
 	let city = data["name"],
@@ -136,6 +136,7 @@ function setupData (data) {
 let mainPage = document.getElementById("mainPage")
 	weatherDetails = document.getElementById("weatherDisplay");
 
+//animating the page translation from main page to the Weather details page
 function refreshPage () {
 	mainPage.classList.remove("fade-in-left");
 	mainPage.classList.add("fade-out");
@@ -146,6 +147,7 @@ function refreshPage () {
 	weatherDetails.classList.add("fade-in-left");
 }
 
+//page refresh function when search is performed 
 function refreshSearch() {
 	console.log("test");
 	weatherDetails.classList.remove("fade-in-left");
@@ -155,10 +157,9 @@ function refreshSearch() {
 		weatherDetails.classList.add("fade-in-left");
 		weatherDetails.style.display = "block";	
 	}, 1000);
-	
-
 }
 
+//using the icon code provided by OpenWeatherMap API, use the appropriate icon for the weather condition
 function getIconsName (id, DON) {
 	let icon;
 	if (id <300 && id>=200) {

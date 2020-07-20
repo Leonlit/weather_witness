@@ -3,10 +3,15 @@ let pageOpen = false;
 let navDisabled = false;
 let pageDisabled = false;
 
+//used for mobile design.
+//when user scrolled down from a specific range, 
+//change the color of the navigation menu
 window.onscroll = () => {
 	if (screen.width < 800) adjustNavCont();
 }
 
+//used as the funcion to be invoked when enter is pressed in
+//main search and secondary search field.
 function isEnterSecondary (event) {
 	if (event.key === "Enter") {
 		getNewData();
@@ -19,6 +24,7 @@ function isEnterMain (event) {
 	}
 }
 
+//showing and closing the about page for the app
 function openClosePage () {
 	let page = document.getElementById("aboutPage");
 	if (!pageDisabled) {
@@ -26,6 +32,9 @@ function openClosePage () {
 			pageOpen = false;
 			page.classList.remove("fade-in-left-03");
 			page.classList.add("fade-out-03");
+			
+			//locking the page so that the page animation could be finished first before user could interact
+			//with the about page close button
 			lockPage(300);
 			setTimeout(() => {
 				page.style.display = "none";
@@ -41,6 +50,8 @@ function openClosePage () {
 	}
 }
 
+//used to lock the navigation bar so that the animation won't be chuncky 
+//in case user clicked the trigger for opening and closing of nav bar too fast.
 function lockNav (time) {
 	navDisabled = true;
 	setTimeout(() => {
@@ -55,6 +66,8 @@ function lockPage (time) {
 	}, time);
 }
 
+//incease the value of the opacity of the white background of nav bar
+//as user scroll down the app
 function adjustNavCont () {
 	if (!navOpen) {
 		let navCont = document.getElementById("navBg");
@@ -68,6 +81,7 @@ function adjustNavCont () {
 	}
 }
 
+//handling and animating nav opening and closing
 function openCloseNav() {
 	let navItems = document.getElementById("navItems");
 	let navTitle = document.getElementById("mainTitle");

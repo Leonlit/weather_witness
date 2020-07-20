@@ -5,7 +5,7 @@ let forecast = document.getElementById("forecast");
 	forecastEle = document.getElementById("forecastData"),
 	forecastDataCont = document.getElementById("forecastDataCont");
 
-
+//Get the data from the API server
 function getForecastData (city) {
 	//when the data haven't been fetched
 	getJson(1, city).then ((message) => {
@@ -16,6 +16,7 @@ function getForecastData (city) {
 	})
 }
 
+//updating the date of the forecast option section
 function setOptionDate (date, month) {
 	month++;
 	let cont = document.getElementById("forecastDay");
@@ -25,6 +26,7 @@ function setOptionDate (date, month) {
 	}
 }
 
+//replace the forecast data when a new option is choosed
 function changeForecastData (initialData) {
 	if (initialData != undefined) {
 		forecastJson = initialData;
@@ -54,11 +56,10 @@ function changeForecastData (initialData) {
 	}
 }
 
-//will be using temperature, weater id, time, percipitation, winds
+//will be using temperature, weather id, time, percipitation, winds for forecast data presentation.
 function setForecastTemperature (batch) {
 	let resultElement = "";
-	//batch means the batch of the data, the forecast is devided to 3 days
-	//it's according to the day (batch 1 = current day forecast).
+	//batch means the batch of the data, the forecast is devided to 5 days
 	for (let index = (batch - 1) * 8; index< 8 * batch; index++) {
 		let currJSON = forecastJson[index];
 		let temp, weatherId, time, pressure;
@@ -94,8 +95,6 @@ function setForecastTemperature (batch) {
 
 function setForecastPrecipitation (batch) {
 	let resultElement = "";
-	//batch means the batch of the data, the forecast is devided to 3 days
-	//it's according to the day (batch 1 = current day forecast).
 	for (let index = (batch - 1) * 8; index< 8 * batch; index++) {
 		let rain, logo, time, rainOrNot, addClass;
 		let currJSON = forecastJson[index];
@@ -128,8 +127,6 @@ function setForecastPrecipitation (batch) {
 
 function setForecastWind (batch) {
 	let resultElement = "";
-	//batch means the batch of the data, the forecast is devided to 3 days
-	//it's according to the day (batch 1 = current day forecast).
 	for (let index = (batch - 1) * 8; index< 8 * batch; index++) {
 		let windSpd, windDeg, time;
 		let currJSON = forecastJson[index];

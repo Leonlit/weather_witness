@@ -1,3 +1,4 @@
+//formating time from unix milisecond time to readable time for user in 12 hour format
 function timeFormater (unixTimestamp) {
     //buiding the time
     let date = new Date(unixTimestamp*1000),
