@@ -322,10 +322,11 @@ a {
 	top: 50%;
     left: 50%;
     position: absolute;
-    font-size: 2em;
+    text-align: center;
+    font-size: 1.5em;
     transform: translate(-50%, -50%);
     font-weight: 900;
-    font-family: CURSIVE;
+    font-family: serif;
 }
 
 #shader2 {
@@ -371,5 +372,16 @@ footer {
 @media only screen and (min-width:700px) {
 	#searchIcon {
 		right: 55%;
+	}
+
+	#errorPopUp {
+		width:50%;
+		height:20%;
+		border-radius: 10px;
+	}
+
+
+	#errorPopUp #message {
+		font-size: 2em;
 	}
 }

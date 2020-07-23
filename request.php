@@ -25,7 +25,7 @@
 				//echoing the variable so that data could be passed to the client script
 				echo $json;
 			}catch (Exception $err) {
-				showError("Cannot find the provided city name. Please retry!!!");
+				echo "Error occured when fetching API data!!!";
 			}
 	}
 	}

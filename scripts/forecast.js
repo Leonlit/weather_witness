@@ -7,13 +7,18 @@ let forecast = document.getElementById("forecast");
 
 //Get the data from the API server
 function getForecastData (city) {
-	//when the data haven't been fetched
-	getJson(1, city).then ((message) => {
-		changeForecastData(message);
-		console.log(message)
-	}).catch ((err)=>{
-		console.log(err);
-	})
+	console.log(invalidCity)
+	if (!invalidCity) {
+		//when the data haven't been fetched
+		getJson(1, city).then ((message) => {
+			changeForecastData(message);
+			console.log(message)
+		}).catch ((err)=>{
+			console.log("error occured");
+		})
+	}else {
+		console.log("Invalid City name");
+	}
 }
 
 //updating the date of the forecast option section

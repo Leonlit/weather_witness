@@ -49,7 +49,7 @@ function getNewData () {
 }
 
 function triggerData () {
-
+	invalidCity = false;
 	let city = document.getElementById("mainSearchBox").value;
 	setTimeout(()=> {
 		document.getElementById("mainSearchBox").value = "";
@@ -61,24 +61,21 @@ function triggerData () {
 		document.getElementById("secondarySearch").value = "";
 	}
 	if (!lockInitialAPI) {
-		getForecastData(city);
 		getJson(0, city).then ((message) => {
 			setupData(message);
+			getForecastData(city);
+			lockInitialAPI = true;
 			console.log(message)
 		}).catch ((err)=>{
-			console.log(err);
-		})	
+			invalidCity = true;
+			console.log(invalidCity)
+			openCloseError("Invalid city name");
+		})
 	}
-	lockInitialAPI = true;
 }
 
 //stting up the data into their appropriate location
 function setupData (data) {
-
-	//check if the city is invalid
-	if (data["cod"] != undefined || data["cod"] != null) {
-		openCloseError(data["message"]);
-	}
 
 	document.getElementsByTagName("body")[0].style.paddingTop = "60px";
 	let city = data["name"],

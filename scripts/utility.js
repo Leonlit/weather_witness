@@ -33,7 +33,7 @@ function getDayOrNight (hour) {
     return (hour>=12.00) ? "PM" : "AM";
 }
 
-let errorShown = false;
+let errorShown = false, invalidCity = false;
 function openCloseError (message) {
     
     let container = document.getElementById("errorPopUp");

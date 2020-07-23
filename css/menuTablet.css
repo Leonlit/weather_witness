@@ -154,4 +154,8 @@
         overflow-x: hidden;
     }
 
+    #errorPopUp #message {
+        font-size: 2.5em;
+    }
+
 }
