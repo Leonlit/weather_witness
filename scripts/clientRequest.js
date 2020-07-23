@@ -74,6 +74,12 @@ function triggerData () {
 
 //stting up the data into their appropriate location
 function setupData (data) {
+
+	//check if the city is invalid
+	if (data["cod"] != undefined || data["cod"] != null) {
+		openCloseError(data["message"]);
+	}
+
 	document.getElementsByTagName("body")[0].style.paddingTop = "60px";
 	let city = data["name"],
 		country = data["sys"]["country"],

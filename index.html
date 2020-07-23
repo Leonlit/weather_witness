@@ -7,11 +7,11 @@
         <meta name="description" content="A simple weather app with forecast functionality using third-party API">
         <meta name="keywords" content="HTMl, CSS, JS, OpenWeatherMapAPI, HobbyProject">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/animation.css"/>
         <link rel="stylesheet" href="css/menuMobile.css"/>
         <link rel="stylesheet" href="css/menuTablet.css"/>
         <link rel="stylesheet" href="css/menuDesktop.css"/>
         <link rel="stylesheet" href="css/dataStructuring.css"/>
-        <link rel="stylesheet" href="css/animation.css"/>
     </head>
     <body>
         <!--Navigation Section-->
@@ -31,7 +31,7 @@
             </div>
             
         </nav>
-        <div id="shader" class="fixedEle absolutePointEle" onclick="openCloseNav()"></div>
+        <div id="shader" class="fixedEle absolutePointEle" onclick="openCloseNav()" ondrag="openCloseNav()"></div>
         
         <!--Weather Info-->
         <div id="weatherDisplay">
@@ -139,7 +139,7 @@
         </div>
 
         <!--About page section-->
-        <div id="aboutPage" class="fixedEle absolutePointEle">
+        <div id="aboutPage" class="fixedEle">
             <span id="close" onclick="openClosePage()">X</span>
             <h2>About Page</h2><hr/>
             <p>
@@ -173,6 +173,13 @@
                 <li><a class="pageLink" href="https://www.reddit.com/user/scrolion" target="_blank">Reddit</a></li>
                 <li><a class="pageLink" href="https://twitter.com/leonlit" target="_blank">Twitter</a></li>
             </ul>
+        </div>
+
+        <!--Error section-->
+        <div id="shader2" class="fixedEle absolutePointEle"></div>
+        <div id="errorPopUp">
+            <span id="close" onclick="openCloseError()">X</span>
+            <div id="message"></div>
         </div>
 
         <!--footer-->
