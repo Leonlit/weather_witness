@@ -1,4 +1,6 @@
-let lockInitialAPI = false, initial = true;
+let lockInitialAPI = false, 
+	initial = true,
+	cityObj ={};
 
 function getJson (type, city) {
 	return new Promise ((resolve, reject)=> {
@@ -76,7 +78,6 @@ function triggerData () {
 
 //stting up the data into their appropriate location
 function setupData (data) {
-
 	document.getElementsByTagName("body")[0].style.paddingTop = "60px";
 	let city = data["name"],
 		country = data["sys"]["country"],

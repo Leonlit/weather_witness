@@ -253,13 +253,13 @@ a {
 	width:50vw;
 	height:25px;
 	font-size:2em;
-	padding:10px;
 	border-radius:5px;
-	border:none;
+	padding:10px;
+	border:2px solid transparent;
 	background-color: white;
 	font-family: monospace;
 	font-weight: 900;
-	transition-duration: 0.3s;
+	transition-duration: 0.4s;
 }
 
 #mainSearchBox:focus {
@@ -267,7 +267,7 @@ a {
 	width:55vw;
 	height:35px;
 	font-size:2.2em;
-	box-shadow: 0px 4px 5px grey;
+	border:2px solid grey;
 }
 
 #searchIcon {
@@ -351,6 +351,33 @@ footer {
 	color:white;
 }
 
+#cityList {
+	display: block;
+	position: absolute;
+	min-height: -1px;
+	max-height: 200px;
+	width:100%;
+	background-color: transparent;
+	padding-top:10px;
+	overflow: auto;
+}
+
+#cityList option {
+	cursor: pointer;
+	font-size: 1.2em;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-weight: 500;
+	margin-bottom:5px;
+	margin-top:5px;
+	border-left:4px solid rgb(66,165,195);
+	transition: 0.3s;
+	padding:2%;	
+}
+
+#cityList option:hover {
+	background-color: rgb(204, 204, 204);
+}
+
 @media only screen and (min-width: 300px) {
 	#searchIcon {
 		right: 35px;
@@ -384,4 +411,19 @@ footer {
 	#errorPopUp #message {
 		font-size: 2em;
 	}
+}
+
+ /* Track */
+ ::-webkit-scrollbar-track {
+	background:transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #4ab7d9;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #c8e9f3; 
 }

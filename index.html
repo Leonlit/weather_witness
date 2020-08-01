@@ -134,6 +134,9 @@
         <div id="mainPage" class="fade-in-left fixedCenter">
             <div class="fixedCenter">
                 <input id="mainSearchBox" class="textCenter" placeholder="City name" autocomplete="off" onkeyup="isEnterMain(event)"/>
+                <datalist id="cityList">
+
+                </datalist>
                 <input type="submit" value="Go" class="mainBtn" onclick="triggerData()"/>
             </div>
         </div>
@@ -187,7 +190,7 @@
     </body>
 </html>
 
-<script src="scripts/clientRequest.js"></script>
 <script src="scripts/utility.js"></script>
+<script src="scripts/clientRequest.js"></script>
 <script src="scripts/forecast.js"></script>
 <script src="scripts/userInteraction.js"></script>

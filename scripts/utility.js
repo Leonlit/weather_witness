@@ -77,3 +77,79 @@ function openCloseError (message) {
         }, 400);
     }
 }
+
+function getCityJSON (callback) {
+    try {
+        fetch ("cityObject.json")
+        .then(result => result.text())
+        .then(json=> {
+            callback(json);
+        })
+        
+    }catch (err) {
+        console.log(err.message);
+    }
+}
+
+let cityArr = null;
+let cityNames = [];
+
+function checkCityList () {
+    if (cityArr == null || cityArr == undefined) {
+        getCityJSON((data)=>{
+
+            let names = JSON.parse(data);
+            cityArr = names;
+            console.log("test")
+            names.forEach(ele => {
+                cityNames.push(ele.name);
+            });
+            console.log(names[0].name);
+            constructOptions (cityNames) 
+        });
+    }else {
+        constructOptions (cityNames);
+        console.log("test2")
+    }
+}
+
+let cityCont = document.getElementById('cityList')
+function constructOptions (cityNames) {
+
+    cityCont.innerHTML = ''; 
+    let value = document.getElementById("mainSearchBox").value;
+    
+    let size = cityNames.length;
+    let found = 0;
+
+    cityCont.style.backgroundColor = "transparent";
+
+    if (value == "") return false;
+
+    for (let i = 0; i < size; i++) {
+        if (found == 20 || value == "") {
+            break;
+        }
+
+        if  ( ((cityNames[i].toLowerCase()).indexOf(value.toLowerCase())) > -1) { 
+            console.log(cityNames[i])
+            found++;
+            let node = document.createElement("option");
+            node.value = cityNames[i];
+            node.addEventListener("click", ()=> {
+                insertValue(cityNames[i]);
+            });
+            let text = document.createTextNode(cityNames[i]); 
+            node.appendChild(text);
+            cityCont.appendChild(node); 
+        }
+        if (found > 0) {
+            cityCont.style.backgroundColor = "white"; 
+        }
+    }
+}
+
+function insertValue (name) {
+    document.getElementById("mainSearchBox").value = name;
+    cityCont.innerHTML = ''; 
+}

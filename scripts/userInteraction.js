@@ -21,6 +21,8 @@ function isEnterSecondary (event) {
 function isEnterMain (event) {
 	if (event.key === "Enter") {
 		triggerData();
+	}else {
+		checkCityList()
 	}
 }
 
