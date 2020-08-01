@@ -19,7 +19,11 @@
         <div id="navItems" class="fixedEle ">
             <li><a class="navLink" onclick="openClosePage()">About</a></li>
             <li><a class="navLink" target="_blank" href="https://github.com/Leonlit/weather_witness">Source Code</a></li>
-            <li onkeyup="isEnterSecondary(event)"><input type="text" placeholder="city name" id="secondarySearch" /></li><span id="searchIcon" onclick="getNewData()">Go</span>
+            <li onkeyup="isEnterSecondary(event)"><input type="text" placeholder="city name" id="secondarySearch" /></li>
+            <datalist id="cityListSmall">
+
+            </datalist>
+            <span id="searchIcon" onclick="getNewData()">Go</span>
         </div>
         <div id="navBg" class="fixedEle absolutePointEle"></div>
         <nav id="navContainer" class="fixedEle absolutePointEle">

@@ -108,48 +108,74 @@ function checkCityList () {
             constructOptions (cityNames) 
         });
     }else {
-        constructOptions (cityNames);
+        constructOptions(cityNames);
         console.log("test2")
     }
 }
 
-let cityCont = document.getElementById('cityList')
-function constructOptions (cityNames) {
+let cityCont = document.getElementById("cityList"),
+    smallCityCont = document.getElementById("cityListSmall");
+function constructOptions (names) {
 
-    cityCont.innerHTML = ''; 
-    let value = document.getElementById("mainSearchBox").value;
+    let theCont = (isSearchMain) ? cityCont : smallCityCont;
+
+    theCont.innerHTML = "";
+    let value = (isSearchMain) ? 
+                document.getElementById("mainSearchBox").value :
+                document.getElementById("secondarySearch").value ;
     
-    let size = cityNames.length;
+    let size = names.length;
     let found = 0;
 
-    cityCont.style.backgroundColor = "transparent";
-
-    if (value == "") return false;
+    if (value == "") {
+        makeSearchTransparent(theCont);
+        return false;
+    }
 
     for (let i = 0; i < size; i++) {
         if (found == 20 || value == "") {
             break;
         }
 
-        if  ( ((cityNames[i].toLowerCase()).indexOf(value.toLowerCase())) > -1) { 
-            console.log(cityNames[i])
+        if  ( ((names[i].toLowerCase()).indexOf(value.toLowerCase())) > -1) { 
             found++;
             let node = document.createElement("option");
-            node.value = cityNames[i];
+            node.value = names[i];
             node.addEventListener("click", ()=> {
-                insertValue(cityNames[i]);
+                makeSearchTransparent(theCont)
+                insertValue(names[i]);
             });
-            let text = document.createTextNode(cityNames[i]); 
+            let text = document.createTextNode(names[i]); 
             node.appendChild(text);
-            cityCont.appendChild(node); 
+            theCont.appendChild(node); 
         }
-        if (found > 0) {
-            cityCont.style.backgroundColor = "white"; 
+    }
+
+    if (found > 0) {
+        theCont.style.backgroundColor = "white"; 
+        if (!isSearchMain && screen.width <= 800.0) {
+            theCont.style.backgroundColor = "rgb(64,64,64)";
+            theCont.style.marginTop = "10px";
+            theCont.style.color = "white";
+            theCont.style.borderTop = "2px solid rgb(100,100, 100)"
         }
+    }else {
+        makeSearchTransparent(theCont)
+        theCont.style = "";
     }
 }
 
 function insertValue (name) {
-    document.getElementById("mainSearchBox").value = name;
-    cityCont.innerHTML = ''; 
+    let theCont = (isSearchMain) ? cityCont : smallCityCont;
+    let ele = (isSearchMain) ? 
+                document.getElementById("mainSearchBox") :
+                document.getElementById("secondarySearch") ;
+    
+    ele.value= name;
+    makeSearchTransparent(theCont)
+    theCont.innerHTML = '';
+}
+
+function makeSearchTransparent (cont) {
+    cont.style.backgroundColor = "transparent";
 }

@@ -63,16 +63,20 @@ function triggerData () {
 		document.getElementById("secondarySearch").value = "";
 	}
 	if (!lockInitialAPI) {
-		getJson(0, city).then ((message) => {
-			setupData(message);
-			getForecastData(city);
-			lockInitialAPI = true;
-			console.log(message)
-		}).catch ((err)=>{
-			invalidCity = true;
-			console.log(invalidCity)
-			openCloseError("Invalid city name");
-		})
+		if (city == "") {
+			console.log("throwed")
+			openCloseError("The city name is empty");
+		}else {
+			getJson(0, city).then ((message) => {
+				setupData(message);
+				getForecastData(city);
+				lockInitialAPI = true;
+				console.log(message)
+			}).catch ((err)=>{
+				invalidCity = true;
+				openCloseError("Invalid city name");
+			})
+		}
 	}
 }
 

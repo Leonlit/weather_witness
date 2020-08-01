@@ -1,7 +1,8 @@
-let navOpen = false;
-let pageOpen = false;
-let navDisabled = false;
-let pageDisabled = false;
+let navOpen = false,
+	pageOpen = false,
+	navDisabled = false,
+	pageDisabled = false,
+	isSearchMain = false;
 
 //used for mobile design.
 //when user scrolled down from a specific range, 
@@ -15,6 +16,9 @@ window.onscroll = () => {
 function isEnterSecondary (event) {
 	if (event.key === "Enter") {
 		getNewData();
+	}else {
+		isSearchMain = false;
+		checkCityList()
 	}
 }
 
@@ -22,12 +26,15 @@ function isEnterMain (event) {
 	if (event.key === "Enter") {
 		triggerData();
 	}else {
+		isSearchMain = true;
 		checkCityList()
 	}
 }
 
 //showing and closing the about page for the app
 function openClosePage () {
+	//to close the search list
+	insertValue("");
 	let page = document.getElementById("aboutPage");
 	if (!pageDisabled) {
 		if (pageOpen) {
@@ -85,6 +92,9 @@ function adjustNavCont () {
 
 //handling and animating nav opening and closing
 function openCloseNav() {
+	//to close search list
+	insertValue("");
+
 	let navItems = document.getElementById("navItems");
 	let navTitle = document.getElementById("mainTitle");
 	let dropDown = document.getElementById("dropDown");
