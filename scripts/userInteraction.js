@@ -18,7 +18,10 @@ function isEnterSecondary (event) {
 		getNewData();
 		insertValue ("");
 	}else {
-		isSearchMain = false;
+		//if the key entered is not enter, it might be a text character
+		//so start to the autocomplete item list
+		//specify that it's not triggered by the main search box
+		isSearchMain = false; 
 		checkCityList();
 	}
 }

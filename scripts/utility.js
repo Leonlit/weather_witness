@@ -78,14 +78,15 @@ function openCloseError (message) {
     }
 }
 
+//getting the list of city namese available
 async function getCityJSON (callback) {
     try {
         await fetch ("cityObject.json")
         .then(result => result.json())
         .then(json=> {
+            //return a json data to the checkCityList method
             callback(json);
         })
-        
     }catch (err) {
         console.log(err.message);
     }
@@ -95,11 +96,13 @@ let gottenName = false;
 let cityNames = [];
 let founded = [];
 
+//get city names from file, but only if the cityNames is empty
+//If its not empty use the list of city in it and pass the value
+//into constructOptions
 function checkCityList () {
     if (!gottenName) {
         gottenName = true;
         getCityJSON((data)=>{
-            console.log("test")
             data.forEach(ele => {
                 cityNames.push(ele.name);
             });
@@ -107,32 +110,37 @@ function checkCityList () {
         });
     }else {
         constructOptions(cityNames);
-        console.log("test2")
     }
 }
 
 let cityCont = document.getElementById("cityList"),
     smallCityCont = document.getElementById("cityListSmall");
 
+//construct the autocomplete list for the appropriate search box
 function constructOptions (names) {
     founded = [];
     let theCont = (isSearchMain) ? cityCont : smallCityCont;
 
+    //clearing the autocomplete item for both search box so that the screen 
+    //wont be so messy
     clearBoth();
-    let value = (isSearchMain) ? 
-                document.getElementById("mainSearchBox").value :
-                document.getElementById("secondarySearch").value ;
+
+    //getting the search box that initiated the search
+    let searchBox = (isSearchMain) ? "mainSearchBox" : "secondarySearch";
+    let value = document.getElementById(searchBox).value ;
     
     let size = names.length;
     let found = 0;
 
+    //if the value of the search box became empty, make the element transparent
     if (value == "") {
         makeSearchTransparent(theCont);
         return false;
     }
 
     for (let i = 0; i < size; i++) {
-        if (found == 20 || value == "") {
+        //if the number of result found is 30 break the loop (limiting the value to loop through)
+        if (found == 30) {
             break;
         }
         if  ( ((names[i].toLowerCase()).indexOf(value.toLowerCase())) > -1) { 
@@ -141,6 +149,8 @@ function constructOptions (names) {
             let currName = names[i];
 
             founded.push(currName);
+            //add a event when the option node is clicked, insert the clicked value into the 
+            //appropriate search box
             node.addEventListener("click", ()=> {
                 makeSearchTransparent(theCont)
                 insertValue(currName);
@@ -152,6 +162,8 @@ function constructOptions (names) {
         }
     }
     if (found > 0) {
+        //because the search box for mobile version is different, therefore need a way
+        //to customize its style
         theCont.style.backgroundColor = "white"; 
         if (!isSearchMain && screen.width <= 800.0) {
             theCont.style.backgroundColor = "rgb(64,64,64)";
@@ -160,11 +172,14 @@ function constructOptions (names) {
             theCont.style.borderTop = "2px solid rgb(100,100, 100)"
         }
     }else {
+        //if no names found to match the string provided by the user, make the
+        //search transparent and remove all style in the datalist element
         makeSearchTransparent(theCont)
         theCont.style = "";
     }
 }
 
+//insert text into the container
 function insertValue (name) {
     let ele = (isSearchMain) ? 
             document.getElementById("mainSearchBox") :
@@ -174,10 +189,12 @@ function insertValue (name) {
     clearBoth();
 }
 
+//making the autocomplete item list to go transparent
 function makeSearchTransparent (cont) {
     cont.style.backgroundColor = "transparent";
 }
 
+//clearing both search box 
 function clearBoth () {
     makeSearchTransparent(cityCont)
     makeSearchTransparent(smallCityCont)
