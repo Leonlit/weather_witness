@@ -16,18 +16,20 @@ window.onscroll = () => {
 function isEnterSecondary (event) {
 	if (event.key === "Enter") {
 		getNewData();
+		insertValue ("");
 	}else {
 		isSearchMain = false;
-		checkCityList()
+		checkCityList();
 	}
 }
 
 function isEnterMain (event) {
 	if (event.key === "Enter") {
 		triggerData();
+		insertValue ("");
 	}else {
 		isSearchMain = true;
-		checkCityList()
+		checkCityList();
 	}
 }
 

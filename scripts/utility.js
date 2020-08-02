@@ -78,10 +78,10 @@ function openCloseError (message) {
     }
 }
 
-function getCityJSON (callback) {
+async function getCityJSON (callback) {
     try {
-        fetch ("cityObject.json")
-        .then(result => result.text())
+        await fetch ("cityObject.json")
+        .then(result => result.json())
         .then(json=> {
             callback(json);
         })
@@ -91,20 +91,18 @@ function getCityJSON (callback) {
     }
 }
 
-let cityArr = null;
+let gottenName = false;
 let cityNames = [];
+let founded = [];
 
 function checkCityList () {
-    if (cityArr == null || cityArr == undefined) {
+    if (!gottenName) {
+        gottenName = true;
         getCityJSON((data)=>{
-
-            let names = JSON.parse(data);
-            cityArr = names;
             console.log("test")
-            names.forEach(ele => {
+            data.forEach(ele => {
                 cityNames.push(ele.name);
             });
-            console.log(names[0].name);
             constructOptions (cityNames) 
         });
     }else {
@@ -115,11 +113,12 @@ function checkCityList () {
 
 let cityCont = document.getElementById("cityList"),
     smallCityCont = document.getElementById("cityListSmall");
-function constructOptions (names) {
 
+function constructOptions (names) {
+    founded = [];
     let theCont = (isSearchMain) ? cityCont : smallCityCont;
 
-    theCont.innerHTML = "";
+    clearBoth();
     let value = (isSearchMain) ? 
                 document.getElementById("mainSearchBox").value :
                 document.getElementById("secondarySearch").value ;
@@ -136,21 +135,22 @@ function constructOptions (names) {
         if (found == 20 || value == "") {
             break;
         }
-
         if  ( ((names[i].toLowerCase()).indexOf(value.toLowerCase())) > -1) { 
             found++;
             let node = document.createElement("option");
-            node.value = names[i];
+            let currName = names[i];
+
+            founded.push(currName);
             node.addEventListener("click", ()=> {
                 makeSearchTransparent(theCont)
-                insertValue(names[i]);
+                insertValue(currName);
             });
-            let text = document.createTextNode(names[i]); 
+
+            let text = document.createTextNode(currName); 
             node.appendChild(text);
             theCont.appendChild(node); 
         }
     }
-
     if (found > 0) {
         theCont.style.backgroundColor = "white"; 
         if (!isSearchMain && screen.width <= 800.0) {
@@ -166,16 +166,21 @@ function constructOptions (names) {
 }
 
 function insertValue (name) {
-    let theCont = (isSearchMain) ? cityCont : smallCityCont;
     let ele = (isSearchMain) ? 
-                document.getElementById("mainSearchBox") :
-                document.getElementById("secondarySearch") ;
+            document.getElementById("mainSearchBox") :
+            document.getElementById("secondarySearch") ;
     
-    ele.value= name;
-    makeSearchTransparent(theCont)
-    theCont.innerHTML = '';
+    ele.value = name;
+    clearBoth();
 }
 
 function makeSearchTransparent (cont) {
     cont.style.backgroundColor = "transparent";
+}
+
+function clearBoth () {
+    makeSearchTransparent(cityCont)
+    makeSearchTransparent(smallCityCont)
+    cityCont.innerHTML = "";
+    smallCityCont.innerHTML = "";
 }
