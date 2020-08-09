@@ -7,12 +7,10 @@ let forecast = document.getElementById("forecast");
 
 //Get the data from the API server
 function getForecastData (city) {
-	console.log(invalidCity)
 	if (!invalidCity) {
 		//when the data haven't been fetched
 		getJson(1, city).then ((message) => {
 			changeForecastData(message);
-			console.log(message)
 		}).catch ((err)=>{
 			console.log("error occured");
 		})
@@ -57,7 +55,7 @@ function changeForecastData (initialData) {
 			break;
 		default:
 			console.log("something wrong in determining forecast type");
-			console.log(type, typeof(type))
+			console.log(type, typeof(type));
 	}
 }
 
@@ -80,7 +78,6 @@ function setForecastTemperature (batch) {
 			iconName = getIconsName(weatherId, dayOrNight),
 			iconUrl = `icons/${iconName}.png`;
 
-		console.log( dayOrNight, currHour, iconName);
 		time = timeFormater(time);
 
 		let ele = `

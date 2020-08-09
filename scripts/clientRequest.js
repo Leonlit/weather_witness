@@ -13,18 +13,24 @@ function getJson (type, city) {
 		try {
 			fetch(requestQuery, {
 				method: 'get', 
-			}).then((response) => {
-				//if  the response status isn't ok, don't do anything
-				if (response.status >= 200 && response.status < 300) {
+			}).then(data=>data.text())
+			.then((response) => {
+				if (response == "1") {
+					openCloseError("The API server is down");
+				}else {
+					response = JSON.parse(response);
 					//return data in JSON form
-					resolve(response.json());
-					
-				}else { 
-					reject (response.statusText);
+					if (response["cod"] == "401") {
+						openCloseError("Invalid operation");
+					}else if (response["cod"] == "404") {
+						openCloseError("Invalid City Name");
+					}else {
+						resolve(response);
+					}
 				}
 			})
-		}catch {
-			reject("Something went wrong when the server send an request to the API, Try again later");
+		}catch (err){
+			console.log(err);
 		}
 	});	
 }
@@ -64,17 +70,14 @@ function triggerData () {
 	}
 	if (!lockInitialAPI) {
 		if (city == "") {
-			console.log("throwed")
 			openCloseError("The city name is empty");
 		}else {
 			getJson(0, city).then ((message) => {
 				setupData(message);
 				getForecastData(city);
 				lockInitialAPI = true;
-				console.log(message)
 			}).catch ((err)=>{
 				invalidCity = true;
-				openCloseError("Invalid city name");
 			})
 		}
 	}
@@ -157,7 +160,6 @@ function refreshPage () {
 
 //page refresh function when search is performed 
 function refreshSearch() {
-	console.log("test");
 	weatherDetails.classList.remove("fade-in-left");
 	weatherDetails.classList.add("fade-out");
 	setTimeout(() => {
