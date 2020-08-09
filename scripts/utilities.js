@@ -1,8 +1,9 @@
+'use strict'
 //formating time from unix milisecond time to readable time for user in 12 hour format
 function timeFormater (unixTimestamp) {
     //buiding the time
     let date = new Date(unixTimestamp*1000),
-        hour = getHour(unixTimestamp);
+        hour = getHour(unixTimestamp),
         minute = "0" + date.getMinutes(),
         symbol = "";
     
@@ -24,58 +25,12 @@ function getHour (unixTime) {
 
 //check if the current time is night or day
 function  getDayType (hour) {
-    console.log(hour)
     return (hour >= 19 || hour <= 6) ? "N": "D";
 }
 
 //determine if its pm or am
 function getDayOrNight (hour) {
     return (hour>=12.00) ? "PM" : "AM";
-}
-
-let errorShown = false, invalidCity = false;
-function openCloseError (message) {
-    
-    let container = document.getElementById("errorPopUp");
-    let msgCont = document.getElementById("message");
-    let shader = document.getElementById("shader2");
-
-    if (!errorShown) {
-        errorShown = true;
-        msgCont.innerHTML = message;
-
-        container.style.opacity = "0";
-        container.style.display = "block";
-        container.classList.remove("hidden");
-        container.classList.add("appear");
-        
-
-        shader.style.opacity = "0";
-        shader.style.display = "block";
-        shader.classList.remove("hidden");
-        shader.classList.add("appear");
-    
-        setTimeout(() => {
-            shader.style.opacity = "1";
-            container.style.opacity = "1";
-        }, 400);
-        
-    }else {
-        errorShown = false; 
-        
-        container.classList.remove("appear");
-        container.classList.add("hidden");
-
-        shader.classList.remove("appear");
-        shader.classList.add("hidden");
-        
-        setTimeout(()=>{
-            shader.style.display = "none";
-            shader.style.opacity = "0";
-            container.style.display = "none";
-            container.style.opacity = "0";
-        }, 400);
-    }
 }
 
 //getting the list of city namese available
@@ -113,7 +68,7 @@ function checkCityList () {
     }
 }
 
-let cityCont = document.getElementById("cityList"),
+const cityCont = document.getElementById("cityList"),
     smallCityCont = document.getElementById("cityListSmall");
 
 //construct the autocomplete list for the appropriate search box
@@ -200,4 +155,32 @@ function clearBoth () {
     makeSearchTransparent(smallCityCont)
     cityCont.innerHTML = "";
     smallCityCont.innerHTML = "";
+}
+
+//using the icon code provided by OpenWeatherMap API, use the appropriate icon for the weather condition
+function getIconsName (id, DON) {
+	let icon;
+	if (id <300 && id>=200) {
+		icon = "thunderstorm_" + DON;
+	}else if (id>=300 && id<400) {
+		icon = "drizzle";
+	}else if (id>=500 && id<600) {
+		icon = "rain_" + DON;
+	}else if (id>=600 && id <700) {
+		icon = "snow";
+	}else if (id >700 && id<800) {
+		icon = "atmosphere";
+	}else if (id == 800) {
+		icon = "clear_" + DON;
+	}else if (id==801) {
+		icon = "broken_clouds_"+DON;
+	}else if (id>801) {
+		icon = "cloud_scattered";
+	}
+	return icon;
+}
+
+function getCookieValue(value) {
+    var cookieStrings = document.cookie.match('(^|;)\\s*' + value + '\\s*=\\s*([^;]+)');
+    return cookieStrings ? cookieStrings.pop() : '';
 }

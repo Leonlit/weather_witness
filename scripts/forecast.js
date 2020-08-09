@@ -1,7 +1,8 @@
+'use strict'
 let forecastJson,
 	forecastShown = false;
 
-let forecast = document.getElementById("forecast");
+const forecast = document.getElementById("forecast"),
 	forecastEle = document.getElementById("forecastData"),
 	forecastDataCont = document.getElementById("forecastDataCont");
 
@@ -12,7 +13,7 @@ function getForecastData (city) {
 		getJson(1, city).then ((message) => {
 			changeForecastData(message);
 		}).catch ((err)=>{
-			console.log("error occured");
+			console.log(err);
 		})
 	}else {
 		console.log("Invalid City name");
@@ -22,8 +23,8 @@ function getForecastData (city) {
 //updating the date of the forecast option section
 function setOptionDate (date, month) {
 	month++;
-	let cont = document.getElementById("forecastDay");
-	let option = cont.getElementsByTagName("option");
+	const cont = document.getElementById("forecastDay");
+	const option = cont.getElementsByTagName("option");
 	for (let x = 0; x< 5;x++) {
 		option[x].innerHTML = `${date++} / ${month} - ${date} / ${month}`
 	}
@@ -40,8 +41,8 @@ function changeForecastData (initialData) {
 		setOptionDate(date.getUTCDate(), date.getUTCMonth());
 	}
 
-	let type = document.getElementById("forecastType").value;
-	let batch = document.getElementById("forecastDay").value;
+	const type = document.getElementById("forecastType").value;
+	const batch = document.getElementById("forecastDay").value;
 
 	switch (type) {
 		case "temperature":

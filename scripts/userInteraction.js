@@ -1,3 +1,4 @@
+'use strict'
 let navOpen = false,
 	pageOpen = false,
 	navDisabled = false,
@@ -168,4 +169,50 @@ function openCloseNav() {
 			}, 500);
 		}
 	}
+}
+
+//handling error pop up
+let errorShown = false, invalidCity = false;
+function openCloseError (message) {
+    
+    let container = document.getElementById("errorPopUp");
+    let msgCont = document.getElementById("message");
+    let shader = document.getElementById("shader2");
+
+    if (!errorShown) {
+        errorShown = true;
+        msgCont.innerHTML = message;
+
+        container.style.opacity = "0";
+        container.style.display = "block";
+        container.classList.remove("hidden");
+        container.classList.add("appear");
+        
+
+        shader.style.opacity = "0";
+        shader.style.display = "block";
+        shader.classList.remove("hidden");
+        shader.classList.add("appear");
+    
+        setTimeout(() => {
+            shader.style.opacity = "1";
+            container.style.opacity = "1";
+        }, 400);
+        
+    }else {
+        errorShown = false; 
+        
+        container.classList.remove("appear");
+        container.classList.add("hidden");
+
+        shader.classList.remove("appear");
+        shader.classList.add("hidden");
+        
+        setTimeout(()=>{
+            shader.style.display = "none";
+            shader.style.opacity = "0";
+            container.style.display = "none";
+            container.style.opacity = "0";
+        }, 400);
+    }
 }

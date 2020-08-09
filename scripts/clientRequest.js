@@ -1,3 +1,4 @@
+'use strict'
 let lockInitialAPI = false, 
 	initial = true,
 	cityObj ={};
@@ -17,6 +18,8 @@ function getJson (type, city) {
 			.then((response) => {
 				if (response == "1") {
 					openCloseError("The API server is down");
+				}else if (response == "2"){
+					openCloseError("You're too fast, slow down!");
 				}else {
 					response = JSON.parse(response);
 					//return data in JSON form
@@ -35,7 +38,7 @@ function getJson (type, city) {
 	});	
 }
 
-let temperatureCont = document.getElementById("temperature"),
+const temperatureCont = document.getElementById("temperature"),
 	weatherCont = document.getElementById("weather"),
 	locationCont = document.getElementById("location"),
 	feelsLikeCont = document.getElementById("feels_like"),
@@ -44,7 +47,7 @@ let temperatureCont = document.getElementById("temperature"),
 	pressureCont = document.getElementById("pressure"),
 	humidityCont = document.getElementById("humidity"),
 	cloudinessCont = document.getElementById("cloudiness"),
-	visibilityCont = document.getElementById("visibility")
+	visibilityCont = document.getElementById("visibility"),
 	mainWeatherIcon = document.getElementById("weatherIcon"),
 	footer = document.getElementsByTagName("footer")[0];
 
@@ -53,6 +56,7 @@ function getNewData () {
 	lockInitialAPI = false;
 	document.getElementById("mainSearchBox").value = "";
 	triggerData();
+	insertValue ("");
 	if (navOpen) openCloseNav();
 }
 
@@ -72,13 +76,20 @@ function triggerData () {
 		if (city == "") {
 			openCloseError("The city name is empty");
 		}else {
-			getJson(0, city).then ((message) => {
-				setupData(message);
-				getForecastData(city);
-				lockInitialAPI = true;
-			}).catch ((err)=>{
-				invalidCity = true;
-			})
+			let delays = 0;
+			
+			if (delays = getCookieValue("delayCount")) {
+				delays = 500 *(Number.parseInt(delays) / 2);
+			}
+			setTimeout(() => {
+				getJson(0, city).then ((message) => {
+					setupData(message);
+					getForecastData(city);
+					lockInitialAPI = true;
+				}).catch ((err)=>{
+					invalidCity = true;
+				})
+			}, delays);
 		}
 	}
 }
@@ -98,8 +109,9 @@ function setupData (data) {
 		feelsLike = data["main"]["feels_like"] - 273.15,
 		visibility = data["visibility"] / 1000,
 		clouds = data["clouds"]["all"],
-		unix = data["dt"], 
-		iconUrl, dayOrNight, currHour;
+		unix = data["dt"];
+
+	let iconUrl, dayOrNight, currHour, time, iconName;
 
 	if (mainPage.style.display != "none") {
 		refreshPage();
@@ -107,7 +119,7 @@ function setupData (data) {
 		refreshSearch();
 	}
 
-	let time;
+	
 	if (!initial) {
 		time = 800;
 	}else {
@@ -144,7 +156,7 @@ function setupData (data) {
 	}, time);
 }
 
-let mainPage = document.getElementById("mainPage")
+const mainPage = document.getElementById("mainPage"),
 	weatherDetails = document.getElementById("weatherDisplay");
 
 //animating the page translation from main page to the Weather details page
@@ -167,31 +179,4 @@ function refreshSearch() {
 		weatherDetails.classList.add("fade-in-left");
 		weatherDetails.style.display = "block";	
 	}, 1000);
-}
-
-//using the icon code provided by OpenWeatherMap API, use the appropriate icon for the weather condition
-function getIconsName (id, DON) {
-	let icon;
-	if (id <300 && id>=200) {
-		icon = "thunderstorm_" + DON;
-	}else if (id>=300 && id<400) {
-		icon = "drizzle";
-	}else if (id>=500 && id<600) {
-		icon = "rain_" + DON;
-	}else if (id>=600 && id <700) {
-		icon = "snow";
-	}else if (id >700 && id<800) {
-		icon = "atmosphere";
-	}else if (id == 800) {
-		icon = "clear_" + DON;
-	}else if (id==801) {
-		icon = "broken_clouds_"+DON;
-	}else if (id>801) {
-		icon = "cloud_scattered";
-	}
-	return icon;
-}
-
-function openPage () {
-	openCloseNav();
 }
