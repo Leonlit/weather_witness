@@ -9,7 +9,7 @@ let navOpen = false,
 //when user scrolled down from a specific range, 
 //change the color of the navigation menu
 window.onscroll = () => {
-	if (screen.width < 800) adjustNavCont();
+	if (window.innerWidth < 800) adjustNavCont();
 }
 
 //used as the funcion to be invoked when enter is pressed in
@@ -99,6 +99,7 @@ function adjustNavCont () {
 //handling and animating nav opening and closing
 function openCloseNav() {
 	//to close search list
+	isSearchMain = false;
 	insertValue("");
 
 	let navItems = document.getElementById("navItems");

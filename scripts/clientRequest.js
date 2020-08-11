@@ -7,17 +7,18 @@ function getJson (type, city) {
 	return new Promise ((resolve, reject)=> {
 		let requestQuery;
 			
-		if (type == 0) 
+		if (type == 0) {
 			requestQuery = `request.php?city=${city}&type=0`;
-		else 
+		}else {
 			requestQuery = `request.php?city=${city}&type=1`;
+		}
 		try {
 			fetch(requestQuery, {
 				method: 'get', 
 			}).then(data=>data.text())
 			.then((response) => {
 				if (response == "1") {
-					openCloseError("The API server is down");
+					openCloseError("The API server is down <br> Please try again later.");
 				}else if (response == "2"){
 					openCloseError("You're too fast, slow down!");
 				}else {
@@ -28,7 +29,7 @@ function getJson (type, city) {
 					}else if (response["cod"] == "404") {
 						openCloseError("Invalid City Name");
 					}else {
-						resolve(response);
+					resolve(response);
 					}
 				}
 			})
