@@ -6,35 +6,44 @@ let lockInitialAPI = false,
 function getJson (type, city) {
 	return new Promise ((resolve, reject)=> {
 		let requestQuery;
-			
-		if (type == 0) {
-			requestQuery = `request.php?city=${city}&type=0`;
+
+		let cacheData = checkCache(city, type);
+		if (cacheData != false) {
+			let json = JSON.parse(cacheData);
+			resolve(json);
 		}else {
-			requestQuery = `request.php?city=${city}&type=1`;
-		}
-		try {
-			fetch(requestQuery, {
-				method: 'get', 
-			}).then(data=>data.text())
-			.then((response) => {
-				if (response == "1") {
-					openCloseError("The API server is down <br> Please try again later.");
-				}else if (response == "2"){
-					openCloseError("You're too fast, slow down!");
-				}else {
-					response = JSON.parse(response);
-					//return data in JSON form
-					if (response["cod"] == "401") {
-						openCloseError("Invalid operation");
-					}else if (response["cod"] == "404") {
-						openCloseError("Invalid City Name");
+			if (type == 0) {
+				requestQuery = `request.php?city=${city}&type=0`;
+			}else {
+				requestQuery = `request.php?city=${city}&type=1`;
+			}
+			try {
+				fetch(requestQuery, {
+					method: 'get', 
+				}).then(data=>data.text())
+				.then((response) => {
+					if (response == "1") {
+						openCloseError("The API server is down <br> Please try again later.");
+					}else if (response == "2"){
+						openCloseError("You're too fast, slow down!");
 					}else {
-					resolve(response);
+						response = JSON.parse(response);
+						//return data in JSON form
+						if (response["cod"] == "401") {
+							openCloseError("Invalid operation");
+						}else if (response["cod"] == "404") {
+							openCloseError("Invalid City Name");
+						}else {
+
+						saveCache (city, type, JSON.stringify(response));
+						resolve(response);
+						}
 					}
-				}
-			})
-		}catch (err){
-			console.log(err);
+				})
+			}catch (err){
+				reject("unexpected error occured!!!")
+				console.log(err);
+			}
 		}
 	});	
 }

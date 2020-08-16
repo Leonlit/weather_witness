@@ -4,15 +4,15 @@
 	$query = "";
 	//if city is set with values, construct and request the API URL and pass it to client
 
-	if (isset($_GET["city"]) && isset($_GET["type"])) {
-		$city = filter_var($_GET["city"], FILTER_SANITIZE_STRING);
+	if (isset($_GET["city"]) && isset($_GET["type"]) && $_GET["city"] != "" && $_GET["type"] != "") {
+		$city = filterData($_GET["city"]);
 		$key = "";
 		try {
 			$key = getenv('weatherAPI');
 		}catch (Exception $err) {
 			throw new Exception("1");
 		}
-		$URLType = ($_GET["type"] == 0) ? URL : FURL;
+		$URLType = (filterData($_GET["type"]) == 0) ? URL : FURL;
 		$query = $URLType."?q=".$city."&appid=".$key;
 
 		$currSeconds = time();
@@ -72,5 +72,11 @@
 				}
 			}
 		}
+	}else {
+		
+	}
+
+	function filterData ($string) {
+		return htmlspecialchars(filter_var($string, FILTER_SANITIZE_STRING), ENT_QUOTES);
 	}
 ?>
