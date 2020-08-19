@@ -32,8 +32,10 @@ function setOptionDate (date, month) {
 
 //replace the forecast data when a new option is choosed
 function changeForecastData (initialData) {
+	//checks if the function is triggered when the forecast data is setup for the first time
 	if (initialData != undefined) {
 		forecastJson = initialData;
+		//getting the forecast data array
 		forecastJson = forecastJson["list"];
 
 		let time = forecastJson[0]["dt"];
