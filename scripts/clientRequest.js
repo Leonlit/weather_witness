@@ -6,7 +6,6 @@ let lockInitialAPI = false,
 function getJson (type, city) {
 	return new Promise ((resolve, reject)=> {
 		let requestQuery;
-
 		let cacheData = checkCache(city, type);
 		if (cacheData != false) {
 			let json = JSON.parse(cacheData);
@@ -34,9 +33,8 @@ function getJson (type, city) {
 						}else if (response["cod"] == "404") {
 							openCloseError("Invalid City Name");
 						}else {
-
-						saveCache (city, type, JSON.stringify(response));
-						resolve(response);
+							saveCache (city, type, JSON.stringify(response));
+							resolve(response);
 						}
 					}
 				})

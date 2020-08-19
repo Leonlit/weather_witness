@@ -19,12 +19,11 @@ function checkCache (city, type) {
             }
         }catch (ex) {
             console.log(ex);
-            return false;
         }
     }else {
         console.log("Storage are not supported!!!");
-        return false;
     }
+    return false;
 }
 
 //saving data into local storage

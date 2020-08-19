@@ -8,7 +8,8 @@
 		$city = filterData($_GET["city"]);
 		$key = "";
 		try {
-			$key = getenv('weatherAPI');
+			//$key = getenv('weatherAPI');
+			$key = file_get_contents("secret/apikey.txt");
 		}catch (Exception $err) {
 			throw new Exception("1");
 		}
@@ -72,8 +73,6 @@
 				}
 			}
 		}
-	}else {
-		
 	}
 
 	function filterData ($string) {
