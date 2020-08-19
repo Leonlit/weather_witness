@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='description' content=''>
+        <meta name='keywords' content='HTMl, CSS, JS,'>
+        <meta name='author' content='Leon Lit'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <!-- <link rel='icon' type='image/png' href='.png'/> -->
+
+        <!--Chart.js CDN-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+        <title>prototype for graph functionality</title>
+
+        <!-- <link rel='stylesheet' href='.css'> -->
+    </head>
+    <body>
+        <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+            <canvas id='canvas'></canvas>
+        </div>
+    </body>
+</html>
+<script>
+    start();
+    async function start() {
+        let json = await getJSON();
+        compileData(json);
+    }
+    let temp = [];
+    let rain = [];
+    let labels = [];
+
+    function compileData (json) {
+        let data_list = json["list"];
+        for (let day = 1; day <= 5; day++) {
+            for (let index = (day - 1) * 8; index < 8 * day ;index++) {
+                let currJSON = data_list[index];
+                try {
+                    let currTemp = currJSON["main"]["temp"] - 273.15;
+                    temp.push(currTemp.toFixed(2));
+                }catch {
+                    temp.push(0.00);
+                }
+                try {
+                    let currRain = currJSON["rain"]["3h"];
+                    rain.push(currRain);
+                }catch {
+                    rain.push(0.00);
+                }
+                let time = currJSON["dt"];
+                let day = getDay(time);
+                time = timeFormater(time);
+                
+                labels.push(`${time}-${day}`);
+            }
+        }
+        console.log(rain);
+        drawGraph(temp, rain);
+    }
+
+    let canvas = document.getElementById("canvas");
+    function getJSON () {
+        return new Promise ((resolve, reject)=>{
+                fetch("secret/text.json")
+                    .then(response=>resolve(response.json()));
+            }
+        );
+    }
+    
+    function drawGraph (tempData, rainData) {
+        console.log("test");
+        let ctx = canvas.getContext('2d');
+        let chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    borderColor: "#ff0000",
+                    data: tempData,
+                    label: "Temperature"
+                },{
+                    borderColor: "#00FF00",
+                    data: rainData,
+                    label: "Precipitation"
+                },
+            ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+            
+        });
+    }
+
+    function getDay(time) {
+		let date = new Date(time * 1000);
+		return `${date.getUTCDate()}/${date.getUTCMonth()}`;
+    }
+
+    function timeFormater (unixTimestamp) {
+        //buiding the time
+        let date = new Date(unixTimestamp*1000),
+            hour = getHour(unixTimestamp),
+            minute = "0" + date.getMinutes(),
+            symbol = "";
+        
+        minute = minute.substr(-2);
+
+        symbol = getDayOrNight(hour);
+        
+        if (hour != 12) 
+            hour %= 12;
+
+        return `${hour}:${minute} ${symbol}`;
+    }
+
+    function getHour (unixTime) {
+        let dateObj = new Date (unixTime*1000);
+        return dateObj.getUTCHours();
+    }
+
+    //determine if its pm or am
+    function getDayOrNight (hour) {
+        return (hour>=12.00) ? "PM" : "AM";
+    }
+</script>
