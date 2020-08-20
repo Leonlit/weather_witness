@@ -12,6 +12,7 @@ function getForecastData (city) {
 		//when the data haven't been fetched
 		getJson(1, city).then ((message) => {
 			changeForecastData(message);
+			changeGraph(message);
 		}).catch ((err)=>{
 			console.log(err);
 		})
@@ -25,15 +26,21 @@ function setOptionDate (date, month) {
 	month++;
 	const cont = document.getElementById("forecastDay");
 	const option = cont.getElementsByTagName("option");
+	const graphCont = document.getElementById("graphDay");
+	const graphOption = graphCont.getElementsByTagName("option");
 	for (let x = 0; x< 5;x++) {
-		option[x].innerHTML = `${date++} / ${month} - ${date} / ${month}`
+		const template = `${date++} / ${month} - ${date} / ${month}`;
+		option[x].innerHTML = template;
+		graphOption[x].innerHTML = template;
 	}
 }
 
 //replace the forecast data when a new option is choosed
 function changeForecastData (initialData) {
+	//checks if the function is triggered when the forecast data is setup for the first time
 	if (initialData != undefined) {
 		forecastJson = initialData;
+		//getting the forecast data array
 		forecastJson = forecastJson["list"];
 
 		let time = forecastJson[0]["dt"];

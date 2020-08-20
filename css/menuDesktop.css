@@ -39,13 +39,11 @@
     }
 
     #aboutPage{
-        margin-top:5%;
-        margin-left:10%;
-        margin-right:10%;
+        margin-top:2%;
+        left:15%;
         height:65vh;
         max-height:700px;
-        width:70%;
-        z-index: 10;
+        width:60%;
     }
 
     #aboutPage h2{
@@ -66,6 +64,11 @@
 
     #errorPopUp #message {
         font-size: 1.5em;
+    }
+
+    #chartContainer {
+        height:40vh;
+        width:70vw;
     }
 
 }

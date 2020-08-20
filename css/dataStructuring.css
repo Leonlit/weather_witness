@@ -14,6 +14,7 @@
     font-size: 3em;
     font-weight: 900;
     margin-bottom:20px;
+    margin-top:0px;
 }
 
 #mainInfo #weather {
@@ -73,6 +74,7 @@
 
 #forecast {
     background-color: rgb(137, 208, 230);
+    z-index:6;
     margin-bottom:10%;
 }
 
@@ -99,6 +101,7 @@
     font-weight:900;
     color:white;
     background-color:rgb(136,161,230) ;
+    box-shadow: 0px 3px 5px black;
 }
 
 #forecast option {
@@ -112,6 +115,7 @@
 }
 
 #forecastDataCont .forecastItems {
+    box-shadow: 0px 3px 5px black;
     color:black;
     width:80px;
     height:100px;
@@ -138,44 +142,25 @@
     margin-bottom: 0px;
 }
 
+#graphContainer .scrollable{
+    background-color: white;
+    margin-top:50px;
+    margin-bottom:50px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px black;
+}
+
 
 @media only screen and (min-width: 800px) {
-    .dataContainer {
-        padding:40px;
-    }
-    
-    #mainInfo div{
-        margin-top:20px;
-    }
-    
     #mainInfo #temperature {
-        font-size: 3em;
-        font-weight: 900;
         margin-top:130px;
-        margin-bottom:20px;
-    }
-    
-    #mainInfo #weather {
-        font-size:1.2em;
-        font-weight:700;
-    }
-    
-    #mainInfo #location {
-        font-size:1.5em;
-        font-weight:900;
     }
     
     #additionalInfo{
+        box-shadow: 0px 0px 5px black;
         display: inline-block;
         width:35%;
         border-radius: 15px 15px 0px 0px ;
-    }
-    
-    #additionalInfo div {
-        margin-bottom:10px;
-        border-bottom: 1px solid white;
-        font-size:1em;
-        padding:5px;
     }
     
     #forecastDataCont {
@@ -190,18 +175,8 @@
         margin-bottom:20px;
     }
     
-    #forecastType {
-        margin-bottom:20px;
-    }
-    
     .forecastConfigure {
-        display: inline;
-        border: none;
-        padding:5px;
         font-size:1.1em;
-        font-weight:900;
-        color:white;
-        background-color:rgb(136,161,230) ;
     }
     
     #forecastDay {
@@ -229,55 +204,14 @@
     
 }
 
-@media only screen and (min-width: 1000px) {  
-    #additionalInfo{
-        display: inline-block;
-        width:35%;
-        border-radius: 15px 15px 0px 0px ;
-    }
-    
-    #additionalInfo div {
-        margin-bottom:10px;
-        border-bottom: 1px solid white;
-        font-size:1.2em;
-        padding:5px;
-    }
-    
-    #forecastDataCont {
-        margin-top:20px;
-        margin-left:2% ;
-        display: grid;
-        grid-column-gap:20px;
-        grid-template-columns: auto auto auto auto;
-        grid-row-gap: 30px;
-        width:100%;
-        height:auto;
-        margin-bottom:20px;
-    }
-    
-    #forecastType {
-        margin-bottom:20px;
-    }
-    
-    .forecastConfigure {
-        display: inline;
-        border: none;
-        padding:5px;
-        font-size:1.1em;
-        font-weight:900;
-        color:white;
-        background-color:rgb(136,161,230) ;
-    }
-    
+@media only screen and (min-width: 1000px) {
     #forecastDay {
-        width:170px;
         display: inline-block;
     }
     
     #forecastDataCont .forecastItems {
         width:80%;
         height:100%;
-        font-size:20px;
     }
     
     .forecastIcon {

@@ -7,6 +7,10 @@
         <meta name="description" content="A simple weather app with forecast functionality using third-party API">
         <meta name="keywords" content="HTMl, CSS, JS, OpenWeatherMapAPI, HobbyProject">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--Chart.js CDN-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
         <link rel="stylesheet" href="css/animation.css"/>
         <link rel="stylesheet" href="css/menuMobile.css"/>
         <link rel="stylesheet" href="css/menuTablet.css"/>
@@ -25,7 +29,7 @@
         </div>
         <div id="navBg" class="fixedEle absolutePointEle"></div>
         <nav id="navContainer" class="fixedEle absolutePointEle">
-            <span id="mainTitle">Weather Witness</span>
+            <span id="mainTitle"><a href="./">Weather Witness</a></span>
             <div id="dropDown" onclick="openCloseNav()">
                 <div></div>
                 <div></div>
@@ -70,6 +74,27 @@
                     </select>
                     <div class="scrollable">
                         <div id="forecastDataCont"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="graphContainer" class="container">
+                <div id="graphData" class="dataSection">
+                    <select id="graphType" name="graphChoose" class="forecastConfigure"  onchange="changeGraph()">
+                        <option value="1">Temperature</option>
+                        <option value="2">Percipitation</option>
+                    </select>
+                    <select id="graphDay" name="graphDay" class="forecastConfigure"  onchange="changeGraph()">
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                    </select>
+                    <div class="scrollable">
+                        <div id="chartContainer">
+                            <canvas id='graph' height='300' width='300'></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -134,8 +159,10 @@
     </body>
 </html>
 
+
 <script src="scripts/utilities.js"></script>
 <script src="scripts/clientRequest.js"></script>
+<script src="scripts/graphManagement.js"></script>
 <script src="scripts/forecast.js"></script>
 <script src="scripts/userInteraction.js"></script>
 <script src="scripts/cacheManagement.js"></script>
