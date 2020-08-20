@@ -73,6 +73,7 @@ a {
 	padding-top:15px;
 	z-index:100;
 	background-color: transparent;
+	box-shadow: 0px 1px 5px grey;
 }
 
 #mainTitle {
@@ -82,22 +83,26 @@ a {
 	margin-left:20px;
 	cursor:pointer;
 	color:black;
+}
+
+#mainTitle a {
+	color:black;
 	transition-duration:0.3s;
 }
 
-#mainTitle:visited {
+#mainTitle a:visited {
 	color:black;
 }
 
-#mainTitle:hover {
+#mainTitle a:hover {
+	color:white;
 	text-shadow:0px 0px 5px black;
-	color:rgb(236, 236, 236);
 }
 
 #aboutPage{
-	margin-top:15%;
-	margin-left:5%;
-	margin-right:5%;
+	top:15%;
+	left:5%;
+	right:5%;
 	padding:5%;
 	height:75vh;
 	width:80%;
@@ -337,6 +342,13 @@ a {
 	height:100vh;
 }
 
+#chartContainer {
+	position: relative;
+	height:45vh;
+	width:80vw;
+	padding: 5%;
+}
+
 footer {
 	position: absolute;
 	bottom:0;
@@ -347,7 +359,7 @@ footer {
 	font-weight: 900;
 	font-size:12px;
 	font-family:monospace;
-	background-color: rgb(66,165,195) ;
+	background-color: rgb(136,161,230) ;
 	color:white;
 }
 
@@ -413,6 +425,12 @@ datalist option:hover {
 	#errorPopUp #message {
 		font-size: 2em;
 	}
+
+	#chartContainer {
+		padding:10%;
+        height:30vh;
+        width:65vw;
+    }
 }
 
  /* Track */

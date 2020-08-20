@@ -41,8 +41,10 @@ function isEnterMain (event) {
 function openClosePage () {
 	//to close the search list
 	insertValue("");
+	console.log("test");
 	let page = document.getElementById("aboutPage");
 	if (!pageDisabled) {
+		console.log("in first if");
 		if (pageOpen) {
 			pageOpen = false;
 			page.classList.remove("fade-in-left-03");
@@ -54,6 +56,7 @@ function openClosePage () {
 			setTimeout(() => {
 				page.style.display = "none";
 			}, 300);
+			console.log(page)
 		}else {
 			if (navOpen) openCloseNav();
 			pageOpen = true;
@@ -61,6 +64,7 @@ function openClosePage () {
 			page.style.display = "block";
 			page.classList.remove("fade-out-03");
 			page.classList.add("fade-in-left-03");
+			console.log(page);
 		}
 	}
 }
@@ -103,7 +107,7 @@ function openCloseNav() {
 	insertValue("");
 
 	let navItems = document.getElementById("navItems");
-	let navTitle = document.getElementById("mainTitle");
+	let navTitle = document.getElementById("mainTitle").getElementsByTagName("a")[0];
 	let dropDown = document.getElementById("dropDown");
 	let navBar = dropDown.getElementsByTagName("div");
 	let shader = document.getElementById("shader");
