@@ -23,11 +23,11 @@ function getForecastData (city) {
 
 //updating the date of the forecast option section
 function setOptionDate (date, month) {
-	month++;
+	month++; //the date.getUTCMonth() provide value starts from 0 to 11 like array element's index
 	const cont = document.getElementById("forecastDay");
 	const option = cont.getElementsByTagName("option");
 	const graphCont = document.getElementById("graphDay");
-	const graphOption = graphCont.getElementsByTagName("option");
+	const graphOption = graphCont.getElementsByTagName("button");
 	for (let x = 0; x< 5;x++) {
 		const template = `${date++} / ${month} - ${date} / ${month}`;
 		option[x].innerHTML = template;
