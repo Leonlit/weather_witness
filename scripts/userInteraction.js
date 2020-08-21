@@ -90,7 +90,7 @@ function lockPage (time) {
 function adjustNavCont () {
 	if (!navOpen) {
 		let navCont = document.getElementById("navBg");
-		let navShadow = document.getElementById("navBg");
+		let navShadow = document.getElementById("navContainer");
 		let windowViewTop = window.scrollY;
 		if (windowViewTop <= 160) {
 			navCont.style.backgroundColor = `rgba(255,255,255 , ${windowViewTop/160})`;

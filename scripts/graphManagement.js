@@ -159,5 +159,5 @@ function drawGraph (dataGave, title,labels) {
             }
             
         });
-    }, 100);
+    }, 200);
 }

@@ -73,7 +73,7 @@ a {
 	padding-top:15px;
 	z-index:100;
 	background-color: transparent;
-	box-shadow: 0px 1px 10px rgb(128, 128, 128 , 1);
+	box-shadow: 0px 1px 10px rgba(128, 128, 128 , 1);
 }
 
 #mainTitle {
@@ -208,7 +208,7 @@ a {
 }
 
 .navLink:hover {
-	color:rgb(108, 186, 250);
+	color:rgb(106, 133, 210);
 	transform: scale(2.5);
 }
 
@@ -359,7 +359,7 @@ footer {
 	font-weight: 900;
 	font-size:12px;
 	font-family:monospace;
-	background-color: rgb(106 133 210) ;
+	background-color: rgb(106, 133, 210);
 	color:white;
 }
 
