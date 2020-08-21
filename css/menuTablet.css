@@ -111,8 +111,7 @@
     }
 
     .navLink:hover {
-        color:rgb(108, 186, 250);
-        transform: scale(2.5);
+        color:rgb(106, 133, 210);
     }
 
     #mainSearchBox {

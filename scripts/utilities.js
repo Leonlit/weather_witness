@@ -184,3 +184,14 @@ function getCookieValue(value) {
     var cookieStrings = document.cookie.match('(^|;)\\s*' + value + '\\s*=\\s*([^;]+)');
     return cookieStrings ? cookieStrings.pop() : '';
 }
+
+
+function isInteger(value) {
+    if (isNaN(value)) {
+      return false;
+    }
+    // 3.01 | 0 = 3
+    // 3 != 3.01 
+    var x = parseFloat(value);
+    return (x | 0) === x;
+  }

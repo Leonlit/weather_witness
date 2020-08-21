@@ -104,6 +104,7 @@ function triggerData () {
 
 //stting up the data into their appropriate location
 function setupData (data) {
+	
 	document.getElementsByTagName("body")[0].style.paddingTop = "60px";
 	let city = data["name"],
 		country = data["sys"]["country"],
@@ -120,7 +121,10 @@ function setupData (data) {
 		unix = data["dt"];
 
 	let iconUrl, dayOrNight, currHour, time, iconName;
-
+	if (window.innerWidth < 800) {
+		let navShadow = document.getElementById("navContainer");
+		navShadow.style.boxShadow = `0px 1px 10px rgba(128, 128, 128 , 0)`;
+	}
 	if (mainPage.style.display != "none") {
 		refreshPage();
 	}else {

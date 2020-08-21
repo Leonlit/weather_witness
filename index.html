@@ -84,16 +84,16 @@
                         <option value="1">Temperature</option>
                         <option value="2">Percipitation</option>
                     </select>
-                    <select id="graphDay" name="graphDay" class="forecastConfigure"  onchange="changeGraph()">
-                        <option value="1"></option>
-                        <option value="2"></option>
-                        <option value="3"></option>
-                        <option value="4"></option>
-                        <option value="5"></option>
-                    </select>
+                    <div id="graphDay" name="graphDay">
+                        <button onclick="changeGraph(1)" class="forecastConfigure" style="background-color:rgb(106, 133, 210)"></button>
+                        <button onclick="changeGraph(2)" class="forecastConfigure" style="background-color:rgb(106, 133, 210)"></button>
+                        <button onclick="changeGraph(3)" class="forecastConfigure" style="background-color:rgb(106, 133, 210)"></button>
+                        <button onclick="changeGraph(4)" class="forecastConfigure" style="background-color:rgb(106, 133, 210)"></button>
+                        <button onclick="changeGraph(5)" class="forecastConfigure" style="background-color:rgb(106, 133, 210)"></button>
+                    </div>
                     <div class="scrollable">
                         <div id="chartContainer">
-                            <canvas id='graph' height='300' width='300'></canvas>
+                            <canvas id='graph'></canvas>
                         </div>
                     </div>
                 </div>
