@@ -39,14 +39,12 @@ function changeGraph(batch) {
 
 //toggling the buttons background color to indicate which button is selected
 function toggleSelectedButton (index) {
-    let buttons = document.getElementById("graphDay").getElementsByTagName("button");
+    const buttons = document.getElementById("graphDay").getElementsByTagName("button");
     let initialBg = buttons[index].style;
-    console.log(initialBg.backgroundColor);
     if (initialBg.backgroundColor === "rgb(106, 133, 210)") {
         initialBg.backgroundColor = "rgb(136,161,230)";
     }else {
         initialBg.backgroundColor = "rgb(106, 133, 210)";
-        console.log("test");
     }
 
 }
@@ -54,7 +52,7 @@ function toggleSelectedButton (index) {
 //setting up the data for the chart
 function compileData (json, batch, type) {
     let data = [], labels = [];
-    let title = getTitle(type);;
+    const title = getTitle(type);;
     let start, end;
 
     batch.sort();
@@ -63,8 +61,7 @@ function compileData (json, batch, type) {
     }
     
     for (let batches = 0; batches < batch.length; batches++) {
-        let currBatch = batch[batches];
-        console.log(typeof currBatch);
+        const currBatch = batch[batches];
         if (currBatch != 0) {
             start = (currBatch - 1) * 8;
             end = 8 * currBatch;
@@ -75,7 +72,7 @@ function compileData (json, batch, type) {
 
         //extracting the forecast data 
         for (let index = start; index < end ;index++) {
-            let currJSON = json[index];
+            const currJSON = json[index];
             
 
             data.push(extractData(currJSON, type));
@@ -103,9 +100,9 @@ function getTitle (type) {
 
 //get the day for the labels in the chart
 function getDataDay (time) {
-    let date = new Date(time * 1000);
+    const date = new Date(time * 1000);
     //getting the date and month for the time
-    let day = `${date.getUTCDate()}/${1+date.getUTCMonth()}`;
+    const day = `${date.getUTCDate()}/${1+date.getUTCMonth()}`;
     //formatting the time to hh:mm pm/am
     time = timeFormater(time);
     return `${time}-${day}`;

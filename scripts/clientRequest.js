@@ -6,10 +6,9 @@ let lockInitialAPI = false,
 function getJson (type, city) {
 	return new Promise ((resolve, reject)=> {
 		let requestQuery;
-		let cacheData = checkCache(city, type);
+		const cacheData = checkCache(city, type);
 		if (cacheData != false) {
-			let json = JSON.parse(cacheData);
-			resolve(json);
+			resolve(JSON.parse(cacheData));
 		}else {
 			if (type == 0) {
 				requestQuery = `request.php?city=${city}&type=0`;

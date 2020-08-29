@@ -138,8 +138,8 @@ function setForecastPrecipitation (batch) {
 function setForecastWind (batch) {
 	let resultElement = "";
 	for (let index = (batch - 1) * 8; index< 8 * batch; index++) {
-		let windSpd, windDeg, time;
-		let currJSON = forecastJson[index];
+		let windSpd, windDeg, time, logo;
+		const currJSON = forecastJson[index];
 		windSpd = currJSON["wind"]["speed"];
 		windDeg = currJSON["wind"]["deg"];
 		time = currJSON["dt"];
@@ -147,7 +147,7 @@ function setForecastWind (batch) {
 
 		logo = "icons/arrow.png";
 
-		let ele = `
+		const ele = `
 			<div class="forecastItems">
 				<div>${time}</div>
 				<img class="forecastIcon" style="transform:rotate(${windDeg}deg);" src="${logo}"/>

@@ -2,13 +2,13 @@
 function checkCache (city, type) {
     if (storageSupported) {
         try {
-            let storageLocation = `${city}_${type}`;
-            let timeStampTemplate = `${storageLocation}_time`;
-            let timeStamp = getCacheItem(timeStampTemplate);
+            const storageLocation = `${city}_${type}`;
+            const timeStampTemplate = `${storageLocation}_time`;
+            const timeStamp = getCacheItem(timeStampTemplate);
             if (timeStamp !== null) {
                 //cache has a lifetime of 10min
                 if (getCurrTimeStamp() - timeStamp < 600000) {
-                    let data = getCacheItem(storageLocation);
+                    const data = getCacheItem(storageLocation);
                     if (data !== null) {
                         //return the JSON string data
                         return data;
@@ -29,8 +29,8 @@ function checkCache (city, type) {
 //saving data into local storage
 function saveCache (city, type, data) {
     if (storageSupported) {
-        let storageLocation = `${city}_${type}`;
-        let timeStampTemplate = `${storageLocation}_time`;
+        const storageLocation = `${city}_${type}`;
+        const timeStampTemplate = `${storageLocation}_time`;
         resetCache(storageLocation);
         saveCacheItem(storageLocation, data);
         saveCacheItem(timeStampTemplate, getCurrTimeStamp());
@@ -59,7 +59,7 @@ function getCacheItem (item) {
 }
 
 function saveCacheItem (key, item){
-       localStorage.setItem(key, item);
+    localStorage.setItem(key, item);
 }
 
 function deleteCacheItem (item) {

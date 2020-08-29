@@ -80,13 +80,13 @@ const cityCont = document.getElementById("cityList"),
 //construct the autocomplete list for the appropriate search box
 function constructOptions (names) {
     founded = [];
-    let theCont = (isSearchMain) ? cityCont : smallCityCont;
+    const theCont = (isSearchMain) ? cityCont : smallCityCont;
     //clearing the autocomplete item for both search box so that the screen 
     //wont be so messy
     clearBoth();
     //getting the search box that initiated the search
-    let searchBox = (isSearchMain) ? "mainSearchBox" : "secondarySearch";
-    let value = document.getElementById(searchBox).value ;
+    const searchBox = (isSearchMain) ? "mainSearchBox" : "secondarySearch";
+    const value = document.getElementById(searchBox).value ;
     
     //if the value of the search box became empty, make the element transparent
     if (value == "") {
@@ -98,7 +98,7 @@ function constructOptions (names) {
 
 function generateList(names, value, theCont) {
     let found = 0;
-    let size = names.length;
+    const size = names.length;
     for (let i = 0; i < size; i++) {
         //if the number of result found is 30 break the loop (limiting the value to loop through)
         if (found == 30) {
@@ -106,8 +106,8 @@ function generateList(names, value, theCont) {
         }
         if  ( ((names[i].toLowerCase()).indexOf(value.toLowerCase())) > -1) { 
             found++;
-            let node = document.createElement("option");
-            let currName = names[i];
+            const node = document.createElement("option");
+            const currName = names[i];
 
             founded.push(currName);
             //add a event when the option node is clicked, insert the clicked value into the 
@@ -187,7 +187,7 @@ function getIconsName (id, DON) {
 }
 
 function getCookieValue(value) {
-    var cookieStrings = document.cookie.match('(^|;)\\s*' + value + '\\s*=\\s*([^;]+)');
+    const cookieStrings = document.cookie.match('(^|;)\\s*' + value + '\\s*=\\s*([^;]+)');
     return cookieStrings ? cookieStrings.pop() : '';
 }
 
@@ -197,13 +197,13 @@ function isInteger(value) {
     }
     // 3.01 | 0 = 3
     // 3 != 3.01 
-    var x = parseFloat(value);
+    const x = parseFloat(value);
     return (x | 0) === x;
 }
 
 function adjustNavShadowOnSetup () {
     if (window.innerWidth < 800) {
-		let navShadow = document.getElementById("navContainer");
+		const navShadow = document.getElementById("navContainer");
 		navShadow.style.boxShadow = `0px 1px 10px rgba(128, 128, 128 , 0)`;
 	}
 }
