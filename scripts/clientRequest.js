@@ -21,22 +21,7 @@ function getJson (type, city) {
 					method: 'get', 
 				}).then(data=>data.text())
 				.then((response) => {
-					if (response == "1") {
-						openCloseError("The API server is down <br> Please try again later.");
-					}else if (response == "2"){
-						openCloseError("You're too fast, slow down!");
-					}else {
-						response = JSON.parse(response);
-						//return data in JSON form
-						if (response["cod"] == "401") {
-							openCloseError("Invalid operation");
-						}else if (response["cod"] == "404") {
-							openCloseError("Invalid City Name");
-						}else {
-							saveCache (city, type, JSON.stringify(response));
-							resolve(response);
-						}
-					}
+					resolve(parseResponse(city, type, response));
 				})
 			}catch (err){
 				reject("unexpected error occured!!!")
@@ -44,6 +29,25 @@ function getJson (type, city) {
 			}
 		}
 	});	
+}
+
+function parseResponse(city, type, response) {
+	if (response == "1") {
+		openCloseError("The API server is down <br> Please try again later.");
+	}else if (response == "2"){
+		openCloseError("You're too fast, slow down!");
+	}else {
+		response = JSON.parse(response);
+		//return data in JSON form
+		if (response["cod"] == "401") {
+			openCloseError("Invalid operation");
+		}else if (response["cod"] == "404") {
+			openCloseError("Invalid City Name");
+		}else {
+			saveCache (city, type, JSON.stringify(response));
+			return response;
+		}
+	}
 }
 
 const temperatureCont = document.getElementById("temperature"),
@@ -104,7 +108,6 @@ function triggerData () {
 
 //stting up the data into their appropriate location
 function setupData (data) {
-	
 	document.getElementsByTagName("body")[0].style.paddingTop = "60px";
 	let city = data["name"],
 		country = data["sys"]["country"],
@@ -120,18 +123,11 @@ function setupData (data) {
 		clouds = data["clouds"]["all"],
 		unix = data["dt"];
 
-	let iconUrl, dayOrNight, currHour, time, iconName;
-	if (window.innerWidth < 800) {
-		let navShadow = document.getElementById("navContainer");
-		navShadow.style.boxShadow = `0px 1px 10px rgba(128, 128, 128 , 0)`;
-	}
-	if (mainPage.style.display != "none") {
-		refreshPage();
-	}else {
-		refreshSearch();
-	}
+	let iconUrl, time;
+	adjustNavShadowOnSetup ();
 
-	
+	(mainPage.style.display != "none") ? refreshPage() : refreshSearch();
+
 	if (!initial) {
 		time = 800;
 	}else {
@@ -139,11 +135,7 @@ function setupData (data) {
 		initial = false;
 	}
 	setTimeout(() => {
-		currHour = getHour(unix)
-		dayOrNight = getDayType(currHour);
-		iconName = getIconsName(id, dayOrNight);
-		iconUrl = `icons/${iconName}.png`;
-		
+		iconUrl = iconrURL(unix, id);
 		temp = temp.toFixed(1);
 		maxTemp = maxTemp.toFixed(1);
 		minTemp = minTemp.toFixed(1);

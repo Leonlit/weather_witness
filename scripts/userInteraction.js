@@ -103,80 +103,92 @@ function adjustNavCont () {
 	}
 }
 
+let navItems = document.getElementById("navItems"),
+	navTitle = document.getElementById("mainTitle").getElementsByTagName("a")[0],
+	dropDown = document.getElementById("dropDown"),
+	navBar = dropDown.getElementsByTagName("div"),
+	shader = document.getElementById("shader"),
+	navShadow = document.getElementById("navContainer");
+
 //handling and animating nav opening and closing
 function openCloseNav() {
 	//to close search list
 	isSearchMain = false;
 	insertValue("");
 
-	let navItems = document.getElementById("navItems");
-	let navTitle = document.getElementById("mainTitle").getElementsByTagName("a")[0];
-	let dropDown = document.getElementById("dropDown");
-	let navBar = dropDown.getElementsByTagName("div");
-	let shader = document.getElementById("shader");
-
 	if (!navDisabled) {
 		if (navOpen){
-			adjustNavCont();
-			navTitle.className = "turn-black";
-			navBar[1].className = "appear";
-			navBar[0].className = "rotateBackNav45";
-			navBar[2].className = "rotateBackNav-45";
-			shader.classList.remove("appear");
-			shader.classList.add("hidden")
-			navItems.classList.add("fade-out-up");
-			navItems.classList.remove("fade-in-down");
-			navOpen = false;
-
-			lockNav(400);
-
-			setTimeout(()=>{
-				navBar[0].style.transform = "translate(0, 0) rotate(0deg)";
-				navBar[2].style.transform = "translate(0, 0) rotate(0deg)";
-				navBar[0].style.backgroundColor = "black";
-				navBar[2].style.backgroundColor = "black";
-				navBar[1].style.opacity = 1;
-				shader.style.display = "none";
-				shader.style.opacity = "0";
-				navTitle.style.color = "black";
-			}, 400);
-			
-			setTimeout(()=>{
-				navItems.style.top = "-260px";
-			}, 500);
-		
+			closeNav();
 		}else {
-			navTitle.className = "turn-white";
-			navBar[1].className = "hidden";
-			navBar[0].className = "rotateNav45";
-			navBar[2].className = "rotateNav-45";
-			navItems.classList.add("fade-in-down");
-			navItems.classList.remove("fade-out-up");
-			navOpen = true;
-			shader.style.opacity = "0";
-			shader.style.display = "block";
-			shader.classList.remove("hidden");
-			shader.classList.add("appear");
-
-			lockNav(400);
-
-			setTimeout(()=> {
-				navBar[1].style.opacity = 0;
-			},200)
-
-			setTimeout(()=>{
-				navBar[0].style.transform = "translate(0, 10px) rotate(45deg)";
-				navBar[2].style.transform = "translate(0, -5px) rotate(-45deg)";
-				navBar[0].style.backgroundColor = "white";
-				navBar[2].style.backgroundColor = "white";
-				shader.style.opacity = "1";
-				navTitle.style.color = "white";
-			}, 400);
-			setTimeout(()=>{
-				navItems.style.top = "0px";
-			}, 500);
+			openNav();
 		}
 	}
+}
+
+function closeNav () {
+	adjustNavCont();
+	navTitle.className = "turn-black";
+	navBar[1].className = "appear";
+	navBar[0].className = "rotateBackNav45";
+	navBar[2].className = "rotateBackNav-45";
+	shader.classList.remove("appear");
+	shader.classList.add("hidden")
+	navItems.classList.add("fade-out-up");
+	navItems.classList.remove("fade-in-down");
+	navOpen = false;
+
+	let windowViewTop = window.scrollY;
+	navShadow.style.boxShadow = `0px 1px 10px rgba(128, 128, 128 , ${windowViewTop/80})`;
+
+	lockNav(400);
+
+	setTimeout(()=>{
+		navBar[0].style.transform = "translate(0, 0) rotate(0deg)";
+		navBar[2].style.transform = "translate(0, 0) rotate(0deg)";
+		navBar[0].style.backgroundColor = "black";
+		navBar[2].style.backgroundColor = "black";
+		navBar[1].style.opacity = 1;
+		shader.style.display = "none";
+		shader.style.opacity = "0";
+		navTitle.style.color = "black";
+	}, 400);
+	
+	setTimeout(()=>{
+		navItems.style.top = "-260px";
+	}, 500);
+}
+
+function openNav () {
+	navTitle.className = "turn-white";
+	navBar[1].className = "hidden";
+	navBar[0].className = "rotateNav45";
+	navBar[2].className = "rotateNav-45";
+	navItems.classList.add("fade-in-down");
+	navItems.classList.remove("fade-out-up");
+	navOpen = true;
+	shader.style.opacity = "0";
+	shader.style.display = "block";
+	shader.classList.remove("hidden");
+	shader.classList.add("appear");
+
+	lockNav(400);
+
+	setTimeout(()=> {
+		navBar[1].style.opacity = 0;
+	},200)
+
+	setTimeout(()=>{
+		navBar[0].style.transform = "translate(0, 10px) rotate(45deg)";
+		navBar[2].style.transform = "translate(0, -5px) rotate(-45deg)";
+		navBar[0].style.backgroundColor = "white";
+		navBar[2].style.backgroundColor = "white";
+		shader.style.opacity = "1";
+		navTitle.style.color = "white";
+		navShadow.style.boxShadow = `0px 1px 10px rgba(128, 128, 128 , 1)`;
+	}, 400);
+	setTimeout(()=>{
+		navItems.style.top = "0px";
+	}, 500);
 }
 
 //handling error pop up

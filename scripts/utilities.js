@@ -33,6 +33,12 @@ function getDayOrNight (hour) {
     return (hour>=12.00) ? "PM" : "AM";
 }
 
+function iconrURL (unix, id) {
+	const currHour = getHour(unix)
+    const dayOrNight = getDayType(currHour);
+    return`icons/${getIconsName(id, dayOrNight)}.png`;
+}
+
 //getting the list of city namese available
 async function getCityJSON (callback) {
     try {
@@ -75,18 +81,14 @@ const cityCont = document.getElementById("cityList"),
 function constructOptions (names) {
     founded = [];
     let theCont = (isSearchMain) ? cityCont : smallCityCont;
-
     //clearing the autocomplete item for both search box so that the screen 
     //wont be so messy
     clearBoth();
-
     //getting the search box that initiated the search
     let searchBox = (isSearchMain) ? "mainSearchBox" : "secondarySearch";
     let value = document.getElementById(searchBox).value ;
-    
     let size = names.length;
     let found = 0;
-
     //if the value of the search box became empty, make the element transparent
     if (value == "") {
         makeSearchTransparent(theCont);
@@ -185,7 +187,6 @@ function getCookieValue(value) {
     return cookieStrings ? cookieStrings.pop() : '';
 }
 
-
 function isInteger(value) {
     if (isNaN(value)) {
       return false;
@@ -194,4 +195,11 @@ function isInteger(value) {
     // 3 != 3.01 
     var x = parseFloat(value);
     return (x | 0) === x;
-  }
+}
+
+function adjustNavShadowOnSetup () {
+    if (window.innerWidth < 800) {
+		let navShadow = document.getElementById("navContainer");
+		navShadow.style.boxShadow = `0px 1px 10px rgba(128, 128, 128 , 0)`;
+	}
+}
