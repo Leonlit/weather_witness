@@ -87,14 +87,18 @@ function constructOptions (names) {
     //getting the search box that initiated the search
     let searchBox = (isSearchMain) ? "mainSearchBox" : "secondarySearch";
     let value = document.getElementById(searchBox).value ;
-    let size = names.length;
-    let found = 0;
+    
     //if the value of the search box became empty, make the element transparent
     if (value == "") {
         makeSearchTransparent(theCont);
         return false;
     }
+    generateList(names, value, theCont);
+}
 
+function generateList(names, value, theCont) {
+    let found = 0;
+    let size = names.length;
     for (let i = 0; i < size; i++) {
         //if the number of result found is 30 break the loop (limiting the value to loop through)
         if (found == 30) {

@@ -8,10 +8,15 @@
 		$city = filterData($_GET["city"]);
 		$key = "";
 		try {
-			$key = getenv('weatherAPI');
+			//$key = getenv('weatherAPI');
+			$key = file_get_contents("secret/apikey.txt");
 		}catch (Exception $err) {
 			throw new Exception("1");
 		}
+		fetchData($city, $key);
+	}
+
+	function fetchData ($city, $key) {
 		$URLType = (filterData($_GET["type"]) == 0) ? URL : FURL;
 		$query = $URLType."?q=".$city."&appid=".$key;
 
@@ -43,10 +48,12 @@
 		}
 	}
 
+	//filtering data
 	function filterData ($string) {
 		return htmlspecialchars(filter_var($string, FILTER_SANITIZE_STRING), ENT_QUOTES);
 	}
 
+	//function for managing cookies
 	function cookieManaging ($currSeconds, $expireTime) {
 		//if any of the cookie is not set, reset all cookie value
 		if (!isset($_COOKIE["lastTimeStamp"]) || !isset($_COOKIE["requestCount"]) || !isset($_COOKIE["delayCount"])) {

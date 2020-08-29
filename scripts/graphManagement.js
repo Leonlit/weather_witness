@@ -73,8 +73,6 @@ function compileData (json, batch, type) {
             end = json.length;
         }
 
-        console.log(start, end)
-
         //extracting the forecast data 
         for (let index = start; index < end ;index++) {
             let currJSON = json[index];
