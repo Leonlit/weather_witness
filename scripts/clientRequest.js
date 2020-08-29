@@ -3,6 +3,7 @@ let lockInitialAPI = false,
 	initial = true,
 	cityObj ={};
 
+//get json data
 function getJson (type, city) {
 	return new Promise ((resolve, reject)=> {
 		let requestQuery;
@@ -30,6 +31,7 @@ function getJson (type, city) {
 	});	
 }
 
+//parsing the response and displaying error or setting up data onto the app
 function parseResponse(city, type, response) {
 	if (response == "1") {
 		openCloseError("The API server is down <br> Please try again later.");

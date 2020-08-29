@@ -121,6 +121,7 @@ function openCloseNav() {
 	}
 }
 
+//close navigation menu
 function closeNav () {
 	adjustNavCont();
 	navTitle.className = "turn-black";
@@ -154,6 +155,7 @@ function closeNav () {
 	}, 500);
 }
 
+//open navigation menu
 function openNav () {
 	navTitle.className = "turn-white";
 	navBar[1].className = "hidden";
@@ -202,6 +204,7 @@ function openCloseError (message) {
     }
 }
 
+//open the error window
 function openError (message) {
 	errorShown = true;
 	msgCont.innerHTML = message;
@@ -222,6 +225,7 @@ function openError (message) {
 	}, 400);
 }
 
+//close the error window
 function closeError (message) {
 	errorShown = false;     
 	container.classList.remove("appear");

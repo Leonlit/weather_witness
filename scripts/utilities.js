@@ -33,6 +33,7 @@ function getDayOrNight (hour) {
     return (hour>=12.00) ? "PM" : "AM";
 }
 
+//generating the icon url
 function iconrURL (unix, id) {
 	const currHour = getHour(unix)
     const dayOrNight = getDayType(currHour);
@@ -96,6 +97,7 @@ function constructOptions (names) {
     generateList(names, value, theCont);
 }
 
+//generating the city list for character provided
 function generateList(names, value, theCont) {
     let found = 0;
     const size = names.length;
@@ -186,11 +188,13 @@ function getIconsName (id, DON) {
 	return icon;
 }
 
+//getting cookies value
 function getCookieValue(value) {
     const cookieStrings = document.cookie.match('(^|;)\\s*' + value + '\\s*=\\s*([^;]+)');
     return cookieStrings ? cookieStrings.pop() : '';
 }
 
+//checking if the value is an integer 
 function isInteger(value) {
     if (isNaN(value)) {
       return false;
@@ -201,6 +205,7 @@ function isInteger(value) {
     return (x | 0) === x;
 }
 
+//adjusting navigation box shadow
 function adjustNavShadowOnSetup () {
     if (window.innerWidth < 800) {
 		const navShadow = document.getElementById("navContainer");
