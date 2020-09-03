@@ -189,14 +189,13 @@ function openNav () {
 	}, 500);
 }
 
+const container = document.getElementById("errorPopUp");
+const msgCont = document.getElementById("message");
+const shader2 = document.getElementById("shader2");
+
 //handling error pop up
 let errorShown = false, invalidCity = false;
 function openCloseError (message) {
-    
-    let container = document.getElementById("errorPopUp");
-    let msgCont = document.getElementById("message");
-    let shader = document.getElementById("shader2");
-
     if (!errorShown) {
         openError(message);
     }else {
@@ -214,13 +213,13 @@ function openError (message) {
 	container.classList.remove("hidden");
 	container.classList.add("appear");
 
-	shader.style.opacity = "0";
-	shader.style.display = "block";
-	shader.classList.remove("hidden");
-	shader.classList.add("appear");
+	shader2.style.opacity = "0";
+	shader2.style.display = "block";
+	shader2.classList.remove("hidden");
+	shader2.classList.add("appear");
 
 	setTimeout(() => {
-		shader.style.opacity = "1";
+		shader2.style.opacity = "1";
 		container.style.opacity = "1";
 	}, 400);
 }
@@ -231,12 +230,12 @@ function closeError (message) {
 	container.classList.remove("appear");
 	container.classList.add("hidden");
 
-	shader.classList.remove("appear");
-	shader.classList.add("hidden");
+	shader2.classList.remove("appear");
+	shader2.classList.add("hidden");
 	
 	setTimeout(()=>{
-		shader.style.display = "none";
-		shader.style.opacity = "0";
+		shader2.style.display = "none";
+		shader2.style.opacity = "0";
 		container.style.display = "none";
 		container.style.opacity = "0";
 	}, 400);
