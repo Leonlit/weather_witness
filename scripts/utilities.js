@@ -1,7 +1,7 @@
 'use strict'
 //formating time from unix milisecond time to readable time for user in 12 hour format
 function timeFormater (unixTimestamp) {
-    //buiding the time
+    //buiding the time (times 1000 to change to miliseconds )
     let date = new Date(unixTimestamp*1000),
         hour = getHour(unixTimestamp),
         minute = "0" + date.getMinutes(),
