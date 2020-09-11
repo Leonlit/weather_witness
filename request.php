@@ -97,8 +97,8 @@
 
 	function managingCacheFile ($country, $time, $type) {
 		$cacheFileArray = checkCacheFile($country, $type);
-		$cacheFile = $cacheFileArray[0];
-		if (!empty($cacheFile)) {
+		if (!empty($cacheFileArray)) {
+			$cacheFile = $cacheFileArray[0];
 			$tokens = explode("-", $cacheFile);
 			$timeStamp = intval($tokens[2]);
 			if ($time - $timeStamp < 100) {
