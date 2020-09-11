@@ -16,7 +16,8 @@
 	}
 
 	function fetchData ($city, $key) {
-		$URLType = (filterData($_GET["type"]) == 0) ? URL : FURL;
+		$requestType = filterData($_GET["type"]);
+		$URLType = ($requestType == 0) ? URL : FURL;
 		$query = $URLType."?q=".$city."&appid=".$key;
 
 		$currSeconds = time();
@@ -27,10 +28,17 @@
 		if ($key != "") {
 			try {
 				cookieManaging($currSeconds, $expireTime);
-				//getting the text printed on that url as string
-				$json = file_get_contents($query, false, stream_context_create(['http' => ['ignore_errors' => true]]));
-				//echoing the variable so that data could be passed to the client script
-				echo $json;
+				$contents = managingCacheFile($city, $currSeconds, $requestType);
+				if (!empty($contents)) {
+					echo $contents;	
+				}else {
+					//getting the text printed on that url as string
+					$json = file_get_contents($query, false, stream_context_create(['http' => ['ignore_errors' => true]]));
+					//saving the file for cache
+					saveCacheFile($city, $currSeconds, $json, $requestType);
+					//echoing the variable so that data could be passed to the client script
+					echo $json;
+				}
 			}catch (Exception $err) {
 				if (($err->getMessage()) == "2") {
 					//rate limiting to 1 request per minute.
@@ -70,7 +78,7 @@
 			//The app request the data from API server twice for every city search.
 			//odds numbered request is for current weather, while the even numbered request is for requesting 
 			//weather forecast data.
-			if ($currSeconds - $lastTimestamp < 30000 && $requestCount == 10) {
+			if ($currSeconds - $lastTimestamp < 30 && $requestCount == 10) {
 				throw new Exception("2");
 			}else if ($requestCount < 10) {
 				//while if the request count is is less than 10 and the last request time is less than 30 seconds
@@ -85,5 +93,43 @@
 				setcookie("delayCount", 0, $expireTime);
 			}
 		}
+	}
+
+	function managingCacheFile ($country, $time, $type) {
+		$cacheFileArray = checkCacheFile($country, $type);
+		$cacheFile = $cacheFileArray[0];
+		if (!empty($cacheFile)) {
+			$tokens = explode("-", $cacheFile);
+			$timeStamp = intval($tokens[2]);
+			if ($time - $timeStamp < 100) {
+				return file_get_contents($cacheFile);
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+	}
+
+	function saveCacheFile ($country, $time, $text, $type) {
+		$fileName = "data-cache/{$country}-{$time}-{$type}-.txt";
+		try {
+			$cached = checkCacheFile($country, $type);
+			if (!empty($cached)) {
+				foreach($cached as $item) {
+					unlink($item);
+				}
+			}
+			file_put_contents($fileName, $text);
+			return true;
+		}catch (Exception $ex) {
+			echo "3";
+			return false;
+		}
+	}
+
+	function checkCacheFile ($country, $type) {
+		$file = glob("data-cache/{$country}*-{$type}-.txt");
+		return !empty($file) ? $file : false;
 	}
 ?>
