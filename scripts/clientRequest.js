@@ -116,15 +116,14 @@ function setupData (data) {
 		temp = data["main"]["temp"] - 273.15,
 		maxTemp = data["main"]["temp_max"] - 273.15,
 		minTemp = data["main"]["temp_min"] - 273.15,
-		id = data["weather"][0]["id"],
+		weatherId = data["weather"][0]["id"],
 		humidity = data["main"]["humidity"], 
 		pressure = data["main"]["pressure"],
 		feelsLike = data["main"]["feels_like"] - 273.15,
 		visibility = data["visibility"] / 1000,
 		clouds = data["clouds"]["all"],
-		unix = data["dt"];
-
-	let iconUrl, time;
+		unix = data["dt"],
+		time;
 	adjustNavShadowOnSetup ();
 
 	(mainPage.style.display != "none") ? refreshPage() : refreshSearch();
@@ -136,7 +135,11 @@ function setupData (data) {
 		initial = false;
 	}
 	setTimeout(() => {
-		iconUrl = iconrURL(unix, id);
+		let currHour = getHour(unix),
+			dayOrNight = getDayType(currHour),
+			iconName = getIconsName(weatherId, dayOrNight),
+			iconUrl = `icons/${iconName}.png`;
+			console.log(dayOrNight, currHour);
 		temp = temp.toFixed(1);
 		maxTemp = maxTemp.toFixed(1);
 		minTemp = minTemp.toFixed(1);

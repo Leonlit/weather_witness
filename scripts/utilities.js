@@ -3,7 +3,7 @@
 function timeFormater (unixTimestamp) {
     //buiding the time (times 1000 to change to miliseconds )
     let date = new Date(unixTimestamp*1000),
-        hour = getHour(unixTimestamp),
+        hour = getHourUnix(unixTimestamp),
         minute = "0" + date.getMinutes(),
         symbol = "";
     
@@ -19,6 +19,11 @@ function timeFormater (unixTimestamp) {
 
 //seperate function as needed for icon url construction
 function getHour (unixTime) {
+    let dateObj = new Date (unixTime*1000);
+    return dateObj.getHours();
+}
+
+function getHourUnix (unixTime) {
     let dateObj = new Date (unixTime*1000);
     return dateObj.getUTCHours();
 }

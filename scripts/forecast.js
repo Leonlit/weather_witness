@@ -81,7 +81,7 @@ function setForecastTemperature (batch) {
 		
 		pressure = currJSON["main"]["pressure"];
 
-		let currHour = getHour(time),
+		let currHour = getHourUnix(time),
 			dayOrNight = getDayType(currHour),
 			iconName = getIconsName(weatherId, dayOrNight),
 			iconUrl = `icons/${iconName}.png`;
