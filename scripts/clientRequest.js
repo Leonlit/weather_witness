@@ -37,6 +37,8 @@ function parseResponse(city, type, response) {
 		openCloseError("The API server is down <br> Please try again later.");
 	}else if (response == "2"){
 		openCloseError("You're too fast, slow down!");
+	}else if (response == "3") {
+		openCloseError("An unexpected error occured!!!");
 	}else {
 		response = JSON.parse(response);
 		//return data in JSON form
