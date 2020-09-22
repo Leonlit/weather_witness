@@ -122,11 +122,6 @@
     #mainSearchBox:focus {
         width:35vw;
     }
-    
-    .scrollable {
-        overflow-y: hidden;
-        overflow-x: hidden;
-    }
 
     #errorPopUp #message {
         font-size: 2.5em;
