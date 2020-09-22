@@ -3,7 +3,7 @@
 function timeFormater (unixTimestamp) {
     //buiding the time (times 1000 to change to miliseconds )
     let date = new Date(unixTimestamp*1000),
-        hour = getHourUnix(unixTimestamp),
+        hour = getHourUTC(unixTimestamp),
         minute = "0" + date.getMinutes(),
         symbol = "";
     
@@ -17,13 +17,13 @@ function timeFormater (unixTimestamp) {
     return `${hour}:${minute} ${symbol}`;
 }
 
-//seperate function as needed for icon url construction
+//separate function as needed for icon url construction
 function getHour (unixTime) {
     let dateObj = new Date (unixTime*1000);
     return dateObj.getHours();
 }
 
-function getHourUnix (unixTime) {
+function getHourUTC (unixTime) {
     let dateObj = new Date (unixTime*1000);
     return dateObj.getUTCHours();
 }
@@ -76,7 +76,7 @@ function checkCityList () {
             constructOptions (cityNames) 
         });
     }else {
-        constructOptions(cityNames);
+        constructOptions(cityNames);    //constructing empty list
     }
 }
 
@@ -150,9 +150,12 @@ function generateList(names, value, theCont) {
 //insert text into the container
 function insertValue (name) {
     let ele = (isSearchMain) ? 
-            document.getElementById("mainSearchBox") :
-            document.getElementById("secondarySearch") ;
-    
+        document.getElementById("mainSearchBox") :
+        document.getElementById("secondarySearch") ;
+
+    if (name === null || name === undefined) {
+        name = "";
+    }
     ele.value = name;
     clearBoth();
 }

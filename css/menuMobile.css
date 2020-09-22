@@ -427,9 +427,7 @@ datalist option:hover {
 	}
 
 	#chartContainer {
-		padding:10%;
-        height:30vh;
-        width:65vw;
+        height:50vh;
     }
 }
 

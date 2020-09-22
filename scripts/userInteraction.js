@@ -17,7 +17,7 @@ window.onscroll = () => {
 function isEnterSecondary (event) {
 	if (event.key === "Enter") {
 		getNewData();
-		insertValue ("");
+		delayFunctionCall(insertValue, 1200);
 	}else {
 		//if the key entered is not enter, it might be a text character
 		//so start to the autocomplete item list
@@ -27,10 +27,16 @@ function isEnterSecondary (event) {
 	}
 }
 
+function delayFunctionCall (func, time) {
+	setTimeout(() => {
+		func();
+	}, time);
+}
+
 function isEnterMain (event) {
 	if (event.key === "Enter") {
 		triggerData();
-		insertValue ("");
+		delayFunctionCall(insertValue, 1200);
 	}else {
 		isSearchMain = true;
 		checkCityList();
@@ -139,6 +145,9 @@ function closeNav () {
 
 	lockNav(400);
 
+	shader.style.opacity = "0";
+	navTitle.style.color = "black";
+
 	setTimeout(()=>{
 		navBar[0].style.transform = "translate(0, 0) rotate(0deg)";
 		navBar[2].style.transform = "translate(0, 0) rotate(0deg)";
@@ -146,13 +155,10 @@ function closeNav () {
 		navBar[2].style.backgroundColor = "black";
 		navBar[1].style.opacity = 1;
 		shader.style.display = "none";
-		shader.style.opacity = "0";
-		navTitle.style.color = "black";
+		
 	}, 400);
 	
-	setTimeout(()=>{
-		navItems.style.top = "-260px";
-	}, 500);
+	navItems.style.top = "-260px";
 }
 
 //open navigation menu
@@ -175,18 +181,18 @@ function openNav () {
 		navBar[1].style.opacity = 0;
 	},200)
 
+	shader.style.opacity = "1";
+	navTitle.style.color = "white";
+	navShadow.style.boxShadow = `0px 1px 10px rgba(128, 128, 128 , 1)`;
+
 	setTimeout(()=>{
 		navBar[0].style.transform = "translate(0, 10px) rotate(45deg)";
 		navBar[2].style.transform = "translate(0, -5px) rotate(-45deg)";
 		navBar[0].style.backgroundColor = "white";
 		navBar[2].style.backgroundColor = "white";
-		shader.style.opacity = "1";
-		navTitle.style.color = "white";
-		navShadow.style.boxShadow = `0px 1px 10px rgba(128, 128, 128 , 1)`;
+		
 	}, 400);
-	setTimeout(()=>{
-		navItems.style.top = "0px";
-	}, 500);
+	navItems.style.top = "0px";
 }
 
 const container = document.getElementById("errorPopUp");

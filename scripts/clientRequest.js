@@ -141,7 +141,6 @@ function setupData (data) {
 			dayOrNight = getDayType(currHour),
 			iconName = getIconsName(weatherId, dayOrNight),
 			iconUrl = `icons/${iconName}.png`;
-			console.log(dayOrNight, currHour);
 		temp = temp.toFixed(1);
 		maxTemp = maxTemp.toFixed(1);
 		minTemp = minTemp.toFixed(1);

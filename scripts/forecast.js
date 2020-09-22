@@ -81,7 +81,7 @@ function setForecastTemperature (batch) {
 		
 		pressure = currJSON["main"]["pressure"];
 
-		let currHour = getHourUnix(time),
+		let currHour = getHourUTC(time),
 			dayOrNight = getDayType(currHour),
 			iconName = getIconsName(weatherId, dayOrNight),
 			iconUrl = `icons/${iconName}.png`;
@@ -103,6 +103,7 @@ function setForecastTemperature (batch) {
 	forecastDataCont.innerHTML = resultElement;
 }
 
+//setting the image card for raining data. Data showed are image, rain volume in mm and the time for the data 
 function setForecastPrecipitation (batch) {
 	let resultElement = "";
 	for (let index = (batch - 1) * 8; index< 8 * batch; index++) {
@@ -135,6 +136,7 @@ function setForecastPrecipitation (batch) {
 	forecastDataCont.innerHTML = resultElement;
 }
 
+//showing wind image, wind direction as well as speed in mps
 function setForecastWind (batch) {
 	let resultElement = "";
 	for (let index = (batch - 1) * 8; index< 8 * batch; index++) {

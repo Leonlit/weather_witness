@@ -106,38 +106,44 @@
 		if (!empty($cacheFileArray)) {
 			$cacheFile = $cacheFileArray[0];			//getting the first occurence of the data (glob returns an array)
 			$tokens = explode("-", $cacheFile);			//Separate the filename into sections while using - as the delimiter
-			$timeStamp = intval($tokens[2]);			//then get the timestamp of the file by getting the third item 
-														//(need to take into account the folder name)
+			$timeStamp = intval($tokens[2]);			//then get the timestamp of the file by getting the third item (need to take into account the folder name)
 			if ($time - $timeStamp < 100) {				//if the timestamp is within the range of 100 second from the creation of the file
 				return file_get_contents($cacheFile);	// return the file content to the fetchData function
 			}else {
-				return false;							//else if the time range are over 100 seconds the system will need to refetch the data
-														//from the api server
+				//else if the time range are over 100 seconds the system will need to refetch the data
+				//from the api server
+				return false;							
 			}
 		}else {
-			return false;								//if there's no file found with the correct name, means the system need to fetch the data
-														//from the API server
+			//if there's no file found with the correct name, means the 
+			//system need to fetch the data from the API server
+			return false;
 		}
 	}
 
 	//after checking and the system need to re-fetch the data from the api server, save the data into a file in the data-cache folder
 	//the function takes in the location name, the time in unix, the json data and the type of the request
 	function saveCacheFile ($country, $time, $text, $type) {
-		$fileName = "data-cache/{$country}-{$time}-{$type}-.txt";	//generating the filename with specified format 
-																	//foldername/location-timestamp-type-.txt
+		//generating the filename with specified format foldername/location-timestamp-type-.txt
+		$fileName = "data-cache/{$country}-{$time}-{$type}-.txt";	
 		try {
-			$cached = checkCacheFile($country, $type);				//check if there's a previously saved file of the same name
-			if (!empty($cached)) {									//the returned data is not an empty array, means that previously
-																	//there's data saved for that location with the same filename
-																	//but the timestamp is not valid anymore 
-				foreach($cached as $item) {							//for each item found, delete the files
+			//check if there's a previously saved file of the same name
+			$cached = checkCacheFile($country, $type);
+			//the returned data is not an empty array, means that previously
+			//there's data saved for that location with the same filename
+			//but the timestamp is not valid anymore 
+			if (!empty($cached)) {
+				//for each item found, delete the files							
+				foreach($cached as $item) {				
 					unlink($item);
 				}
 			}
-			file_put_contents($fileName, $text);					//write the content of the fecth request into the file
+			//write the content of the fecth request into the file
+			file_put_contents($fileName, $text);
 			return true;
 		}catch (Exception $ex) {
-			echo "3";												//An unexpected error occured
+			//An unexpected error occured
+			echo "3";
 			return false;
 		}
 	}

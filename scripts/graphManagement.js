@@ -73,8 +73,6 @@ function compileData (json, batch, type) {
         //extracting the forecast data 
         for (let index = start; index < end ;index++) {
             const currJSON = json[index];
-            
-
             data.push(extractData(currJSON, type));
             //getting the time for which this data is predicted for
             let time = currJSON["dt"];
@@ -132,10 +130,15 @@ function extractData(json, type) {
 
 //drawing out the chart using chart.js
 function drawGraph (dataGave, title,labels) {
-    let graph = document.getElementById("graph");
-    graph.innerHTML = "";
-    let ctx = graph.getContext('2d');
-    ctx.clearRect(0, 0, graph.width, graph.height);
+    const container = document.getElementById("chartContainer");
+    //There's a bug where the cleared canvas graph will sometimes flickling around the newly drawed graph
+    //That's why the app will need to remove an re-add the canvas element into the container
+    const graph = document.getElementById("graph");
+    graph.remove();
+    const newGraph = document.createElement("canvas");
+    newGraph.setAttribute("id", "graph");
+    container.appendChild(newGraph);
+    let ctx = newGraph.getContext('2d');
     setTimeout(() => {
         let chart = new Chart(ctx, {
             type: 'line',
