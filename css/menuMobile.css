@@ -353,14 +353,24 @@ footer {
 	position: absolute;
 	bottom:0;
 	width:100%;
-	padding-top:10px;
-	padding-bottom:10px;
+	padding-top:5px;
+	padding-bottom:5px;
 	text-align: center;
 	font-weight: 900;
-	font-size:12px;
+	font-size:14px;
 	font-family:monospace;
 	background-color: rgb(106, 133, 210);
 	color:white;
+}
+
+footer > a {
+	color: rgb(106, 210, 209);
+	cursor: pointer;
+	font-weight: 900;
+}
+
+footer > a:hover {
+	color: rgb(106, 210, 130);
 }
 
 datalist {

@@ -9,10 +9,16 @@
 		$key = "";
 		try {
 			$key = getenv('weatherAPI');
+			if (!$key) {
+				throw new Exception();
+			}
+			fetchData($city, $key);
 		}catch (Exception $err) {
-			throw new Exception("1");
+			//An unexpected error occured
+			echo "3";
 		}
-		fetchData($city, $key);
+	}else {
+		//echo "The API needs two arguments to be able to function. Please use the website instead.";
 	}
 
 	function fetchData ($city, $key) {
@@ -79,7 +85,7 @@
 			//odds numbered request is for current weather, while the even numbered request is for requesting 
 			//weather forecast data.
 			if ($currSeconds - $lastTimestamp < 30 && $requestCount == 10) {
-				throw new Exception("2");
+				echo "2";
 			}else if ($requestCount < 10) {
 				//while if the request count is is less than 10 and the last request time is less than 30 seconds
 				//update the two cookies requestCount and delayCount value
