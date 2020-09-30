@@ -2,3 +2,4 @@ secret/
 vendor/
 .env
 *.txt
+.vscode

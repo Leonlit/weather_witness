@@ -43,6 +43,7 @@
 					//saving the file for cache
 					saveCacheFile($city, $currSeconds, $json, $requestType);
 					//echoing the variable so that data could be passed to the client script
+					header("Content-Type: application/json; charset=UTF-8");
 					echo $json;
 				}
 			}catch (Exception $err) {

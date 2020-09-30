@@ -53,7 +53,9 @@ async function getCityJSON (callback) {
         .then(json=> {
             //return a json data to the checkCityList method
             callback(json);
-        })
+        }).catch(err=>{
+            openCloseError("Unable to load city names!");
+        });
     }catch (err) {
         console.log(err.message);
     }
@@ -204,7 +206,7 @@ function getCookieValue(value) {
 
 //checking if the value is an integer 
 function isInteger(value) {
-    if (isNaN(value)) {
+    if (Number.isNaN(value)) {
       return false;
     }
     // 3.01 | 0 = 3
