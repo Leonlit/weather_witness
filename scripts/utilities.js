@@ -42,7 +42,7 @@ function getDayOrNight (hour) {
 function iconrURL (unix, id) {
 	const currHour = getHour(unix)
     const dayOrNight = getDayType(currHour);
-    return`icons/${getIconsName(id, dayOrNight)}.png`;
+    return `./icons/${getIconsName(id, dayOrNight)}.png`;
 }
 
 //getting the list of city namese available

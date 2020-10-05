@@ -1,7 +1,10 @@
 'use strict'
-let lockInitialAPI = false, 
-	initial = true,
-	cityObj ={};
+var time = 100, cityObj ={};
+var mainSearchBox = document.getElementById("mainSearchBox"),
+	secondarySearchBox = document.getElementById("secondarySearch");
+
+mainSearchBox.addEventListener("keyup", isEnterMain);
+secondarySearchBox.addEventListener("keyup", isEnterSecondary);
 
 //get json data
 function getJson (type, city) {
@@ -19,12 +22,16 @@ function getJson (type, city) {
 			try {
 				fetch(requestQuery, {
 					method: 'get', 
-				}).then(data=>data.text())
+				})
+				.then(data=>data.text())
 				.then((response) => {
 					resolve(parseResponse(city, type, response));
-				})
+				}).catch(err=>{
+					reject("unable to request data from server!!!");
+					console.log(err);
+				});
 			}catch (err){
-				reject("unexpected error occured!!!")
+				reject("unexpected error occured!!!");
 				console.log(err);
 			}
 		}
@@ -40,15 +47,19 @@ function parseResponse(city, type, response) {
 	}else if (response == "3") {
 		openCloseError("An unexpected error occured!!!");
 	}else {
-		response = JSON.parse(response);
-		//return data in JSON form
-		if (response["cod"] == "401") {
-			openCloseError("Invalid operation");
-		}else if (response["cod"] == "404") {
-			openCloseError("Invalid City Name");
-		}else {
-			saveCache (city, type, JSON.stringify(response));
-			return response;
+		try {
+			response = JSON.parse(response);
+			//return data in JSON form
+			if (response["cod"] == "401") {
+				openCloseError("Invalid operation");
+			}else if (response["cod"] == "404") {
+				openCloseError("Invalid City Name");
+			}else {
+				saveCache (city, type, JSON.stringify(response));
+				return response;
+			}
+		}catch(err) {
+			openCloseError("Unable to parse response!!!");
 		}
 	}
 }
@@ -68,7 +79,6 @@ const temperatureCont = document.getElementById("temperature"),
 
 //used when the secondary search field is used
 function getNewData () {
-	lockInitialAPI = false;
 	document.getElementById("mainSearchBox").value = "";
 	triggerData();
 	insertValue ("");
@@ -76,6 +86,7 @@ function getNewData () {
 }
 
 function triggerData () {
+	disableMultiRequest();
 	invalidCity = false;
 	let city = document.getElementById("mainSearchBox").value;
 	setTimeout(()=> {
@@ -87,26 +98,40 @@ function triggerData () {
 	}else {
 		document.getElementById("secondarySearch").value = "";
 	}
-	if (!lockInitialAPI) {
-		if (city == "") {
-			openCloseError("The city name is empty");
-		}else {
-			let delays = 0;
-			
-			if (delays = getCookieValue("delayCount")) {
-				delays = 500 *(Number.parseInt(delays) / 2);
-			}
-			setTimeout(() => {
-				getJson(0, city).then ((message) => {
-					setupData(message);
-					getForecastData(city);
-					lockInitialAPI = true;
-				}).catch ((err)=>{
-					invalidCity = true;
-				})
-			}, delays);
+	if (city == "") {
+		openCloseError("The city name is empty");
+		allowRequestAgain();
+	}else {
+		let delays = 0;
+		//to prevent heavy spam request
+		if (delays = getCookieValue("delayCount")) {
+			delays = 500 *(Number.parseInt(delays) / 2);
 		}
+		setTimeout(() => {
+			getJson(0, city).then ((message) => {
+				setupData(message);
+				getForecastData(city);
+			}).catch ((err)=>{
+				invalidCity = true;
+			}).finally(()=>{
+				allowRequestAgain();
+			})
+		}, delays);
 	}
+}
+
+function disableMultiRequest () {
+	console.log("disabled");
+	const mainPageContainer = document.getElementById("mainPage");
+	const mainSearchBtn = mainPageContainer.getElementsByTagName("input")[1];
+	
+	mainSearchBtn.disabled = true;
+	mainSearchBox.removeEventListener("keyup", isEnterMain);
+	secondarySearchBox.removeEventListener("keyup", isEnterSecondary);
+}
+
+function allowRequestAgain () {
+	secondarySearchBox.addEventListener("keyup", isEnterSecondary);
 }
 
 //stting up the data into their appropriate location
@@ -124,23 +149,17 @@ function setupData (data) {
 		feelsLike = data["main"]["feels_like"] - 273.15,
 		visibility = data["visibility"] / 1000,
 		clouds = data["clouds"]["all"],
-		unix = data["dt"],
-		time;
+		unix = data["dt"];
+
 	adjustNavShadowOnSetup ();
 
 	(mainPage.style.display != "none") ? refreshPage() : refreshSearch();
 
-	if (!initial) {
-		time = 800;
-	}else {
-		time = 100;
-		initial = false;
-	}
 	setTimeout(() => {
 		let currHour = getHour(unix),
 			dayOrNight = getDayType(currHour),
 			iconName = getIconsName(weatherId, dayOrNight),
-			iconUrl = `icons/${iconName}.png`;
+			iconUrl = `/asset/${iconName}.png`;
 		temp = temp.toFixed(1);
 		maxTemp = maxTemp.toFixed(1);
 		minTemp = minTemp.toFixed(1);
@@ -162,6 +181,9 @@ function setupData (data) {
 		footer.style.position = "relative";
 
 		document.getElementsByTagName("body")[0].style.height = "100%";
+		if (time != 800) {
+			time = 800;
+		}
 	}, time);
 }
 

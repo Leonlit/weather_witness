@@ -23,7 +23,7 @@
         <div id="navItems" class="fixedEle ">
             <li><a class="navLink" onclick="openClosePage()">About</a></li>
             <li><a class="navLink" target="_blank" href="https://github.com/Leonlit/weather_witness">Source Code</a></li>
-            <li onkeyup="isEnterSecondary(event)"><input type="text" placeholder="city name" id="secondarySearch" /></li>
+            <li><input type="text" placeholder="city name" id="secondarySearch" /></li>
             <datalist id="cityListSmall"></datalist>
             <span id="searchIcon" onclick="getNewData()">Go</span>
         </div>
@@ -104,7 +104,7 @@
         <!--Main page section-->
         <div id="mainPage" class="fade-in-left fixedCenter">
             <div class="fixedCenter">
-                <input id="mainSearchBox" class="textCenter" placeholder="City name" autocomplete="off" onkeyup="isEnterMain(event)"/>
+                <input id="mainSearchBox" class="textCenter" placeholder="City name" autocomplete="off"/>
                 <datalist id="cityList"></datalist>
                 <input type="submit" value="Go" class="mainBtn" onclick="triggerData()"/>
             </div>
@@ -161,8 +161,8 @@
 
 
 <script src="scripts/utilities.js"></script>
+<script src="scripts/userInteraction.js"></script>
 <script src="scripts/clientRequest.js"></script>
 <script src="scripts/graphManagement.js"></script>
 <script src="scripts/forecast.js"></script>
-<script src="scripts/userInteraction.js"></script>
 <script src="scripts/cacheManagement.js"></script>

@@ -16,7 +16,8 @@ window.onscroll = () => {
 //main search and secondary search field.
 function isEnterSecondary (event) {
 	if (event.key === "Enter") {
-		delayFunctionCall(getNewData, 1200);
+		console.log("test");
+		getNewData();
 	}else {
 		//if the key entered is not enter, it might be a text character
 		//so start to the autocomplete item list
@@ -26,14 +27,17 @@ function isEnterSecondary (event) {
 	}
 }
 
+//Delaying the call of another function
 function delayFunctionCall (func, time) {
 	setTimeout(() => {
 		func();
 	}, time);
 }
 
+//User pressed enter at the main search box
 function isEnterMain (event) {
 	if (event.key === "Enter") {
+		console.log("test");
 		triggerData();
 		delayFunctionCall(insertValue, 1200);
 	}else {

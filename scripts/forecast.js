@@ -1,6 +1,5 @@
 'use strict'
-let forecastJson,
-	forecastShown = false;
+let forecastJson;
 
 const forecast = document.getElementById("forecast"),
 	forecastEle = document.getElementById("forecastData"),
@@ -84,7 +83,7 @@ function setForecastTemperature (batch) {
 		let currHour = getHourUTC(time),
 			dayOrNight = getDayType(currHour),
 			iconName = getIconsName(weatherId, dayOrNight),
-			iconUrl = `icons/${iconName}.png`;
+			iconUrl = `/asset/${iconName}.png`;
 
 		time = timeFormater(time);
 
@@ -114,11 +113,11 @@ function setForecastPrecipitation (batch) {
 
 		try {
 			rain = currJSON["rain"]["3h"];
-			logo = "icons/waterDrop.png";
+			logo = "/asset/waterDrop.png";
 			rainOrNot = `<div style="margin-top:5px;">${rain} mm</div>`;
 			addClass = "forecastIcon";
 		}catch { 
-			logo = "icons/noWaterDrop.png";
+			logo = "/asset/noWaterDrop.png";
 			rainOrNot = "";
 			addClass = `noRainImg`
 		}
@@ -147,7 +146,7 @@ function setForecastWind (batch) {
 		time = currJSON["dt"];
 		time = timeFormater(time);
 
-		logo = "icons/arrow.png";
+		logo = "/asset/arrow.png";
 
 		const ele = `
 			<div class="forecastItems">
