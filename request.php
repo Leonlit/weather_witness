@@ -64,7 +64,7 @@
 
 	//filtering data
 	function filterData ($string) {
-		return htmlspecialchars(filter_var($string, FILTER_SANITIZE_STRING), ENT_QUOTES);
+		return filter_var($string, FILTER_SANITIZE_STRING);
 	}
 
 	//function for managing cookies
