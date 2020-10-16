@@ -23,7 +23,7 @@
         <div id="navItems" class="fixedEle ">
             <li><a class="navLink" onclick="openClosePage()">About</a></li>
             <li><a class="navLink" target="_blank" href="https://github.com/Leonlit/weather_witness">Source Code</a></li>
-            <li><input type="text" placeholder="city name" id="secondarySearch" /></li>
+            <li><input type="text" placeholder="city name" id="secondarySearch" autocomplete="off"/></li>
             <datalist id="cityListSmall"></datalist>
             <span id="searchIcon" onclick="getNewData()">Go</span>
         </div>
@@ -58,7 +58,7 @@
                 <div>Visibility <span id="visibility"></span></div>
             </div>
             
-            <div id="forecast" class="dataContainer">
+            <div id="forecast">
                 <div id="forecastData" class="dataSection">
                     <select id="forecastType" name="forecastChoose" class="forecastConfigure"  onchange="changeForecastData()">
                         <option value="temperature">Temperature</option>

@@ -79,24 +79,20 @@ const temperatureCont = document.getElementById("temperature"),
 
 //used when the secondary search field is used
 function getNewData () {
-	document.getElementById("mainSearchBox").value = "";
+	mainSearchBox.value = "";
 	triggerData();
-	insertValue ("");
+	setTimeout(() => {
+		insertValue ("");
+	}, 300);
 	if (navOpen) openCloseNav();
 }
 
 function triggerData () {
 	disableMultiRequest();
 	invalidCity = false;
-	let city = document.getElementById("mainSearchBox").value;
-	setTimeout(()=> {
-		document.getElementById("mainSearchBox").value = "";
-	}, 2000);
-	if (city == "" || city == null) {
-		city = document.getElementById("secondarySearch").value;
-		document.getElementById("secondarySearch").value = "";
-	}else {
-		document.getElementById("secondarySearch").value = "";
+	let city = mainSearchBox.value;
+	if (city == "") {
+		city = secondarySearchBox.value;
 	}
 	if (city == "") {
 		openCloseError("The city name is empty");
@@ -113,12 +109,12 @@ function triggerData () {
 				getForecastData(city);
 			}).catch ((err)=>{
 				invalidCity = true;
-			}).finally(()=>{
-				allowRequestAgain();
 			})
 		}, delays);
 	}
 }
+
+const secondaryBtn = document.getElementById("searchIcon");
 
 function disableMultiRequest () {
 	console.log("disabled");
@@ -126,11 +122,17 @@ function disableMultiRequest () {
 	const mainSearchBtn = mainPageContainer.getElementsByTagName("input")[1];
 	
 	mainSearchBtn.disabled = true;
+	secondaryBtn.disabled = true;
+	secondarySearchBox.disabled = true;
+	mainSearchBox.disabled = true;
 	mainSearchBox.removeEventListener("keyup", isEnterMain);
 	secondarySearchBox.removeEventListener("keyup", isEnterSecondary);
 }
 
 function allowRequestAgain () {
+	secondarySearchBox.disabled = false;
+	mainSearchBox.disabled = false;
+	secondaryBtn.disabled = false;
 	secondarySearchBox.addEventListener("keyup", isEnterSecondary);
 }
 
@@ -184,6 +186,8 @@ function setupData (data) {
 		if (time != 800) {
 			time = 800;
 		}
+		allowRequestAgain();
+		clearSearchField();
 	}, time);
 }
 

@@ -85,13 +85,17 @@ function checkCityList () {
 const cityCont = document.getElementById("cityList"),
     smallCityCont = document.getElementById("cityListSmall");
 
+function getSearchedBoxContainer () {
+    return isSearchMain ? cityCont : smallCityCont;
+}
+
 //construct the autocomplete list for the appropriate search box
 function constructOptions (names) {
     founded = [];
-    const theCont = (isSearchMain) ? cityCont : smallCityCont;
+    const theCont = getSearchedBoxContainer();
     //clearing the autocomplete item for both search box so that the screen 
     //wont be so messy
-    clearBoth();
+    clearBothSearchList();
     //getting the search box that initiated the search
     const searchBox = (isSearchMain) ? "mainSearchBox" : "secondarySearch";
     const value = document.getElementById(searchBox).value ;
@@ -141,38 +145,46 @@ function generateList(names, value, theCont) {
             theCont.style.color = "white";
             theCont.style.borderTop = "2px solid rgb(100,100, 100)"
         }
+        searchRecommendationOpen = true;
     }else {
         //if no names found to match the string provided by the user, make the
         //search transparent and remove all style in the datalist element
-        makeSearchTransparent(theCont)
-        theCont.style = "";
+        clearBothSearchList()
     }
 }
 
 //insert text into the container
 function insertValue (name) {
     let ele = (isSearchMain) ? 
-        document.getElementById("mainSearchBox") :
-        document.getElementById("secondarySearch") ;
+        mainSearchBox :
+        secondarySearchBox ;
 
     if (name === null || name === undefined) {
         name = "";
     }
     ele.value = name;
-    clearBoth();
+    clearBothSearchList();
 }
 
 //making the autocomplete item list to go transparent
 function makeSearchTransparent (cont) {
     cont.style.backgroundColor = "transparent";
+    cont.style = "";
+    searchRecommendationOpen = false;
 }
 
 //clearing both search box 
-function clearBoth () {
+function clearBothSearchList () {
     makeSearchTransparent(cityCont)
     makeSearchTransparent(smallCityCont)
     cityCont.innerHTML = "";
     smallCityCont.innerHTML = "";
+    searchRecommendationOpen = false;
+}
+
+function clearSearchField (city) {
+    secondarySearchBox.value = "";
+    mainSearchBox.value="";
 }
 
 //using the icon code provided by OpenWeatherMap API, use the appropriate icon for the weather condition

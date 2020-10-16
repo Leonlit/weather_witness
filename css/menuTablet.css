@@ -3,6 +3,7 @@
         height:55px;
         padding-top:20px;
         background-color: white;
+        box-shadow: 0px 1px 10px rgba(128, 128, 128 , 1);
     }
 
     #mainTitle {
@@ -133,6 +134,7 @@
     }
 
     #chartContainer {
+        min-height:250px;
         height:20vh;
         width:70vw;
     }

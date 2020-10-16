@@ -3,13 +3,20 @@ let navOpen = false,
 	pageOpen = false,
 	navDisabled = false,
 	pageDisabled = false,
-	isSearchMain = false;
+	isSearchMain = false,
+	searchRecommendationOpen = false;
 
 //used for mobile design.
 //when user scrolled down from a specific range, 
 //change the color of the navigation menu
 window.onscroll = () => {
 	if (window.innerWidth < 800) adjustNavCont();
+}
+
+window.onclick= () => {
+	if (searchRecommendationOpen) {
+		clearBothSearchList();
+	}
 }
 
 //used as the funcion to be invoked when enter is pressed in

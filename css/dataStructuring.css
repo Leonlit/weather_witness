@@ -79,11 +79,9 @@
 #forecast {
     background-color: rgb(137, 208, 230);
     z-index:6;
-    margin-bottom:10%;
 }
 
 .dataSection {
-    background-color: rgb(163, 232, 255);
     padding:5%;
     border-radius: 5px;
 }
@@ -101,6 +99,7 @@
 }
 
 .forecastConfigure {
+    border-radius: 5px;
     cursor: pointer;
     display: inline;
     border: none;
@@ -194,7 +193,8 @@
         padding-left:5%;
         padding-right:5%;
         margin-top:20px;
-        margin-left:2%;
+        margin-left:50%;
+        transform:translateX(-50%);
         display: grid;
         grid-column-gap:20px;
         grid-template-columns: auto auto auto auto;
