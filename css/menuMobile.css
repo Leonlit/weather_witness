@@ -99,10 +99,8 @@ a {
 
 #aboutPage{
 	top:15%;
-	left:5%;
-	right:5%;
-	padding:10%;
-	padding-top:5%;
+	left:10%;
+	padding:5%;
 	height:65vh;
 	width:70%;
 	z-index:102;
