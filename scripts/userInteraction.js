@@ -150,8 +150,7 @@ function closeNav () {
 	navItems.classList.remove("fade-in-down");
 	navOpen = false;
 
-	let windowViewTop = window.scrollY;
-	navShadow.style.boxShadow = `0px 1px 10px rgba(128, 128, 128 , ${windowViewTop/80})`;
+	adjustNavCont();
 
 	lockNav(400);
 
