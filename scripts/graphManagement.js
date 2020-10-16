@@ -41,10 +41,10 @@ function changeGraph(batch) {
 function toggleSelectedButton (index) {
     const buttons = document.getElementById("graphDay").getElementsByTagName("button");
     let initialBg = buttons[index].style;
-    if (initialBg.backgroundColor === "rgb(106, 133, 210)") {
-        initialBg.backgroundColor = "rgb(136,161,230)";
+    if (initialBg.backgroundColor === "rgb(159, 137, 230)") {
+        initialBg.backgroundColor = "rgb(185, 173, 225)";
     }else {
-        initialBg.backgroundColor = "rgb(106, 133, 210)";
+        initialBg.backgroundColor = "rgb(159, 137, 230)";
     }
 
 }

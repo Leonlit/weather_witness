@@ -385,9 +385,11 @@ datalist {
 	padding-top:10px;
 	overflow: auto;
 }
+option {
+	cursor: pointer;
+}
 
 datalist option {
-	cursor: pointer;
 	font-size: 1.2em;
 	font-family: Georgia, 'Times New Roman', Times, serif;
 	font-weight: 500;
