@@ -110,9 +110,9 @@
             </div>
         </div>
 
+        <div id="shader3" class="specialShader fixedEle absolutePointEle" onclick="closePage()"></div>
         <!--About page section-->
         <div id="aboutPage" class="fixedEle">
-            <span id="close" onclick="openClosePage()">X</span>
             <h2>About Page</h2><hr/>
             <p>
                 Welcome to my weather app (weather_viewer). It uses the weather API from <a href="https://openweathermap.org/" target="_blank" class="pageLink">OpenWeatherMap </a>, 
@@ -148,9 +148,8 @@
         </div>
 
         <!--Error section-->
-        <div id="shader2" class="fixedEle absolutePointEle"></div>
+        <div id="shader2" class="specialShader fixedEle absolutePointEle" onclick="closeError()"></div>
         <div id="errorPopUp">
-            <span id="close" onclick="openCloseError()">X</span>
             <div id="message"></div>
         </div>
 

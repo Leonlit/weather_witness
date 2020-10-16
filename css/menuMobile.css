@@ -101,10 +101,11 @@ a {
 	top:15%;
 	left:5%;
 	right:5%;
-	padding:5%;
-	height:75vh;
+	padding:10%;
+	padding-top:5%;
+	height:65vh;
 	width:70%;
-	z-index:9;
+	z-index:102;
 	border-radius:5px;
 	background-color: rgb(152, 229, 255);
 	color:black;
@@ -294,6 +295,7 @@ a {
 }
 
 #errorPopUp {
+	z-index:102;
 	width:60%;
 	height:30%;
 	position: fixed;
@@ -331,9 +333,9 @@ a {
     font-family: serif;
 }
 
-#shader2 {
+.specialShader {
+	z-index: 101;
 	display:none;
-	top:55px;
 	background-color: rgba(0, 0, 0, 0.568);
 	width:100vw;
 	height:100vh;
