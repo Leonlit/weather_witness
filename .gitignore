@@ -1,5 +1,5 @@
 secret/
 vendor/
 .env
-data-cache/*.txt
+*.txt
 .vscode
