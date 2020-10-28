@@ -1,6 +1,8 @@
 <?php
 	define("URL", "https://api.openweathermap.org/data/2.5/weather");
 	define("FURL", "https://api.openweathermap.org/data/2.5/forecast");
+	define("ROOT_DiR", "/");
+	define("DOMAIN_NAME", $_SERVER['HTTP_HOST']);
 	$query = "";
 	//if city is set with values, construct and request the API URL and pass it to client
 
@@ -36,15 +38,15 @@
 				cookieManaging($currSeconds, $expireTime);
 				$contents = managingCacheFile($city, $currSeconds, $requestType);
 				if (!empty($contents)) {
-					echo $contents;	
+					echo htmlspecialchars_decode($contents);
 				}else {
 					//getting the text printed on that url as string
-					$json = file_get_contents($query, false, stream_context_create(['http' => ['ignore_errors' => true]]));
+					$json = htmlspecialchars(file_get_contents(filterData($query), false, stream_context_create(['http' => ['ignore_errors' => true]])));
 					//saving the file for cache
 					saveCacheFile($city, $currSeconds, $json, $requestType);
 					//echoing the variable so that data could be passed to the client script
 					header("Content-Type: application/json; charset=UTF-8");
-					echo $json;
+					echo htmlspecialchars_decode($json);
 				}
 			}catch (Exception $err) {
 				if (($err->getMessage()) == "2") {
@@ -54,9 +56,9 @@
 					//server down
 					echo "1";
 					//resettting request as the request failed
-					setcookie("lastTimeStamp", $resetTime);
-					setcookie("requestCount", $resetTime);
-					setcookie("delayCount", $resetTime);
+					setcookie("lastTimeStamp", $resetTime, null, ROOT_DiR, DOMAIN_NAME, true, true);
+					setcookie("requestCount", $resetTime, null, ROOT_DiR, DOMAIN_NAME, true, true);
+					setcookie("delayCount", $resetTime, null, ROOT_DiR, DOMAIN_NAME, true, true);
 				}
 			}
 		}
@@ -71,9 +73,9 @@
 	function cookieManaging ($currSeconds, $expireTime) {
 		//if any of the cookie is not set, reset all cookie value
 		if (!isset($_COOKIE["lastTimeStamp"]) || !isset($_COOKIE["requestCount"]) || !isset($_COOKIE["delayCount"])) {
-			setcookie("lastTimeStamp", $currSeconds, $expireTime);
-			setcookie("requestCount", 1, $expireTime);
-			setcookie("delayCount", 0, $expireTime);
+			setcookie("lastTimeStamp", $currSeconds, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
+			setcookie("requestCount", 1, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
+			setcookie("delayCount", 0, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
 		}else{
 			//if all three cookies 
 			$lastTimestamp = $_COOKIE["lastTimeStamp"];
@@ -91,13 +93,13 @@
 				//while if the request count is is less than 10 and the last request time is less than 30 seconds
 				//update the two cookies requestCount and delayCount value
 				//delayCount is used to increase the timeout time for user to request new API data from the server
-				setcookie("requestCount", ++$requestCount, $expireTime);
-				setcookie("delayCount", ++$delayCount, $expireTime);
+				setcookie("requestCount", ++$requestCount, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
+				setcookie("delayCount", ++$delayCount, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
 			}else{
 				//if the last timestamp exceeded 30 seconds, then it means that our app will need to reset the value for 
 				//the cookies as the time window has been resetted.
-				setcookie("lastTimeStamp", $currSeconds, $expireTime);
-				setcookie("delayCount", 0, $expireTime);
+				setcookie("lastTimeStamp", $currSeconds, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
+				setcookie("delayCount", 0, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
 			}
 		}
 	}
@@ -115,7 +117,7 @@
 			$tokens = explode("-", $cacheFile);			//Separate the filename into sections while using - as the delimiter
 			$timeStamp = intval($tokens[2]);			//then get the timestamp of the file by getting the third item (need to take into account the folder name)
 			if ($time - $timeStamp < 100) {				//if the timestamp is within the range of 100 second from the creation of the file
-				return file_get_contents($cacheFile);	// return the file content to the fetchData function
+				return htmlspecialchars(file_get_contents($cacheFile));	// return the file content to the fetchData function
 			}else {
 				//else if the time range are over 100 seconds the system will need to refetch the data
 				//from the api server
