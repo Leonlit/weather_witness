@@ -8,7 +8,9 @@ Since I deployed this application to [Heroku](https://dashboard.heroku.com/) (we
  - Refactoring code
  - Better styling
  - Dark mode support
- - Using graph to represent data
+ - ~~Using graph to represent data~~
+ - Support Air quality index (AQI)
+ - Support weather map (wind, temperature, rain)
 
 ## Contact
 If you have any question regarding the project, feel free to contact me.
