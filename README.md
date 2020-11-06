@@ -4,13 +4,10 @@ A simple weather app created using [OpenWeatherMap API](https://openweathermap.o
 
 Since I deployed this application to [Heroku](https://dashboard.heroku.com/) (website link: https://weather-witness.herokuapp.com), I used heroku's "Config Vars" to store the API key rather then storing it in text files. You could setup your own environment configuration variables locally using [phpdotenv](https://github.com/vlucas/phpdotenv)
 
-## Things to work on:
- - Refactoring code
- - Better styling
- - Dark mode support
- - ~~Using graph to represent data~~
- - Support Air quality index (AQI)
- - Support weather map (wind, temperature, rain)
+## Suggesstions and issues
+
+If you can think some improvement that I could make for the project or you found some pesty bug in the app, feel free to open an issues.
+
 
 ## Contact
 If you have any question regarding the project, feel free to contact me.
