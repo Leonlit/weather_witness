@@ -79,7 +79,6 @@ const temperatureCont = document.getElementById("temperature"),
 
 //used when the secondary search field is used
 function getNewData () {
-	mainSearchBox.value = "";
 	triggerData();
 	setTimeout(() => {
 		insertValue ("");
@@ -89,11 +88,11 @@ function getNewData () {
 
 function triggerData () {
 	disableMultiRequest();
-	invalidCity = false;
 	let city = mainSearchBox.value;
 	if (city == "") {
 		city = secondarySearchBox.value;
 	}
+	
 	if (city == "") {
 		openCloseError("The city name is empty");
 		allowRequestAgain();
@@ -108,19 +107,17 @@ function triggerData () {
 				setupData(message);
 				getForecastData(city);
 			}).catch ((err)=>{
-				invalidCity = true;
+				allowRequestAgain();
 			})
 		}, delays);
 	}
 }
 
 const secondaryBtn = document.getElementById("searchIcon");
+const mainPageContainer = document.getElementById("mainPage");
+const mainSearchBtn = mainPageContainer.getElementsByTagName("input")[1];
 
 function disableMultiRequest () {
-	console.log("disabled");
-	const mainPageContainer = document.getElementById("mainPage");
-	const mainSearchBtn = mainPageContainer.getElementsByTagName("input")[1];
-	
 	mainSearchBtn.disabled = true;
 	secondaryBtn.disabled = true;
 	secondarySearchBox.disabled = true;
@@ -130,9 +127,11 @@ function disableMultiRequest () {
 }
 
 function allowRequestAgain () {
+	mainSearchBtn.disabled = false;
 	secondarySearchBox.disabled = false;
 	mainSearchBox.disabled = false;
 	secondaryBtn.disabled = false;
+	mainSearchBox.addEventListener("keyup", isEnterMain);
 	secondarySearchBox.addEventListener("keyup", isEnterSecondary);
 }
 
