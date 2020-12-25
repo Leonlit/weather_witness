@@ -39,9 +39,9 @@
         <div id="navItems" class="fixedEle ">
             <li><a class="navLink" onclick="openClosePage()">About</a></li>
             <li><a class="navLink" target="_blank" href="https://github.com/Leonlit/weather_witness">Source Code</a></li>
-            <li><input type="text" placeholder="city name" id="secondarySearch" autocomplete="off"/></li>
+            <li><input type="text" placeholder="city name" id="secondarySearch" autocomplete="off"/><span id="searchIcon" onclick="getNewData()">Go</span></li>
             <datalist id="cityListSmall"></datalist>
-            <span id="searchIcon" onclick="getNewData()">Go</span>
+            
         </div>
         <div id="navBg" class="fixedEle absolutePointEle"></div>
         <nav id="navContainer" class="fixedEle absolutePointEle">
