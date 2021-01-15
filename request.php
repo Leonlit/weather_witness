@@ -1,4 +1,13 @@
 <?php
+	//feature
+	/*
+		- JSON data caching
+		- Spam prevention using cookie (not foul proof)
+		- user input sanitized
+		- Api key not exposed in 
+		
+	*/
+
 	define("URL", "https://api.openweathermap.org/data/2.5/weather");
 	define("FURL", "https://api.openweathermap.org/data/2.5/forecast");
 	define("ROOT_DiR", "/");
@@ -25,15 +34,17 @@
 
 	function fetchData ($city, $key) {
 		$requestType = filterData($_GET["type"]);
-		$URLType = ($requestType == 0) ? URL : FURL;
-		$query = $URLType."?q=".$city."&appid=".$key;
-
-		$currSeconds = time();
-		$expireTime = $currSeconds + 30;
-		$resetTime = time() - 30;
-
+		$URLType =  $requestType === "0" ? URL : (
+				$requestType === "1" ? FURL : ""
+		);
 		//constructing the url for getting the API data 
-		if ($key != "") {
+		if ($URLType != "" && $key != "") {
+			$query = $URLType."?q=".$city."&appid=".$key;
+
+			$currSeconds = time();
+			$expireTime = $currSeconds + 30;
+			$resetTime = time() - 30;
+
 			try {
 				cookieManaging($currSeconds, $expireTime);
 				$contents = managingCacheFile($city, $currSeconds, $requestType);

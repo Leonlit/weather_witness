@@ -8,8 +8,23 @@ body {
 }
 
 .scrollable {
-	overflow-y: hidden;
 	overflow-x: auto;
+}
+
+.closeBtn {
+	position: absolute;
+	right:20px;
+	top:20px;
+	font-size: xx-large;
+	font-weight: 900;
+	transition: 0.3s;
+}
+
+.closeBtn:hover {
+	font-weight: bolder;
+	text-shadow: 0px 3px 3px grey;
+	cursor: pointer;
+	transform: scale(1.2);
 }
 
 .fixedCenter {

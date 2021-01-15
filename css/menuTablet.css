@@ -10,6 +10,11 @@
         font-size:1.8em;
         margin-left:40px;
     }
+    
+    .scrollable {
+        overflow: hidden;
+    }
+
 
     #aboutPage{
         top:20%;
