@@ -10,7 +10,4 @@ If you can think some improvement that I could make for the project or you found
 
 
 ## Contact
-If you have any question regarding the project, feel free to contact me.
-### [leonlit](https://github.com/Leonlit) :
- - [twitter](https://twitter.com/leonlit)
- - [email](leonlit123@gmail.com)
+If you have any question regarding the project, feel free to open an issue
