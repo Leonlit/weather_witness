@@ -7,6 +7,10 @@
 		- Api key not exposed in 
 		
 	*/
+	require(__DIR__."/startup.php");
+
+	$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+	$dotenv->load();
 
 	define("URL", "https://api.openweathermap.org/data/2.5/weather");
 	define("FURL", "https://api.openweathermap.org/data/2.5/forecast");
@@ -19,7 +23,7 @@
 		$city = filterData($_GET["city"]);
 		$key = "";
 		try {
-			$key = getenv('weatherAPI');
+			$key = $_ENV['WEATEHR_API'];;
 			if (!$key) {
 				throw new Exception();
 			}
