@@ -23,8 +23,17 @@ function getJson (type, city) {
 				fetch(requestQuery, {
 					method: 'get', 
 				})
-				.then(data=>data.text())
+				.then(data=>{
+					const statsCode = data.status;
+					if (statsCode == 200) {
+						return data.text();
+					}else {
+						checkResponseCode(statsCode);
+						reject("Something went wrong");
+					}
+				})
 				.then((response) => {
+					console.log();
 					resolve(parseResponse(city, type, response));
 				}).catch(err=>{
 					reject("unable to request data from server!!!");
@@ -38,29 +47,46 @@ function getJson (type, city) {
 	});	
 }
 
+function checkResponseCode (code) {
+	/*
+		- 422 invalid request parameter
+		- 429 rate limits reach
+		- 500 unexpected error
+		- 503 server down
+	*/
+	switch (Number(code)) {
+		case 422:
+			openCloseError("The API server is down <br> Please try again later.");
+			break;
+		case 429:
+			openCloseError("You're too fast, slow down!!!");
+			break;
+		case 500:
+			openCloseError("An unexpected error occured, please try again!!!");
+			break;
+		case 503:
+			openCloseError("Server is down, please try again later!!!");
+			break;
+		default:
+			openCloseError(`Unhandled error code (${code}), please contact the developer to resolve the issue!!!`);
+	}
+}
+
 //parsing the response and displaying error or setting up data onto the app
 function parseResponse(city, type, response) {
-	if (response == "1") {
-		openCloseError("The API server is down <br> Please try again later.");
-	}else if (response == "2"){
-		openCloseError("You're too fast, slow down!");
-	}else if (response == "3") {
-		openCloseError("An unexpected error occured!!!");
-	}else {
-		try {
-			response = JSON.parse(response);
-			//return data in JSON form
-			if (response["cod"] == "401") {
-				openCloseError("Invalid operation");
-			}else if (response["cod"] == "404") {
-				openCloseError("Invalid City Name");
-			}else {
-				saveCache (city, type, JSON.stringify(response));
-				return response;
-			}
-		}catch(err) {
-			openCloseError("Unable to parse response!!!");
+	try {
+		response = JSON.parse(response);
+		//return data in JSON form
+		if (response["cod"] == "401") {
+			openCloseError("Invalid operation");
+		}else if (response["cod"] == "404") {
+			openCloseError("Invalid City Name");
+		}else {
+			saveCache (city, type, JSON.stringify(response));
+			return response;
 		}
+	}catch(err) {
+		openCloseError("Unable to parse response!!!");
 	}
 }
 
@@ -102,10 +128,11 @@ function triggerData (secondarySearch=null) {
 		}
 		setTimeout(() => {
 			getJson(0, city).then ((message) => {
-				delayFunctionCall(insertValue, 3200);
 				setupData(message);
 				getForecastData(city);
+				delayFunctionCall(insertValue, 3200);
 			}).catch ((err)=>{
+				console.log(err);
 				allowRequestAgain();
 			})
 
@@ -131,6 +158,8 @@ function allowRequestAgain () {
 	mainSearchBtn.disabled = false;
 	secondarySearchBox.disabled = false;
 	secondaryBtn.disabled = false;
+	mainSearchBox.disabled = false;
+	mainSearchBox.addEventListener("keyup", isEnterMain);
 	secondarySearchBox.addEventListener("keyup", isEnterSecondary);
 }
 

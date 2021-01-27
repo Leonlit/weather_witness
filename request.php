@@ -114,7 +114,6 @@
 			//odds numbered request is for current weather, while the even numbered request is for requesting 
 			//weather forecast data.
 			if ($requestCount < 10 && ($currSeconds - $lastTimestamp) < 30) {
-				echo "increasing";
 				//while if the request count is is less than 10 and the last request time is less than 30 seconds
 				//update the two cookies requestCount and delayCount value
 				//delayCount is used to increase the timeout time for user to request new API data from the server
