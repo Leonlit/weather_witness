@@ -22,24 +22,23 @@ window.onclick= () => {
 //used as the funcion to be invoked when enter is pressed in
 //main search and secondary search field.
 function isEnterSecondary (event) {
+	isSearchMain = false;
 	if (event.key === "Enter") {
 		getNewData();
 	}else {
 		//if the key entered is not enter, it might be a text character
 		//so start to the autocomplete item list
 		//specify that it's not triggered by the main search box
-		isSearchMain = false; 
 		checkCityList();
 	}
 }
 
 //User pressed enter at the main search box
 function isEnterMain (event) {
+	isSearchMain = true;
 	if (event.key === "Enter") {
 		triggerData();
-		delayFunctionCall(insertValue, 1200);
 	}else {
-		isSearchMain = true;
 		checkCityList();
 	}
 }
@@ -56,7 +55,6 @@ const shader3 = document.getElementById("shader3");
 //showing and closing the about page for the app
 function openClosePage () {
 	//to close the search list
-	insertValue("");
 	if (!pageDisabled) {
 		if (pageOpen) {
 			closePage();

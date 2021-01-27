@@ -6,6 +6,12 @@
 		- user input sanitized
 		- Api key not exposed in 
 		
+		http code
+			- 422 invalid request parameter
+			- 429 rate limits reach
+			- 500 unexpected error
+			- 503 server down
+
 	*/
 	require(__DIR__."/startup.php");
 
@@ -14,8 +20,6 @@
 
 	define("URL", "https://api.openweathermap.org/data/2.5/weather");
 	define("FURL", "https://api.openweathermap.org/data/2.5/forecast");
-	define("ROOT_DiR", "/");
-	define("DOMAIN_NAME", $_SERVER['HTTP_HOST']);
 	$query = "";
 	//if city is set with values, construct and request the API URL and pass it to client
 
@@ -30,10 +34,11 @@
 			fetchData($city, $key);
 		}catch (Exception $err) {
 			//An unexpected error occured
-			echo "3";
+			http_response_code(500);
 		}
 	}else {
 		//echo "The API needs two arguments to be able to function. Please use the website instead.";
+		http_response_code(422);
 	}
 
 	function fetchData ($city, $key) {
@@ -50,7 +55,10 @@
 			$resetTime = time() - 30;
 
 			try {
-				cookieManaging($currSeconds, $expireTime);
+				$status = cookieManaging($currSeconds, $expireTime);
+				if (!$status) {
+					throw new Exception("2");
+				}
 				$contents = managingCacheFile($city, $currSeconds, $requestType);
 				if (!empty($contents)) {
 					echo htmlspecialchars_decode($contents);
@@ -66,16 +74,19 @@
 			}catch (Exception $err) {
 				if (($err->getMessage()) == "2") {
 					//rate limiting to 1 request per minute.
-					echo "2";
+					http_response_code(429);
 				}else {
 					//server down
-					echo "1";
+					http_response_code(503);
 					//resettting request as the request failed
 					setcookie("lastTimeStamp", $resetTime, null, ROOT_DiR, DOMAIN_NAME, true, true);
 					setcookie("requestCount", $resetTime, null, ROOT_DiR, DOMAIN_NAME, true, true);
 					setcookie("delayCount", $resetTime, null, ROOT_DiR, DOMAIN_NAME, true, true);
 				}
 			}
+		}else {
+			//invalid parameter in url
+			http_response_code(422);
 		}
 	}
 
@@ -88,9 +99,9 @@
 	function cookieManaging ($currSeconds, $expireTime) {
 		//if any of the cookie is not set, reset all cookie value
 		if (!isset($_COOKIE["lastTimeStamp"]) || !isset($_COOKIE["requestCount"]) || !isset($_COOKIE["delayCount"])) {
-			setcookie("lastTimeStamp", $currSeconds, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
-			setcookie("requestCount", 1, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
-			setcookie("delayCount", 0, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
+			setcookie("lastTimeStamp", $currSeconds, $expireTime);
+			setcookie("requestCount", 1, $expireTime);
+			setcookie("delayCount", 0, $expireTime);
 		}else{
 			//if all three cookies 
 			$lastTimestamp = $_COOKIE["lastTimeStamp"];
@@ -102,21 +113,24 @@
 			//The app request the data from API server twice for every city search.
 			//odds numbered request is for current weather, while the even numbered request is for requesting 
 			//weather forecast data.
-			if ($currSeconds - $lastTimestamp < 30 && $requestCount == 10) {
-				echo "2";
-			}else if ($requestCount < 10) {
+			if ($requestCount < 10 && ($currSeconds - $lastTimestamp) < 30) {
+				echo "increasing";
 				//while if the request count is is less than 10 and the last request time is less than 30 seconds
 				//update the two cookies requestCount and delayCount value
 				//delayCount is used to increase the timeout time for user to request new API data from the server
-				setcookie("requestCount", ++$requestCount, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
-				setcookie("delayCount", ++$delayCount, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
+				setcookie("requestCount", ++$requestCount, $expireTime);
+				setcookie("delayCount", ++$delayCount, $expireTime);
 			}else{
+				return false;
+			}
+			if (($currSeconds - $lastTimestamp) >= 30) {
 				//if the last timestamp exceeded 30 seconds, then it means that our app will need to reset the value for 
 				//the cookies as the time window has been resetted.
-				setcookie("lastTimeStamp", $currSeconds, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
-				setcookie("delayCount", 0, $expireTime, ROOT_DiR, DOMAIN_NAME, true, true);
+				setcookie("lastTimeStamp", $currSeconds, $expireTime);
+				setcookie("delayCount", 0, $expireTime);
 			}
 		}
+		return true;
 	}
 
 	//managing cache file on weather data
@@ -132,7 +146,8 @@
 			$tokens = explode("-", $cacheFile);			//Separate the filename into sections while using - as the delimiter
 			$timeStamp = intval($tokens[2]);			//then get the timestamp of the file by getting the third item (need to take into account the folder name)
 			if ($time - $timeStamp < 100) {				//if the timestamp is within the range of 100 second from the creation of the file
-				return htmlspecialchars(file_get_contents($cacheFile));	// return the file content to the fetchData function
+				header("Content-Type: application/json; charset=UTF-8");
+				return file_get_contents($cacheFile);	// return the file content to the fetchData function
 			}else {
 				//else if the time range are over 100 seconds the system will need to refetch the data
 				//from the api server
@@ -167,7 +182,7 @@
 			return true;
 		}catch (Exception $ex) {
 			//An unexpected error occured
-			echo "3";
+			http_response_code(500);
 			return false;
 		}
 	}

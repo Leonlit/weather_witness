@@ -79,19 +79,13 @@ const temperatureCont = document.getElementById("temperature"),
 
 //used when the secondary search field is used
 function getNewData () {
-	triggerData();
-	setTimeout(() => {
-		insertValue ("");
-	}, 300);
+	triggerData(secondarySearchBox.value);
 	if (navOpen) openCloseNav();
 }
 
-function triggerData () {
+function triggerData (secondarySearch=null) {
 	disableMultiRequest();
-	let city = mainSearchBox.value;
-	if (city == "") {
-		city = secondarySearchBox.value;
-	}
+	let city = secondarySearch || mainSearchBox.value;
 	
 	if (city == "") {
 		openCloseError("The city name is empty");
@@ -102,14 +96,21 @@ function triggerData () {
 		if (delays = getCookieValue("delayCount")) {
 			delays = 500 *(Number.parseInt(delays) / 2);
 		}
+
+		if (!secondarySearch) {
+			delays+=100;
+		}
 		setTimeout(() => {
 			getJson(0, city).then ((message) => {
+				delayFunctionCall(insertValue, 3200);
 				setupData(message);
 				getForecastData(city);
 			}).catch ((err)=>{
 				allowRequestAgain();
 			})
+
 		}, delays);
+		
 	}
 }
 
@@ -129,9 +130,7 @@ function disableMultiRequest () {
 function allowRequestAgain () {
 	mainSearchBtn.disabled = false;
 	secondarySearchBox.disabled = false;
-	mainSearchBox.disabled = false;
 	secondaryBtn.disabled = false;
-	mainSearchBox.addEventListener("keyup", isEnterMain);
 	secondarySearchBox.addEventListener("keyup", isEnterSecondary);
 }
 

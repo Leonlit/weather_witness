@@ -159,9 +159,7 @@ function insertValue (name) {
         mainSearchBox :
         secondarySearchBox ;
 
-    if (name === null || name === undefined) {
-        name = "";
-    }
+    name = name || "";
     ele.value = name;
     clearBothSearchList();
 }
