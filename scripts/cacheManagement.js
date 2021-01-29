@@ -1,14 +1,14 @@
 //check for saved data for the weather
-function checkCache (city, type) {
+async function checkCache (city, type) {
     if (storageSupported) {
         try {
             const storageLocation = `${city}_${type}`;
             const timeStampTemplate = `${storageLocation}_time`;
-            const timeStamp = getCacheItem(timeStampTemplate);
+            const timeStamp = await getCacheItem(timeStampTemplate);
             if (timeStamp !== null) {
                 //cache has a lifetime of 10min
                 if (getCurrTimeStamp() - timeStamp < 600000) {
-                    const data = getCacheItem(storageLocation);
+                    const data = await getCacheItem(storageLocation);
                     if (data !== null) {
                         //return the JSON string data
                         return data;
@@ -27,13 +27,13 @@ function checkCache (city, type) {
 }
 
 //saving data into local storage
-function saveCache (city, type, data) {
+async function saveCache (city, type, data) {
     if (storageSupported) {
         const storageLocation = `${city}_${type}`;
         const timeStampTemplate = `${storageLocation}_time`;
-        resetCache(storageLocation);
-        saveCacheItem(storageLocation, data);
-        saveCacheItem(timeStampTemplate, getCurrTimeStamp());
+        await resetCache(storageLocation);
+        await saveCacheItem(storageLocation, data);
+        await saveCacheItem(timeStampTemplate, getCurrTimeStamp());
         return true;
     }else {
         console.log("Storage are not supported!!!");
