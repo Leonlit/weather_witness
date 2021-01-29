@@ -6,7 +6,7 @@ const forecast = document.getElementById("forecast"),
 	forecastDataCont = document.getElementById("forecastDataCont");
 
 //Get the data from the API server
-function getForecastData (city) {
+async function getForecastData (city) {
 	if (!invalidCity) {
 		//when the data haven't been fetched
 		getJson(1, city).then ((message) => {

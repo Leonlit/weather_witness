@@ -7,12 +7,11 @@ mainSearchBox.addEventListener("keyup", isEnterMain);
 secondarySearchBox.addEventListener("keyup", isEnterSecondary);
 
 //get json data
-function getJson (type, city) {
-	return new Promise ((resolve, reject)=> {
+async function getJson (type, city) {
+	return await checkCache(city, type).then (async (data)=>{
 		let requestQuery;
-		const cacheData = checkCache(city, type);
-		if (cacheData != false) {
-			resolve(JSON.parse(cacheData));
+		if (data != false) {
+			return JSON.parse(data);
 		}else {
 			if (type == 0) {
 				requestQuery = `request.php?city=${city}&type=0`;
@@ -20,31 +19,28 @@ function getJson (type, city) {
 				requestQuery = `request.php?city=${city}&type=1`;
 			}
 			try {
-				fetch(requestQuery, {
+				return await fetch(requestQuery, {
 					method: 'get', 
 				})
 				.then(data=>{
 					const statsCode = data.status;
 					if (statsCode == 200) {
-						return data.text();
+						const text = data.text();
+						return text;
 					}else {
-						checkResponseCode(statsCode);
-						reject("Something went wrong");
+						throw statsCode;
 					}
 				})
 				.then((response) => {
-					console.log();
-					resolve(parseResponse(city, type, response));
+					return parseResponse(city, type, response);
 				}).catch(err=>{
-					reject("unable to request data from server!!!");
-					console.log(err);
+					checkResponseCode(err.message);
 				});
 			}catch (err){
-				reject("unexpected error occured!!!");
-				console.log(err);
+				checkResponseCode(500);
 			}
 		}
-	});	
+	});
 }
 
 function checkResponseCode (code) {
@@ -126,16 +122,19 @@ function triggerData (secondarySearch=null) {
 		if (!secondarySearch) {
 			delays+=100;
 		}
-		setTimeout(() => {
-			getJson(0, city).then ((message) => {
-				setupData(message);
-				getForecastData(city);
-				delayFunctionCall(insertValue, 3200);
+		setTimeout(async () => {
+			const data = await getJson(0, city).then ((message) => {
+				if (message) {
+					setupData(message);
+					getForecastData(city);
+					delayFunctionCall(insertValue, 3200);
+				}else {
+					throw "can't get json data";
+				}
 			}).catch ((err)=>{
 				console.log(err);
 				allowRequestAgain();
 			})
-
 		}, delays);
 		
 	}
