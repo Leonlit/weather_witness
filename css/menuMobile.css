@@ -165,6 +165,7 @@ a {
 
 .pageLink {
 	color:green;
+	cursor: pointer;
 }
 
 .pageLink:visited {
@@ -377,13 +378,12 @@ footer {
 	font-weight: 900;
 	font-size:14px;
 	font-family:monospace;
-	background-color: rgb(106, 133, 210);
+	background-color: #6a85d2;
 	color:white;
 }
 
 footer > a {
 	color: rgb(106, 210, 209);
-	cursor: pointer;
 	font-weight: 900;
 }
 
@@ -394,6 +394,15 @@ footer > a:hover {
 footer span {
 	margin-left:2%;
 	margin-right:2%;
+}
+
+.footerLink {
+	cursor: pointer;
+	color: 	#d2b76a;
+}
+
+.footerLink:hover{
+	color: #85d26a;
 }
 
 .separator {
