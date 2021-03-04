@@ -114,10 +114,11 @@ a {
 
 #page{
 	top:15%;
-	left:10%;
+	left:5%;
 	padding:5%;
 	height:65vh;
-	width:70%;
+	overflow-wrap: break-word;
+	width:80%;
 	z-index:102;
 	border-radius:5px;
 	background-color: rgb(152, 229, 255);
@@ -142,7 +143,7 @@ a {
 }
 
 #page h2{
-	font-size: 2em;
+	font-size: 1.8em;
 	font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
