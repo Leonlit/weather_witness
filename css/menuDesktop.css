@@ -29,7 +29,7 @@
         font-size:1.2em;
     }
 
-    #aboutPage{
+    #page{
         top: 10%;
         left: 15%;
         height:50vh;
@@ -37,7 +37,7 @@
         width:60%;
     }
 
-    #aboutPage h2{
+    #page h2{
         font-size: 1.8em;
     }
 

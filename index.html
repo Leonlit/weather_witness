@@ -37,7 +37,7 @@
         <!--Navigation Section-->
         
         <div id="navItems" class="fixedEle ">
-            <li><a class="navLink" onclick="openClosePage()">About</a></li>
+            <li><a class="navLink" onclick="openClosePage(0)">About</a></li>
             <li><a class="navLink" target="_blank" href="https://github.com/Leonlit/weather_witness">Source Code</a></li>
             <li><input type="text" placeholder="city name" id="secondarySearch" autocomplete="off"/><span id="searchIcon" onclick="getNewData()">Go</span></li>
             <datalist id="cityListSmall"></datalist>
@@ -128,40 +128,7 @@
 
         <div id="shader3" class="specialShader fixedEle absolutePointEle" onclick="closePage()"></div>
         <!--About page section-->
-        <div id="aboutPage" class="fixedEle">
-            <h2>About Page</h2><hr/>
-            <p>
-                Welcome to my weather app (weather_viewer). It uses the weather API from <a href="https://openweathermap.org/" target="_blank" class="pageLink">OpenWeatherMap </a>, 
-                and is built with HTML, CSS and JS. <br/><br/>This app allow you to check for the current weather of a location (city or country name), as well as the forecast weather for 
-                that location. The forecast data is separated using three section: <br>
-                <ul>
-                    <li>Temperature - which also shows the weather and pressure reading</li>
-                    <li>Percipitation - shows the rain volume for a particular time</li>
-                    <li>Wind - shows the wind direction and speed</li>
-                </ul><br>
-                The data are also separated by date of 3 different days.
-            </p>
-
-            <h2>Credits</h2>
-            <p>
-                Weather icon from <a href="https://www.iconfinder.com/dooder" target="_blank">dooder from iconfinder</a><br><br>
-
-                No water drop Icon made by <a href="https://www.flaticon.com/free-icon/no-water_1174794?term=no%20water&page=1&position=19" title="phatplus">phatplus</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a><br><br>
-
-                Water drop icons made by <a href="https://www.iconfinder.com/kirill.kazachek" title="Kirill Kazachek">Kirill Kazachek</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a><br><br>
-
-                Wind arrow icons made by <a href="http://tumanova.cat/" title="Lyolya">Lyolya</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a><br><br>
-            </p>
-
-            <h2>Contact Me</h2>
-            <p>if you have any suggestion, critics or you found out a bug, please be kindly to let me know through any of the following methods.</p>
-            <br>
-            <ul>
-                <li><a class="pageLink" href="mailto:leonlit123@gmail.com" target="_blank">Email</a></li>
-                <li><a class="pageLink" href="https://www.reddit.com/user/scrolion" target="_blank">Reddit</a></li>
-                <li><a class="pageLink" href="https://twitter.com/leonlit" target="_blank">Twitter</a></li>
-            </ul>
-        </div>
+        <div id="page" class="fixedEle"></div>
 
         <!--Error section-->
         <div id="shader2" class="specialShader fixedEle absolutePointEle" onclick="closeError()"></div>
@@ -171,10 +138,13 @@
         </div>
 
         <!--footer-->
-        <footer>Developed by <a href="https://github.com/Leonlit">Leonlit</a></footer>
+        <footer>
+            <span onclick="openClosePage(1)">Privacy Policy</span>
+            <span class="separator"></span>
+            <span>Developed by <a href="https://github.com/Leonlit">Leonlit</a></span>
+        </footer>
     </body>
 </html>
-
 
 <script src="scripts/utilities.js"></script>
 <script src="scripts/userInteraction.js"></script>
@@ -182,3 +152,4 @@
 <script src="scripts/graphManagement.js"></script>
 <script src="scripts/forecast.js"></script>
 <script src="scripts/cacheManagement.js"></script>
+<script src="scripts/pageContent.js"></script>

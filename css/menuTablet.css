@@ -16,14 +16,14 @@
     }
 
 
-    #aboutPage{
+    #page{
         top:20%;
         height:80vh;
         max-height:700px;
         width:70%;
     }
 
-    #aboutPage h2{
+    #page h2{
         font-size: 1.8em;
     }
 

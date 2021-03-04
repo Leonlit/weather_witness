@@ -112,7 +112,7 @@ a {
 	text-shadow:0px 0px 5px black;
 }
 
-#aboutPage{
+#page{
 	top:15%;
 	left:10%;
 	padding:5%;
@@ -126,7 +126,7 @@ a {
 	display:none;
 }
 
-#aboutPage #close {
+#page #close {
 	float:right;
 	font-weight: 900;
 	font-size: 2em;
@@ -135,28 +135,28 @@ a {
 	transition-duration: 0.2s;
 }
 
-#aboutPage #close:hover {
+#page #close:hover {
 	color:#c8e9f3;
 	transform: scale(1.3);
 	text-shadow: 0px 0px 3px black;
 }
 
-#aboutPage h2{
-	font-size: 2.2em;
+#page h2{
+	font-size: 2em;
 	font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-#aboutPage hr {
+#page hr {
 	border-color:rgb(74,74,74);
 
 }
 
-#aboutPage p {
+#page p {
 	font-size:1.3em;
 	font-family: monospace;
 }
 
-#aboutPage ul li {
+#page ul li {
 	margin-top:10px;
 	font-size:1.1em;
 	font-weight:800;
@@ -365,8 +365,11 @@ a {
 
 footer {
 	position: absolute;
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
 	bottom:0;
-	width:100%;
+	width:100vw;
 	padding-top:5px;
 	padding-bottom:5px;
 	text-align: center;
@@ -385,6 +388,15 @@ footer > a {
 
 footer > a:hover {
 	color: rgb(106, 210, 130);
+}
+
+footer span {
+	margin-left:2%;
+	margin-right:2%;
+}
+
+.separator {
+	border-left: 2px solid white;
 }
 
 datalist {

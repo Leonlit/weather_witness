@@ -50,10 +50,20 @@ function delayFunctionCall (func, time) {
 	}, time);
 }
 
-const page = document.getElementById("aboutPage");
+const page = document.getElementById("page");
 const shader3 = document.getElementById("shader3");
 //showing and closing the about page for the app
-function openClosePage () {
+function openClosePage (type) {
+	switch (type) {
+		case 0:
+			page.innerHTML = aboutPageContent;
+			break;
+		case 1:
+			page.innerHTML = privacyPageContent;
+			break;
+		default:
+			break;
+	}
 	//to close the search list
 	if (!pageDisabled) {
 		if (pageOpen) {

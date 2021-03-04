@@ -7,7 +7,7 @@
 		- Api key not exposed in 
 		
 		http code
-			- 422 invalid request parameter
+	 		- 422 invalid request parameter
 			- 429 rate limits reach
 			- 500 unexpected error
 			- 503 server down
