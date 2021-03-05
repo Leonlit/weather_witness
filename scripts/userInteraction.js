@@ -99,6 +99,16 @@ function openPage () {
 	page.classList.add("fade-in-left-03");
 }
 
+function acceptCookie(){
+	saveCacheItem("cookieAccepted", true);
+	const popUp = 	document.getElementById("popUp");
+	popUp.classList.toggle("fade-in-left");
+	popUp.classList.toggle("fade-out");
+	popUp.onanimationend = e=>{
+		popUp.style.display = "none";
+	}
+}
+
 //used to lock the navigation bar so that the animation won't be chuncky 
 //in case user clicked the trigger for opening and closing of nav bar too fast.
 function lockNav (time) {

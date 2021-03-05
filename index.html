@@ -126,6 +126,12 @@
             </div>
         </div>
 
+        <div id="popUp" class="fade-in-left">
+            <h3>Cookies on the Weather witness Website</h3>
+            <p>This site uses cookie as what we've explained in our <span class="footerLink" onclick="openClosePage(1)">Privacy Policy</span>. Please close this message and continue to use this site</p>
+            <button onclick="acceptCookie()">Accept & Close</button>
+        </div>
+
         <div id="shader3" class="specialShader fixedEle absolutePointEle" onclick="closePage()"></div>
         <!--About page section-->
         <div id="page" class="fixedEle"></div>
@@ -153,3 +159,12 @@
 <script src="scripts/forecast.js"></script>
 <script src="scripts/cacheManagement.js"></script>
 <script src="scripts/pageContent.js"></script>
+
+<script>
+    window.onload = function () {
+        console.log(String(getCacheItem("cookieAccepted")));
+        if (String(getCacheItem("cookieAccepted")) === "true") {
+            document.getElementById("popUp").style.display = "none"
+        }
+    }
+</script>

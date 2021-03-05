@@ -54,13 +54,11 @@
     #navItems {
         top:0px;
         padding-top:10px;
-        padding-bottom:10px;
         z-index:101;
         background-color:transparent;
         display: inline-block;
         position:fixed;
         right:20px;
-        height:auto;
     }
 
     #secondarySearch {
