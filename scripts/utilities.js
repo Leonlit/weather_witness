@@ -63,12 +63,12 @@ async function getCityJSON (callback) {
 
 let gottenName = false;
 let cityNames = [];
-let founded = [];
 
 //get city names from file, but only if the cityNames is empty
 //If its not empty use the list of city in it and pass the value
 //into constructOptions
 function checkCityList () {
+    selectedPos = null;
     if (!gottenName) {
         gottenName = true;
         getCityJSON((data)=>{
@@ -91,7 +91,6 @@ function getSearchedBoxContainer () {
 
 //construct the autocomplete list for the appropriate search box
 function constructOptions (names) {
-    founded = [];
     const theCont = getSearchedBoxContainer();
     //clearing the autocomplete item for both search box so that the screen 
     //wont be so messy
@@ -109,12 +108,12 @@ function constructOptions (names) {
 }
 
 //generating the city list for character provided
-function generateList(names, value, theCont) {
+async function generateList(names, value, theCont) {
     let found = 0;
     const size = names.length;
     for (let i = 0; i < size; i++) {
         //if the number of result found is 30 break the loop (limiting the value to loop through)
-        if (found == 30) {
+        if (found == 50) {
             break;
         }
         if  ( ((names[i].toLowerCase()).indexOf(value.toLowerCase())) > -1) { 
@@ -122,7 +121,6 @@ function generateList(names, value, theCont) {
             const node = document.createElement("option");
             const currName = names[i];
 
-            founded.push(currName);
             //add a event when the option node is clicked, insert the clicked value into the 
             //appropriate search box
             node.addEventListener("click", ()=> {
@@ -135,6 +133,7 @@ function generateList(names, value, theCont) {
             theCont.appendChild(node); 
         }
     }
+    console.log(found);
     if (found > 0) {
         //because the search box for mobile version is different, therefore need a way
         //to customize its style
@@ -177,7 +176,6 @@ function clearBothSearchList () {
     makeSearchTransparent(smallCityCont)
     cityCont.innerHTML = "";
     smallCityCont.innerHTML = "";
-    searchRecommendationOpen = false;
 }
 
 function clearSearchField (city) {

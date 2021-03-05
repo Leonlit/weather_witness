@@ -6,6 +6,8 @@ let navOpen = false,
 	isSearchMain = false,
 	searchRecommendationOpen = false;
 
+let selectedPos = null;
+
 //used for mobile design.
 //when user scrolled down from a specific range, 
 //change the color of the navigation menu
@@ -13,9 +15,13 @@ window.onscroll = () => {
 	if (window.innerWidth < 800) adjustNavCont();
 }
 
-window.onclick= () => {
+window.onclick = (event) => {
+	const target = event.target.id;
 	if (searchRecommendationOpen) {
-		clearBothSearchList();
+		if (target != "mainSearchBox" && target != "secondarySearch") {
+			selectedPos = null;
+			clearBothSearchList();
+		}
 	}
 }
 
@@ -23,23 +29,60 @@ window.onclick= () => {
 //main search and secondary search field.
 function isEnterSecondary (event) {
 	isSearchMain = false;
-	if (event.key === "Enter") {
-		getNewData();
-	}else {
-		//if the key entered is not enter, it might be a text character
-		//so start to the autocomplete item list
-		//specify that it's not triggered by the main search box
-		checkCityList();
-	}
+	checkSearchAction(event) 
 }
 
 //User pressed enter at the main search box
 function isEnterMain (event) {
 	isSearchMain = true;
-	if (event.key === "Enter") {
-		triggerData();
+	checkSearchAction(event)
+}
+
+function checkSearchAction (eve) {
+	const eventKey = eve.key.toLowerCase();
+	const listContainer = getSearchedBoxContainer();
+	console.log(eventKey);
+	switch (eventKey) {
+		case "enter":
+			if (isSearchMain){
+				if (selectedPos != null){
+					mainSearchBox.value = listContainer.getElementsByTagName("option")[selectedPos].value
+				}
+				triggerData()
+			}else {
+				if (selectedPos != null){
+					secondarySearchBox.value = listContainer.getElementsByTagName("option")[selectedPos].value
+				}
+				getNewData();
+			}
+			break;
+		case "arrowdown":
+			moveSelectedOption(listContainer, selectedPos, selectedPos+1);
+			break;
+		case "arrowup":
+			moveSelectedOption(listContainer, selectedPos, selectedPos-1)
+			break;
+		case "arrowright":
+		case "arrowleft":
+			break;
+		default:
+			checkCityList();
+		break;
+	}
+}
+
+function moveSelectedOption(listCont,oldPos, newPos) {
+	const elements = listCont.getElementsByTagName("option");
+	if (newPos > elements.length || newPos < 0) {
+		return;
 	}else {
-		checkCityList();
+		if (oldPos == null){
+			newPos = oldPos = 0;
+		}
+		elements[oldPos].classList.remove("datalistSelected");
+		elements[newPos].classList.add("datalistSelected");
+		selectedPos = newPos
+		console.log(selectedPos);
 	}
 }
 
