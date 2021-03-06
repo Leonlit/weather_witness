@@ -15,8 +15,10 @@ window.onscroll = () => {
 	if (window.innerWidth < 800) adjustNavCont();
 }
 
+
 window.onclick = (event) => {
 	const target = event.target.id;
+	//to hide all search field if other part of the site is clicked 
 	if (searchRecommendationOpen) {
 		if (target != "mainSearchBox" && target != "secondarySearch") {
 			selectedPos = null;
@@ -38,6 +40,9 @@ function isEnterMain (event) {
 	checkSearchAction(event)
 }
 
+//check which key is pressed in one off the search box.
+//Whether to display the matched city name 
+//or to navigate through the list
 function checkSearchAction (eve) {
 	const eventKey = eve.key.toLowerCase();
 	const listContainer = getSearchedBoxContainer();
@@ -55,6 +60,7 @@ function checkSearchAction (eve) {
 				}
 				getNewData();
 			}
+			clearBothSearchList()
 			break;
 		case "arrowdown":
 			moveSelectedOption(listContainer, selectedPos, selectedPos+1);
