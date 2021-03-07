@@ -45,6 +45,7 @@ function iconrURL (unix, id) {
     return `./icons/${getIconsName(id, dayOrNight)}.png`;
 }
 
+let previousName = "";
 //getting the list of city namese available
 async function getCityJSON (city, callback) {
     console.log("city");
@@ -72,7 +73,6 @@ function checkCityList () {
     const theCont = getSearchedBoxContainer();
     const searchBox = (isSearchMain) ? "mainSearchBox" : "secondarySearch";
     const value = document.getElementById(searchBox).value ;
-    console.log(value);
     //if the value of the search box became empty, make the element transparent
     if (value == "") {
         makeSearchTransparent(theCont);
@@ -82,12 +82,16 @@ function checkCityList () {
     if (value.length < 3) {
         clearBothSearchList();
     }else {
-        getCityJSON(value, (data)=>{
-            if (data){
-                clearBothSearchList();
-                generateList (data, theCont);
-            }
-        });
+        if (value !== previousName) {
+            previousName = value;
+            getCityJSON(value, (data)=>{
+                if (data){
+                    console.log("optimizing");
+                    clearBothSearchList();
+                    generateList (data, theCont);
+                }
+            });
+        }
     }
 }
 
