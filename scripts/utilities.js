@@ -51,7 +51,13 @@ async function getCityJSON (city, callback) {
     console.log("city");
     try {
         await fetch (`searchCity.php?city=${city}`)
-        .then(result => result.json())
+        .then(result => {
+            if (result.status == 200) {
+                return result.json();
+            }else {
+                checkResponseCode(result.status);
+            }
+        })
         .then(json=> {
             //return a json data to the checkCityList method
             callback(json);
