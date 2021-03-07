@@ -34,6 +34,8 @@
         <link rel="stylesheet" href="css/dataStructuring.css"/>
     </head>
     <body>
+
+        <noscript>Please enable Javascript for the app to work</noscript>
         <!--Navigation Section-->
         
         <div id="navItems" class="fixedEle ">
@@ -165,8 +167,8 @@
         mainSearchBox.addEventListener("focus", checkCityList);
         secondarySearchBox.addEventListener("focus", checkCityList);
         console.log(String(getCacheItem("cookieAccepted")));
-        if (String(getCacheItem("cookieAccepted")) === "true") {
-            document.getElementById("popUp").style.display = "none"
+        if (String(getCacheItem("cookieAccepted")) !== "true") {
+            document.getElementById("popUp").style.display = "block"
         }
     }
 </script>

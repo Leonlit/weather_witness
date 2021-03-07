@@ -127,7 +127,6 @@ function triggerData (secondarySearch=null) {
 				if (message) {
 					setupData(message);
 					getForecastData(city);
-					delayFunctionCall(insertValue, 3200);
 					document.getElementById("navItems").getElementsByTagName("li")[2].style.display = "initial";
 				}else {
 					throw "can't get json data";

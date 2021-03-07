@@ -22,9 +22,19 @@ window.onclick = (event) => {
 	if (searchRecommendationOpen) {
 		if (target != "mainSearchBox" && target != "secondarySearch") {
 			selectedPos = null;
-			clearBothSearchList();
+			HideBothSearchList();
 		}
 	}
+}
+
+function HideBothSearchList(){
+	cityCont.style.display = "none"
+	smallCityCont.style.display = "none"
+}
+
+function openBothSearchList(){
+	cityCont.style.display = "block"
+	smallCityCont.style.display = "block"
 }
 
 //used as the funcion to be invoked when enter is pressed in
@@ -60,7 +70,6 @@ function checkSearchAction (eve) {
 				}
 				getNewData();
 			}
-			clearBothSearchList()
 			break;
 		case "arrowdown":
 			moveSelectedOption(listContainer, selectedPos, selectedPos+1);

@@ -46,14 +46,16 @@ function iconrURL (unix, id) {
 }
 
 //getting the list of city namese available
-async function getCityJSON (callback) {
+async function getCityJSON (city, callback) {
+    console.log("city");
     try {
-        await fetch ("cityObject.json")
+        await fetch (`searchCity.php?city=${city}`)
         .then(result => result.json())
         .then(json=> {
             //return a json data to the checkCityList method
             callback(json);
         }).catch(err=>{
+            console.log(err);
             openCloseError("Unable to load city names!");
         });
     }catch (err) {
@@ -61,24 +63,31 @@ async function getCityJSON (callback) {
     }
 }
 
-let gottenName = false;
-let cityNames = [];
-
 //get city names from file, but only if the cityNames is empty
 //If its not empty use the list of city in it and pass the value
 //into constructOptions
 function checkCityList () {
+    openBothSearchList()
     selectedPos = null;
-    if (!gottenName) {
-        gottenName = true;
-        getCityJSON((data)=>{
-            data.forEach(ele => {
-                cityNames.push(ele);
-            });
-            constructOptions (cityNames) 
-        });
+    const theCont = getSearchedBoxContainer();
+    const searchBox = (isSearchMain) ? "mainSearchBox" : "secondarySearch";
+    const value = document.getElementById(searchBox).value ;
+    console.log(value);
+    //if the value of the search box became empty, make the element transparent
+    if (value == "") {
+        makeSearchTransparent(theCont);
+        return false;
+    }
+    console.log("test2");
+    if (value.length < 3) {
+        clearBothSearchList();
     }else {
-        constructOptions(cityNames);    //constructing empty list
+        getCityJSON(value, (data)=>{
+            if (data){
+                clearBothSearchList();
+                generateList (data, theCont);
+            }
+        });
     }
 }
 
@@ -91,49 +100,32 @@ function getSearchedBoxContainer () {
 
 //construct the autocomplete list for the appropriate search box
 function constructOptions (names) {
-    const theCont = getSearchedBoxContainer();
     //clearing the autocomplete item for both search box so that the screen 
     //wont be so messy
-    clearBothSearchList();
-    //getting the search box that initiated the search
-    const searchBox = (isSearchMain) ? "mainSearchBox" : "secondarySearch";
-    const value = document.getElementById(searchBox).value ;
     
-    //if the value of the search box became empty, make the element transparent
-    if (value == "") {
-        makeSearchTransparent(theCont);
-        return false;
-    }
-    generateList(names, value, theCont);
 }
 
 //generating the city list for character provided
-async function generateList(names, value, theCont) {
+async function generateList(names, theCont) {
     let found = 0;
     const size = names.length;
     for (let i = 0; i < size; i++) {
         //if the number of result found is 30 break the loop (limiting the value to loop through)
-        if (found == 50) {
-            break;
-        }
-        if  ( ((names[i].toLowerCase()).indexOf(value.toLowerCase())) > -1) { 
-            found++;
-            const node = document.createElement("option");
-            const currName = names[i];
+        found++;
+        const node = document.createElement("option");
+        const currName = names[i];
 
-            //add a event when the option node is clicked, insert the clicked value into the 
-            //appropriate search box
-            node.addEventListener("click", ()=> {
-                makeSearchTransparent(theCont)
-                insertValue(currName);
-            });
+        //add a event when the option node is clicked, insert the clicked value into the 
+        //appropriate search box
+        node.addEventListener("click", ()=> {
+            makeSearchTransparent(theCont)
+            insertValue(currName);
+        });
 
-            let text = document.createTextNode(currName); 
-            node.appendChild(text);
-            theCont.appendChild(node); 
-        }
+        let text = document.createTextNode(currName); 
+        node.appendChild(text);
+        theCont.appendChild(node);
     }
-    console.log(found);
     if (found > 0) {
         //because the search box for mobile version is different, therefore need a way
         //to customize its style
@@ -160,7 +152,6 @@ function insertValue (name) {
 
     name = name || "";
     ele.value = name;
-    clearBothSearchList();
 }
 
 //making the autocomplete item list to go transparent

@@ -366,6 +366,7 @@ a {
 }
 
 #popUp {
+	display: none;
 	background-color: #6a85d2;
 	padding: 2vh 5vw 2vh 5vw;
 	position: fixed;
