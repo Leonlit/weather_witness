@@ -128,7 +128,7 @@ async function generateList(names, theCont) {
         //add a event when the option node is clicked, insert the clicked value into the 
         //appropriate search box
         node.addEventListener("click", ()=> {
-            makeSearchTransparent(theCont)
+            clearBothSearchList(theCont)
             insertValue(currName);
         });
 
