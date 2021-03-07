@@ -73,7 +73,7 @@ function checkCityList () {
         gottenName = true;
         getCityJSON((data)=>{
             data.forEach(ele => {
-                cityNames.push(ele.name);
+                cityNames.push(ele);
             });
             constructOptions (cityNames) 
         });
