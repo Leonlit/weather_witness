@@ -15,7 +15,7 @@
 	*/
 	require(__DIR__."/startup.php");
 
-	$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+	$dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
 	$dotenv->load();
 
 	define("URL", "https://api.openweathermap.org/data/2.5/weather");
@@ -27,7 +27,7 @@
 		$city = filterData($_GET["city"]);
 		$key = "";
 		try {
-			$key = $_ENV['WEATEHR_API'];
+			$key = getenv('WEATEHR_API');
 			if (!$key) {
 				throw new Exception();
 			}
