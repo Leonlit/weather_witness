@@ -23,7 +23,7 @@
 		$city = filterData($_GET["city"]);
 		$key = "";
 		try {
-			$key = getenv('WEATEHR_API');
+			$key = getenv('weatherAPI');
 			if (!$key) {
 				throw new Exception();
 			}
