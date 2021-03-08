@@ -1,0 +1,1 @@
+{&quot;cod&quot;:401, &quot;message&quot;: &quot;Invalid API key. Please see http://openweathermap.org/faq#error401 for more info.&quot;}

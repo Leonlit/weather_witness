@@ -1,0 +1,10 @@
+{
+  "name": "vendor/weather_witness",
+  "description": "A simple weather app",
+  "require": {
+    "php": "^7.4.0"
+  },
+  "require-dev": {
+    "heroku/heroku-buildpack-php": "*"
+  }
+}
