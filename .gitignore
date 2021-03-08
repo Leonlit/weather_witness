@@ -1,6 +1,6 @@
 secret/
 vendor/
 .env
-data-cache/*.txt
+public/data-cache/*.txt
 .vscode
 .dccache
