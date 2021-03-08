@@ -70,6 +70,7 @@ function checkSearchAction (eve) {
 				}
 				getNewData();
 			}
+			clearBothSearchList();
 			break;
 		case "arrowdown":
 			moveSelectedOption(listContainer, selectedPos, selectedPos+1);
