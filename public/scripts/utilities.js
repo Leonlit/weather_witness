@@ -135,8 +135,14 @@ async function generateList(names, theCont) {
     if (found > 0) {
         //because the search box for mobile version is different, therefore need a way
         //to customize its style
+        let size =0;
+        if (found > 5){
+            size = 5
+        }else {
+            size = found;
+        }
         theCont.style.backgroundColor = "white";
-        theCont.style.height = `${(theCont.firstChild.clientHeight + 5) * 5}px`;
+        theCont.style.height = `${(theCont.firstChild.clientHeight + 5) * size}px`;
         if (!isSearchMain && screen.width <= 800.0) {
             theCont.style.backgroundColor = "rgb(64,64,64)";
             theCont.style.marginTop = "10px";
