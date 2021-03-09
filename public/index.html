@@ -166,7 +166,6 @@
     window.onload = function () {
         mainSearchBox.addEventListener("focus", checkCityList);
         secondarySearchBox.addEventListener("focus", checkCityList);
-        console.log(String(getCacheItem("cookieAccepted")));
         if (String(getCacheItem("cookieAccepted")) !== "true") {
             document.getElementById("popUp").style.display = "block"
         }

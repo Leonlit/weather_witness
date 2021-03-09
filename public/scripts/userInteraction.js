@@ -27,11 +27,13 @@ window.onclick = (event) => {
 	}
 }
 
+//hide search list instead of clearing them
 function HideBothSearchList(){
 	cityCont.style.display = "none"
 	smallCityCont.style.display = "none"
 }
 
+//showinng serch list back
 function openBothSearchList(){
 	cityCont.style.display = "block"
 	smallCityCont.style.display = "block"
@@ -56,7 +58,6 @@ function isEnterMain (event) {
 function checkSearchAction (eve) {
 	const eventKey = eve.key.toLowerCase();
 	const listContainer = getSearchedBoxContainer();
-	console.log(eventKey);
 	switch (eventKey) {
 		case "enter":
 			if (isSearchMain){
@@ -87,6 +88,7 @@ function checkSearchAction (eve) {
 	}
 }
 
+//navigate across the searched list
 function moveSelectedOption(listCont,oldPos, newPos) {
 	const elements = listCont.getElementsByTagName("option");
 	if (newPos > elements.length || newPos < 0) {
@@ -98,9 +100,10 @@ function moveSelectedOption(listCont,oldPos, newPos) {
 		elements[oldPos].classList.remove("datalistSelected");
 		elements[newPos].classList.add("datalistSelected");
 		selectedPos = newPos
-		console.log(selectedPos);
 	}
 }
+
+//syncing the search list with the view
 
 //Delaying the call of another function
 function delayFunctionCall (func, time) {
@@ -326,6 +329,7 @@ function closeError () {
 }
 
 
+//hiding and showing the shader 
 function makeShaderAppear (shader) {
 	shader.style.opacity = "0";
 	shader.style.display = "block";

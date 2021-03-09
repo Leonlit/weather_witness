@@ -48,7 +48,6 @@ function iconrURL (unix, id) {
 let previousName = "";
 //getting the list of city namese available
 async function getCityJSON (city, callback) {
-    console.log("city");
     try {
         await fetch (`searchCity.php?city=${city}`)
         .then(result => {
@@ -84,7 +83,6 @@ function checkCityList () {
         makeSearchTransparent(theCont);
         return false;
     }
-    console.log("test2");
     if (value.length < 3) {
         clearBothSearchList();
     }else {
@@ -92,7 +90,6 @@ function checkCityList () {
             previousName = value;
             getCityJSON(value, (data)=>{
                 if (data){
-                    console.log("optimizing");
                     clearBothSearchList();
                     generateList (data, theCont);
                 }
@@ -120,7 +117,6 @@ async function generateList(names, theCont) {
     let found = 0;
     const size = names.length;
     for (let i = 0; i < size; i++) {
-        //if the number of result found is 30 break the loop (limiting the value to loop through)
         found++;
         const node = document.createElement("option");
         const currName = names[i];
