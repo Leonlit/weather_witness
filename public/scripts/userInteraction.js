@@ -97,6 +97,9 @@ function moveSelectedOption(listCont,oldPos, newPos) {
 		if (oldPos == null){
 			newPos = oldPos = 0;
 		}
+		const scroll = `${(elements[0].clientHeight + 5) * 5 * Math.floor(newPos/5)}`;
+		console.log(scroll);
+		listCont.scrollTop = scroll;
 		elements[oldPos].classList.remove("datalistSelected");
 		elements[newPos].classList.add("datalistSelected");
 		selectedPos = newPos

@@ -7,7 +7,7 @@ body {
 	background-repeat: no-repeat;
 }
 
-noscript {
+#noscript {
 	position: fixed;
 	margin-top: 70px;
 	left: 50%;
@@ -471,7 +471,6 @@ datalist {
 	position: absolute;
 	float:left;
 	min-height: -1px;
-	max-height: 200px;
 	padding:1%;
 	width:100%;
 	background-color: transparent;

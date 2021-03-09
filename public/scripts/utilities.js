@@ -80,7 +80,7 @@ function checkCityList () {
     const value = document.getElementById(searchBox).value ;
     //if the value of the search box became empty, make the element transparent
     if (value == "") {
-        makeSearchTransparent(theCont);
+        clearBothSearchList(theCont);
         return false;
     }
     if (value.length < 3) {
@@ -135,7 +135,8 @@ async function generateList(names, theCont) {
     if (found > 0) {
         //because the search box for mobile version is different, therefore need a way
         //to customize its style
-        theCont.style.backgroundColor = "white"; 
+        theCont.style.backgroundColor = "white";
+        theCont.style.height = `${(theCont.firstChild.clientHeight + 5) * 5}px`;
         if (!isSearchMain && screen.width <= 800.0) {
             theCont.style.backgroundColor = "rgb(64,64,64)";
             theCont.style.marginTop = "10px";
