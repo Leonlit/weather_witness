@@ -7,6 +7,21 @@ body {
 	background-repeat: no-repeat;
 }
 
+noscript {
+	position: fixed;
+	margin-top: 70px;
+	left: 50%;
+	width: 200px;
+	transform: translateX(-50%);
+	background-color: #6a85d2;
+	color: aliceblue;
+	z-index: 1;
+	padding: 20px;
+	font-size: 1.4em;
+	border-radius: 10px;
+	text-align: center;
+}
+
 .scrollable {
 	overflow-x: auto;
 }
