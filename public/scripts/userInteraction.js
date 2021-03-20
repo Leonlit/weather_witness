@@ -119,7 +119,6 @@ const page = document.getElementById("page");
 const shader3 = document.getElementById("shader3");
 //showing and closing the about page for the app
 function openClosePage (type) {
-	page.scrollTop = 0;
 	switch (type) {
 		case 0:
 			page.innerHTML = aboutPageContent;
@@ -150,6 +149,7 @@ function closePage () {
 	//with the about page close button
 	lockPage(300);
 	setTimeout(() => {
+		page.scrollTop = 0;
 		page.style.display = "none";
 	}, 300);
 }
