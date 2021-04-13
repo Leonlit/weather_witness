@@ -49,21 +49,27 @@ function changeForecastData (initialData) {
 
 	const type = document.getElementById("forecastType").value;
 	const batch = document.getElementById("forecastDay").value;
-
-	switch (type) {
-		case "temperature":
-			setForecastTemperature(batch);
-			break;
-		case "percipitation":
-			setForecastPrecipitation(batch);
-			break;
-		case "wind":
-			setForecastWind(batch);
-			break;
-		default:
-			console.log("something wrong in determining forecast type");
-			console.log(type, typeof(type));
-	}
+	
+	forecastDataCont.style.opacity = "0";
+	console.log(forecastDataCont.style.opacity);
+	setTimeout(() => {
+		switch (type) {
+			case "temperature":
+				setForecastTemperature(batch);
+				break;
+			case "percipitation":
+				setForecastPrecipitation(batch);
+				break;
+			case "wind":
+				setForecastWind(batch);
+				break;
+			default:
+				console.log("something wrong in determining forecast type");
+				console.log(type, typeof(type));
+		}
+		forecastDataCont.style.opacity = "1";
+	}, 310);
+	console.log(forecastDataCont.style.opacity);
 }
 
 //will be using temperature, weather id, time, percipitation, winds for forecast data presentation.
