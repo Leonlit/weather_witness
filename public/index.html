@@ -117,6 +117,12 @@
 
             <div id="pollutionContainer" class="container">
                 <div id="pollutionData" class="dataSection">
+
+                </div>
+            </div>
+
+            <div id="pollutionForecastContainer" class="container">
+                <div id="pollutionData" class="dataSection">
                     <select id="pollutionType" name="pollutionChoose" class="forecastConfigure"  onchange="showPollutionData()">
                         <option value="1">AQI</option>
                         <option value="2">CO</option>
@@ -141,7 +147,7 @@
                     </div>
                     <div class="scrollable">
                         <div id="chartContainer">
-                            <canvas id='graph'></canvas>
+                            <canvas id='pollutionGraph'></canvas>
                         </div>
                     </div>
                 </div>
@@ -187,7 +193,7 @@
 <script src="scripts/utilities.js"></script>
 <script src="scripts/userInteraction.js"></script>
 <script src="scripts/clientRequest.js"></script>
-<script src="scripts/graphManagement.js"></script>
+<script src="scripts/forecastGraph.js"></script>
 <script src="scripts/forecast.js"></script>
 <script src="scripts/cacheManagement.js"></script>
 <script src="scripts/pageContent.js"></script>

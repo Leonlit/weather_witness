@@ -5,29 +5,12 @@ let pollutionData;
 async function getPollutionData (coord) {
     await getJson(2, coord).then((data)=> {
         pollutionData = data;
-        showPollutionData(true);
+        showPollutionData();
+        showForecastData(true);
     });
 }
 
-function showPollutionData (initial=false) {
-    if (initial) {
-       {date, month} = getstartDate();
-        setPollutionsOptions();
-    }
+function showPollutionData () {
     
 }
 
-function setPollutionsOptions (date, month) {
-    month++;
-	const cont = document.getElementById("pollutionGraphDay");
-	const option = cont.getElementsByTagName("option");
-	for (let x = 0; x< option.length; x++) {
-		const template = `${date++} / ${month}`;
-		option[x].innerHTML = template;
-	}
-}
-
-function getstartDate () {
-    
-    return {};
-}
