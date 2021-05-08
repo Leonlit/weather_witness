@@ -13,11 +13,7 @@ async function getJson (type, city) {
 		if (data != false) {
 			return JSON.parse(data);
 		}else {
-			if (type == 0) {
-				requestQuery = `request.php?city=${city}&type=0`;
-			}else {
-				requestQuery = `request.php?city=${city}&type=1`;
-			}
+			requestQuery = `request.php?city=${city}&type=${type}`;
 			try {
 				return await fetch(requestQuery, {
 					method: 'get', 
@@ -127,6 +123,7 @@ function triggerData (secondarySearch=null) {
 				if (message) {
 					setupData(message);
 					getForecastData(city);
+					getPollutionData(getCoordFromJSON(message));
 					document.getElementById("navItems").getElementsByTagName("li")[2].style.display = "initial";
 				}else {
 					throw "can't get json data";

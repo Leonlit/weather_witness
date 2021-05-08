@@ -234,3 +234,8 @@ function adjustNavShadowOnSetup () {
 		navShadow.style.boxShadow = `0px 1px 10px rgba(128, 128, 128 , 0)`;
 	}
 }
+
+function getCoordFromJSON (data) {
+    let coords = data["coord"];
+    return `${coords["lat"]},${coords["lon"]}`;
+}

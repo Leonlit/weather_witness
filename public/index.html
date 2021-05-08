@@ -114,7 +114,38 @@
                     </div>
                 </div>
             </div>
-        
+
+            <div id="pollutionContainer" class="container">
+                <div id="pollutionData" class="dataSection">
+                    <select id="pollutionType" name="pollutionChoose" class="forecastConfigure"  onchange="showPollutionData()">
+                        <option value="1">AQI</option>
+                        <option value="2">CO</option>
+                        <option value="3">NO</option>
+                        <option value="4">NO<sub>2</sub></option>
+                        <option value="5">O<sub>3</sub></option>
+                        <option value="6">SO<sub>2</sub></option>
+                        <option value="7">NH<sub>3</sub></option>
+                        <option value="8">PM<sub>2.5</sub></option>
+                        <option value="9">PM<sub>10</sub></option>
+                    </select>
+                    <div id="pollutionGraphDay" name="pollutionForecastedDay">
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                        <option value="6"></option>
+                        <option value="7"></option>
+                        <option value="8"></option>
+                        <option value="9"></option>
+                    </div>
+                    <div class="scrollable">
+                        <div id="chartContainer">
+                            <canvas id='graph'></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!--Main page section-->

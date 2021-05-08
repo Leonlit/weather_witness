@@ -14,8 +14,10 @@
 
 	*/
 
-	define("URL", "https://api.openweathermap.org/data/2.5/weather");
-	define("FURL", "https://api.openweathermap.org/data/2.5/forecast");
+	define("URL", "https://api.openweathermap.org/data/2.5/weather");			//weather endpoint
+	define("FURL", "https://api.openweathermap.org/data/2.5/forecast");			//weather forecast
+	define("PURL", "http://api.openweathermap.org/data/2.5/air_pollution");		//pollution endpoint
+	define("PFURL", "http://api.openweathermap.org/data/2.5/air_pollution"); 	//pollution forecast
 	$query = "";
 	//if city is set with values, construct and request the API URL and pass it to client
 
@@ -40,11 +42,20 @@
 	function fetchData ($city, $key) {
 		$requestType = filterData($_GET["type"]);
 		$URLType =  $requestType === "0" ? URL : (
-				$requestType === "1" ? FURL : ""
+				$requestType === "1" ? FURL : (
+					$requestType === "2" ? PURL : ""
+				)
 		);
 		//constructing the url for getting the API data 
 		if ($URLType != "" && $key != "") {
-			$query = $URLType."?q=".$city."&appid=".$key;
+			$query = $URLType."?q=".$city;
+
+			if ($requestType === "2") {
+				$coords = explode(",", $city);
+				$query = $URLType."lat=".$coords[0]."&lon=".$coords[1];
+			}
+			
+			$query = $query."&appid=".$key;
 
 			$currSeconds = time();
 			$expireTime = $currSeconds + 30;
