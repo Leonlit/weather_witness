@@ -17,7 +17,7 @@
 	define("URL", "https://api.openweathermap.org/data/2.5/weather");			//weather endpoint
 	define("FURL", "https://api.openweathermap.org/data/2.5/forecast");			//weather forecast
 	define("PURL", "http://api.openweathermap.org/data/2.5/air_pollution");		//pollution endpoint
-	define("PFURL", "http://api.openweathermap.org/data/2.5/air_pollution"); 	//pollution forecast
+	define("PFURL", "http://api.openweathermap.org/data/2.5/air_pollution/forecast"); 	//pollution forecast
 	$query = "";
 	//if city is set with values, construct and request the API URL and pass it to client
 

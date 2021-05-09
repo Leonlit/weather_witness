@@ -235,7 +235,13 @@ function adjustNavShadowOnSetup () {
 	}
 }
 
+//getting coord returned by the server, regarding a location
 function getCoordFromJSON (data) {
     let coords = data["coord"];
     return `${coords["lat"]},${coords["lon"]}`;
+}
+
+//changing long float number to only shows certain number of 
+function limitSignificantShown (number, limit) {
+    return (number).toFixed(limit);
 }
