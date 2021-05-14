@@ -14,7 +14,7 @@ async function getPollutionData (coord) {
 function showPollutionData () {
     console.log(pollutionData);
     const data = pollutionData["list"][0];
-    const pollutionContainer = document.getElementById("pollutionData");
+    const pollutionContainer = document.getElementById("pollutionDataContainer");
     const pollutionFields = pollutionContainer.getElementsByClassName("pollutionData");
     pollutionFields[0].innerHTML = limitSignificantShown(data["main"]["aqi"], 2);
     pollutionFields[1].innerHTML = limitSignificantShown(data["components"]["co"], 2);
