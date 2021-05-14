@@ -43,16 +43,18 @@
 		$requestType = filterData($_GET["type"]);
 		$URLType =  $requestType === "0" ? URL : (
 				$requestType === "1" ? FURL : (
-					$requestType === "2" ? PURL : ""
+					$requestType === "2" ? PURL : (
+						$requestType === "3"? PFURL: ""
+					)
 				)
 		);
 		//constructing the url for getting the API data 
 		if ($URLType != "" && $key != "") {
 			$query = $URLType."?q=".$city;
 
-			if ($requestType === "2") {
+			if ($requestType > "1") {
 				$coords = explode(",", $city);
-				$query = $URLType."lat=".$coords[0]."&lon=".$coords[1];
+				$query = $URLType."?lat=".$coords[0]."&lon=".$coords[1];
 			}
 			
 			$query = $query."&appid=".$key;
