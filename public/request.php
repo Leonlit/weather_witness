@@ -25,7 +25,7 @@
 		$city = filterData($_GET["city"]);
 		$key = "";
 		try {
-			$key = file_get_contents("secret/apikey.txt");//getenv('weatherAPI');
+			$key = getenv('weatherAPI');
 			if (!$key) {
 				throw new Exception();
 			}
