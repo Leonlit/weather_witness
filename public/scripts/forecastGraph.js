@@ -1,60 +1,59 @@
 //function that's triggered when an option is changed in the graph section
 //as well as setting up the dropdown items value during set up
 // 0 means draw out all the data to the chart
-let selectedBatch = [0];
-function changeGraph(batch) {
+let forecastSelectedBatch = [0];
+function changeForecastGraph(batch) {
     let getBatch;
     //Since if this method is called from the forecast.js,
     //the provided data is in json form so its not an Integer
     //that's when the system will need to pass the array [0] 
-    //to the compileData function. 
+    //to the compileForecastData function. 
     //If the provided batch is an integer (from the html element onclick event)
     if (isInteger(batch)) {
         getBatch = batch;
         //check if there's a zero in the array , if its in it 
         //then we need to remove it
-        if (selectedBatch.includes(0)) {
-            let index = selectedBatch.indexOf(0);
-            selectedBatch.splice(index, 1);
+        if (forecastSelectedBatch.includes(0)) {
+            let index = forecastSelectedBatch.indexOf(0);
+            forecastSelectedBatch.splice(index, 1);
         }
         //if the provided batch number is in the array, it means that user want to remove it from
         //displaying the batch data to the chart
         //batch meaning - since this API can provide forecast data for 5 days,
         //I divided the data into 5 batch according to days
-        if (selectedBatch.includes(getBatch)) {
-            let index = selectedBatch.indexOf(getBatch);
-            selectedBatch.splice(index, 1);
+        if (forecastSelectedBatch.includes(getBatch)) {
+            let index = forecastSelectedBatch.indexOf(getBatch);
+            forecastSelectedBatch.splice(index, 1);
         }else {
             //if its not in the array, add it into the array
-            selectedBatch.push(getBatch);
+            forecastSelectedBatch.push(getBatch);
         }
         //toggle the clicked button (change its color)
-        toggleSelectedButton(batch - 1);
+        toggleSelectedButton(batch - 1, "forecastGraphDay");
     }
     //getting the type of the chart to draw out (temperature or precipitation)
-    const type = document.getElementById("graphType").value;
+    const type = document.getElementById("forecastGraphType").value;
     //forecastJson is a global variable from forecast.js
-    compileData(forecastJson, selectedBatch, type);
+    compileForecastData(forecastJson, forecastSelectedBatch, type);
 }
 
 //toggling the buttons background color to indicate which button is selected
-function toggleSelectedButton (index) {
-    const buttons = document.getElementById("graphDay").getElementsByTagName("button");
+function toggleSelectedButton (index, element) {
+    const buttons = document.getElementById(element).getElementsByTagName("button");
     let initialBg = buttons[index].style;
     if (initialBg.backgroundColor === "rgb(159, 137, 230)") {
         initialBg.backgroundColor = "rgb(185, 173, 225)";
     }else {
         initialBg.backgroundColor = "rgb(159, 137, 230)";
     }
-
 }
 
 //setting up the data for the chart
-function compileData (json, batch, type) {
+function compileForecastData (json, batch, type) {
     let data = [], labels = [];
-    const title = getTitle(type);;
+    const title = getForecastTitle(type);;
     let start, end;
-
+    const batchSize = 8;
     batch.sort();
     if (batch.length == 0 ) {
         batch = [0]
@@ -63,8 +62,8 @@ function compileData (json, batch, type) {
     for (let batches = 0; batches < batch.length; batches++) {
         const currBatch = batch[batches];
         if (currBatch != 0) {
-            start = (currBatch - 1) * 8;
-            end = 8 * currBatch;
+            start = (currBatch - 1) * batchSize;
+            end = batchSize * currBatch;
         }else {
             start = 0;
             end = json.length;
@@ -73,7 +72,7 @@ function compileData (json, batch, type) {
         //extracting the forecast data 
         for (let index = start; index < end ;index++) {
             const currJSON = json[index];
-            data.push(extractData(currJSON, type));
+            data.push(extractForecastData(currJSON, type));
             //getting the time for which this data is predicted for
             let time = currJSON["dt"];
             //the time final format is hh: mm pm/am-dd/m
@@ -81,12 +80,12 @@ function compileData (json, batch, type) {
         }
     }
     setTimeout(() => {
-        drawGraph(data, title, labels);
+        drawGraph(data, title, labels, "forecastChartContainer", "forecastGraph");
     }, 300);
 }
 
 //base on the selected chart type, return the title of the chart
-function getTitle (type) {
+function getForecastTitle (type) {
     if (type === "1") {
         return "Temperature";
     }else if (type === "2"){
@@ -97,16 +96,16 @@ function getTitle (type) {
 }
 
 //get the day for the labels in the chart
-function getDataDay (time) {
-    const date = new Date(time * 1000);
+function getDataDay (timestamp) {
+    const date = new Date(timestamp * 1000);
     //getting the date and month for the time
     const day = `${date.getUTCDate()}/${1+date.getUTCMonth()}`;
     //formatting the time to hh:mm pm/am
-    time = timeFormater(time);
-    return `${time}-${day}`;
+    timestamp = timeFormater(timestamp);
+    return `${timestamp}-${day}`;
 }
 
-function extractData(json, type) {
+function extractForecastData(json, type) {
     //there's two major option for the chart, temperature and precipitation (rain)
     // 1 means the option choosed is temperature while 2 means precipitation is choosed
     if (type === "1") {
@@ -129,24 +128,24 @@ function extractData(json, type) {
 }
 
 //drawing out the chart using chart.js
-function drawGraph (dataGave, title,labels) {
-    const container = document.getElementById("chartContainer");
+function drawGraph (dataGiven, title, labels, containerID, graphID) {
+    const container = document.getElementById(containerID);
     //There's a bug where the cleared canvas graph will sometimes flickling around the newly drawed graph
     //That's why the app will need to remove an re-add the canvas element into the container
-    const graph = document.getElementById("graph");
+    const graph = document.getElementById(graphID);
     graph.remove();
     const newGraph = document.createElement("canvas");
-    newGraph.setAttribute("id", "graph");
+    newGraph.setAttribute("id", graphID);
     container.appendChild(newGraph);
     let ctx = newGraph.getContext('2d');
     setTimeout(() => {
         let chart = new Chart(ctx, {
-            type: 'line',
+            type: "line",
             data: {
                 labels: labels,
                 datasets: [{
                     borderColor: "#e69e88",
-                    data: dataGave,
+                    data: dataGiven,
                     label: title
                 },
             ]

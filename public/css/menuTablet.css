@@ -142,7 +142,7 @@
         width: 50%;
     }
 
-    #chartContainer {
+    .chartContainer {
         min-height:250px;
         height:20vh;
         width:70vw;

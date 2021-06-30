@@ -27,6 +27,7 @@
             gtag('config', 'G-S22JFJG7BJ');
         </script>
 
+        <!-- Stylesheet section -->
         <link rel="stylesheet" href="css/animation.css"/>
         <link rel="stylesheet" href="css/menuMobile.css"/>
         <link rel="stylesheet" href="css/menuTablet.css"/>
@@ -34,8 +35,8 @@
         <link rel="stylesheet" href="css/dataStructuring.css"/>
     </head>
     <body>
+
         <!--Navigation Section-->
-        
         <div id="navItems" class="fixedEle ">
             <li><a class="navLink" onclick="openClosePage(0)">About</a></li>
             <li><a class="navLink" target="_blank" href="https://github.com/Leonlit/weather_witness">Source Code</a></li>
@@ -96,24 +97,26 @@
 
             <div id="graphContainer" class="container">
                 <div id="graphData" class="dataSection">
-                    <select id="graphType" name="graphChoose" class="forecastConfigure"  onchange="changeGraph()">
+                    <select id="forecastGraphType" name="graphChoose" class="forecastConfigure"  onchange="changeForecastGraph()">
                         <option value="1">Temperature</option>
                         <option value="2">Percipitation</option>
                     </select>
-                    <div id="graphDay" name="graphDay">
-                        <button onclick="changeGraph(1)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
-                        <button onclick="changeGraph(2)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
-                        <button onclick="changeGraph(3)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
-                        <button onclick="changeGraph(4)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
-                        <button onclick="changeGraph(5)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                    <div id="forecastGraphDay" class="graphDay">
+                        <button onclick="changeForecastGraph(1)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changeForecastGraph(2)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changeForecastGraph(3)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changeForecastGraph(4)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changeForecastGraph(5)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
                     </div>
                     <div class="scrollable">
-                        <div id="chartContainer">
-                            <canvas id='graph'></canvas>
+                        <div id="forecastChartContainer" class="chartContainer">
+                            <canvas id="forecastGraph" class="graph"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Pollution section -->
             <div id="pollutionContainer" class="container">
                 <div id="pollutionDataContainer" class="dataSection">
                     <span class="pollutionCurrentData">
@@ -175,7 +178,7 @@
 
             <div id="pollutionForecastContainer" class="container">
                 <div id="pollutionData" class="dataSection">
-                    <select id="pollutionType" name="pollutionChoose" class="forecastConfigure"  onchange="showPollutionData()">
+                    <select id="pollutionType" name="pollutionChoose" class="forecastConfigure"  onchange="changePollutionGraph()">
                         <option value="1"><span>AQI</span></option>
                         <option value="2"><span>CO</span></option>
                         <option value="3"><span>NO</span></option>
@@ -186,20 +189,21 @@
                         <option value="8"><span>PM&#8322;.&#8325;</span></option>
                         <option value="9"><span>PM&#8321;&#8320;</span></option>
                     </select>
-                    <div id="pollutionGraphDay" name="pollutionForecastedDay">
-                        <option value="1"></option>
-                        <option value="2"></option>
-                        <option value="3"></option>
-                        <option value="4"></option>
-                        <option value="5"></option>
-                        <option value="6"></option>
-                        <option value="7"></option>
-                        <option value="8"></option>
-                        <option value="9"></option>
+                    <div id="pollutionGraphDay" name="pollutionForecastedDay" class="graphDay">
+                        <button onclick="changePollutionGraph(1)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changePollutionGraph(2)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changePollutionGraph(3)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changePollutionGraph(4)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changePollutionGraph(5)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changePollutionGraph(6)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changePollutionGraph(7)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changePollutionGraph(8)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changePollutionGraph(9)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
+                        <button onclick="changePollutionGraph(10)" class="forecastConfigure" style="background-color:rgb(159, 137, 230)"></button>
                     </div>
                     <div class="scrollable">
-                        <div id="chartContainer">
-                            <canvas id='pollutionGraph'></canvas>
+                        <div id="pollutionChartContainer" class="chartContainer">
+                            <canvas id="pollutionGraph"></canvas>
                         </div>
                     </div>
                 </div>
@@ -242,11 +246,13 @@
     </body>
 </html>
 
+<!-- Scripts section -->
 <script src="scripts/utilities.js"></script>
 <script src="scripts/userInteraction.js"></script>
 <script src="scripts/clientRequest.js"></script>
 <script src="scripts/forecastGraph.js"></script>
 <script src="scripts/forecast.js"></script>
+<script src="scripts/pollutionGraph.js"></script>
 <script src="scripts/pollution.js"></script>
 <script src="scripts/cacheManagement.js"></script>
 <script src="scripts/pageContent.js"></script>

@@ -1,20 +1,18 @@
 'use strict'
 
-let pollutionData;  
+let forecastPollutionData;
+let pollutionData;
 
 async function getPollutionData (coord) {
     await getJson(2, coord).then((data)=> {
-        console.log(data);
+        showPollutionData(data["list"][0]);
         pollutionData = data;
-        showPollutionData();
-        //showForecastData(true);
+        showPollutionForecastData(true);
     });
 }
 
-function showPollutionData () {
-    console.log(pollutionData);
+function showPollutionData (data) {
     const unit = " μg/m<sup>3</sup>";
-    const data = pollutionData["list"][0];
     const pollutionContainer = document.getElementById("pollutionDataContainer");
     const pollutionFields = pollutionContainer.getElementsByClassName("pollutionData");
     pollutionFields[0].innerHTML = limitSignificantShown(data["main"]["aqi"], 2) + unit;
@@ -28,3 +26,41 @@ function showPollutionData () {
     pollutionFields[8].innerHTML = limitSignificantShown(data["components"]["pm10"], 2) + unit;
 }
 
+function showPollutionForecastData(initial=false) {
+    if (initial) {
+        let coord = pollutionData["coord"]["lat"] + "," + pollutionData["coord"]["lon"];
+        getJson(3, coord).then ((data) => {
+            console.log(data);
+			let dateObj = getStartDateObj(data["list"][0]["dt"]);
+            setPollutionsOptions(dateObj);
+            forecastPollutionData = data;
+            changePollutionGraph(data);
+		}).catch ((err)=>{
+			console.log(err);
+		})
+        
+    }
+}
+
+//setting up the values for the options for pollution
+function setPollutionsOptions (dateObj) {
+    let date = dateObj.getUTCDate();
+	let month = dateObj.getUTCMonth() + 1; //the dateObj.getUTCMonth() provide value starts from 0 to 11 like array element's index
+    var dt = new Date();
+	var year = dt. getFullYear();
+	var numOfDay = new Date(year, month, 0).getDate();
+	const cont = document.getElementById("pollutionGraphDay");
+	const buttons = cont.getElementsByTagName("button");
+	for (let x = 0; x < buttons.length; x++) {
+		let [newDate, newMonth, nextDay, nextMonth] = generateDate(date, month, numOfDay);
+		date = newDate;
+		month = newMonth;
+		const template = `${date++} / ${month} - ${nextDay} / ${nextMonth}`;
+		buttons[x].innerHTML = template;
+	}
+}
+
+function getStartDateObj (time) {
+	let dateObj = new Date(time * 1000);
+    return dateObj;
+}

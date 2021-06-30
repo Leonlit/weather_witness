@@ -235,6 +235,22 @@ function adjustNavShadowOnSetup () {
 	}
 }
 
+function generateDate(date, month, numOfDay) {
+    if (date / numOfDay > 1) {
+        date = 1;
+        month++;
+    }
+
+    let nextDay = date + 1;
+    let nextMonth = month;
+    
+    if (nextDay / numOfDay > 1) {
+        nextDay = 1;
+        nextMonth++;
+    }
+    return [date, month, nextDay, nextMonth]
+}
+
 //getting coord returned by the server, regarding a location
 function getCoordFromJSON (data) {
     let coords = data["coord"];

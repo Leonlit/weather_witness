@@ -370,7 +370,7 @@ a {
 	height:100vh;
 }
 
-#chartContainer {
+.chartContainer {
 	margin-left:50%;
 	transform: translateX(-50%);
 	position: relative;
@@ -517,7 +517,7 @@ datalist option:hover {
 		font-size: 2em;
 	}
 
-	#chartContainer {
+	.chartContainer {
         height:50vh;
     }
 }

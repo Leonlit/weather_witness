@@ -11,7 +11,7 @@ async function getForecastData (city) {
 		//when the data haven't been fetched
 		getJson(1, city).then ((message) => {
 			changeForecastData(message);
-			changeGraph(message);
+			changeForecastGraph(message);
 		}).catch ((err)=>{
 			console.log(err);
 		})
@@ -21,14 +21,21 @@ async function getForecastData (city) {
 }
 
 //updating the date of the forecast option section
-function setOptionDate (date, month) {
-	month++; //the date.getUTCMonth() provide value starts from 0 to 11 like array element's index
+function setOptionDate (dateObj) {
+	let date = dateObj.getUTCDate();
+	let month = dateObj.getUTCMonth() + 1; //the dateObj.getUTCMonth() provide value starts from 0 to 11 like array element's index
+	var dt = new Date();
+	var year = dt. getFullYear();
+	var numOfDay = new Date(year, month, 0).getDate();
 	const cont = document.getElementById("forecastDay");
 	const option = cont.getElementsByTagName("option");
-	const graphCont = document.getElementById("graphDay");
+	const graphCont = document.getElementById("forecastGraphDay");
 	const graphOption = graphCont.getElementsByTagName("button");
 	for (let x = 0; x< 5;x++) {
-		const template = `${date++} / ${month} - ${date} / ${month}`;
+		let [newDate, newMonth, nextDay, nextMonth] = generateDate(date, month, numOfDay);
+		date = newDate;
+		month = newMonth;
+		const template = `${date++} / ${month} - ${nextDay} / ${nextMonth}`;
 		option[x].innerHTML = template;
 		graphOption[x].innerHTML = template;
 	}
@@ -43,15 +50,14 @@ function changeForecastData (initialData) {
 		forecastJson = forecastJson["list"];
 
 		let time = forecastJson[0]["dt"];
-		let date = new Date(time * 1000);
-		setOptionDate(date.getUTCDate(), date.getUTCMonth());
+		let dateObj = new Date(time * 1000);
+		setOptionDate(dateObj);
 	}
 
 	const type = document.getElementById("forecastType").value;
 	const batch = document.getElementById("forecastDay").value;
 	
 	forecastDataCont.style.opacity = "0";
-	console.log(forecastDataCont.style.opacity);
 	setTimeout(() => {
 		switch (type) {
 			case "temperature":
@@ -69,7 +75,6 @@ function changeForecastData (initialData) {
 		}
 		forecastDataCont.style.opacity = "1";
 	}, 310);
-	console.log(forecastDataCont.style.opacity);
 }
 
 //will be using temperature, weather id, time, percipitation, winds for forecast data presentation.
