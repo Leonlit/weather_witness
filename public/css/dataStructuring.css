@@ -165,7 +165,7 @@
     background-color: #8AA2E6;
 }
 
-#graphContainer .scrollable{
+.container .scrollable{
     background-color: white;
     margin-top:50px;
     margin-bottom:50px;
