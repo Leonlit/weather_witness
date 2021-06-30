@@ -84,15 +84,15 @@ function getPollutionTitle (type) {
         "Nitrogen dioxide",
         "Ozone",
         "Sulfur dioxide",
+        "Ammonia",
         "Particulates Matter 2.5",
-        "Particulates Matter 10",
-        "Ammonia"
+        "Particulates Matter 10"
     ]
     return title[parseInt(type)];
 }
 
 function extractPollutionData (json, type) {
-    const labels = ["", "co", "no", "no2", "o3", "so2", "pm2_5", "pm10", "nh3"];
+    const labels = ["", "co", "no", "no2", "o3", "so2", "nh3", "pm2_5", "pm10"];
     let value;
     try {
         if (type == 1) {
