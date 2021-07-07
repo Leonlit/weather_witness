@@ -127,6 +127,14 @@ a {
 	text-shadow:0px 0px 5px black;
 }
 
+h1.sectionHeader {
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	text-shadow: 1px 1px 5px black;
+	font-size: 2.5em;
+}
+
 #page{
 	top:15%;
 	left:5%;
@@ -179,7 +187,7 @@ a {
 }
 
 .pageLink {
-	color:green;
+	color:orange;
 	cursor: pointer;
 }
 
@@ -188,7 +196,7 @@ a {
 }
 
 .pageLink:hover {
-	color:orange;
+	color:orangered;
 }
 
 #weatherIcon{
@@ -459,7 +467,7 @@ footer span {
 }
 
 .footerLink:hover{
-	color: #85d26a;
+	color: orangered;
 }
 
 .separator {

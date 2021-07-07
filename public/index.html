@@ -64,7 +64,7 @@
                 <div id="weather"></div>
                 <div id="location"></div>
             </div>
-
+            
             <div id="additionalInfo" class="dataContainer">
                 <div>Feels like <span id="feels_like"></span></div>
                 <div>Max. Temperature <span id="maxTemperature"></span></div>
@@ -77,6 +77,7 @@
             
             <div id="forecast">
                 <div id="forecastData" class="dataSection">
+                    <h1 class="sectionHeader">Weather Forecast</h1>
                     <select id="forecastType" name="forecastChoose" class="forecastConfigure"  onchange="changeForecastData()">
                         <option value="temperature">Temperature</option>
                         <option value="percipitation">Percipitation</option>
@@ -97,6 +98,7 @@
 
             <div id="graphContainer" class="container">
                 <div id="graphData" class="dataSection">
+                    <h1 class="sectionHeader">Weather Forecast - Graph view</h1>
                     <select id="forecastGraphType" name="graphChoose" class="forecastConfigure"  onchange="changeForecastGraph()">
                         <option value="1">Temperature</option>
                         <option value="2">Percipitation</option>
@@ -118,66 +120,70 @@
 
             <!-- Pollution section -->
             <div id="pollutionContainer" class="container">
-                <div id="pollutionDataContainer" class="dataSection">
-                    <span class="pollutionCurrentData">
-                        <div class="pollutionItemsContatiner">
-                            <span class="pollutionTitle">AQI</span>
-                            <span class="pollutionData"></span>
-                        </div>
-                    </span>
-                    <span class="pollutionCurrentData">
-                        <div class="pollutionItemsContatiner">
-                            <span class="pollutionTitle">CO</span>
-                            <span class="pollutionData"></span>
-                        </div>
-                    </span>
-                    <span class="pollutionCurrentData">
-                        <div class="pollutionItemsContatiner">
-                            <span class="pollutionTitle">NO</span>
-                            <span class="pollutionData"></span>
-                        </div>
-                    </span>
-                    <span class="pollutionCurrentData">
-                        <div class="pollutionItemsContatiner">
-                            <span class="pollutionTitle">NO&#8322;</span>
-                            <span class="pollutionData"></span>
-                        </div>
-                    </span>
-                    <span class="pollutionCurrentData">
-                        <div class="pollutionItemsContatiner">
-                            <span class="pollutionTitle">O&#8323;</span>
-                            <span class="pollutionData"></span>
-                        </div>
-                    </span>
-                    <span class="pollutionCurrentData">
-                        <div class="pollutionItemsContatiner">
-                            <span class="pollutionTitle">SO&#8322;</span>
-                            <span class="pollutionData"></span>
-                        </div>
-                    </span>
-                    <span class="pollutionCurrentData">
-                        <div class="pollutionItemsContatiner">
-                            <span class="pollutionTitle">NH&#8323;</span>
-                            <span class="pollutionData"></span>
-                        </div>
-                    </span>
-                    <span class="pollutionCurrentData">
-                        <div class="pollutionItemsContatiner">
-                            <span class="pollutionTitle">PM&#8322;.&#8325;</span>
-                            <span class="pollutionData"></span>
-                        </div>
-                    </span>
-                    <span class="pollutionCurrentData">
-                        <div class="pollutionItemsContatiner">
-                            <span class="pollutionTitle">PM&#8321;&#8320;</span>
-                            <span class="pollutionData"></span>
-                        </div>
-                    </span>
+                <div class="dataSection">
+                    <h1 class="sectionHeader">Pollution Data</h1>
+                    <div id="pollutionDataContainer">
+                        <span class="pollutionCurrentData">
+                            <div class="pollutionItemsContatiner">
+                                <span class="pollutionTitle">AQI</span>
+                                <span class="pollutionData"></span>
+                            </div>
+                        </span>
+                        <span class="pollutionCurrentData">
+                            <div class="pollutionItemsContatiner">
+                                <span class="pollutionTitle">CO</span>
+                                <span class="pollutionData"></span>
+                            </div>
+                        </span>
+                        <span class="pollutionCurrentData">
+                            <div class="pollutionItemsContatiner">
+                                <span class="pollutionTitle">NO</span>
+                                <span class="pollutionData"></span>
+                            </div>
+                        </span>
+                        <span class="pollutionCurrentData">
+                            <div class="pollutionItemsContatiner">
+                                <span class="pollutionTitle">NO&#8322;</span>
+                                <span class="pollutionData"></span>
+                            </div>
+                        </span>
+                        <span class="pollutionCurrentData">
+                            <div class="pollutionItemsContatiner">
+                                <span class="pollutionTitle">O&#8323;</span>
+                                <span class="pollutionData"></span>
+                            </div>
+                        </span>
+                        <span class="pollutionCurrentData">
+                            <div class="pollutionItemsContatiner">
+                                <span class="pollutionTitle">SO&#8322;</span>
+                                <span class="pollutionData"></span>
+                            </div>
+                        </span>
+                        <span class="pollutionCurrentData">
+                            <div class="pollutionItemsContatiner">
+                                <span class="pollutionTitle">NH&#8323;</span>
+                                <span class="pollutionData"></span>
+                            </div>
+                        </span>
+                        <span class="pollutionCurrentData">
+                            <div class="pollutionItemsContatiner">
+                                <span class="pollutionTitle">PM&#8322;.&#8325;</span>
+                                <span class="pollutionData"></span>
+                            </div>
+                        </span>
+                        <span class="pollutionCurrentData">
+                            <div class="pollutionItemsContatiner">
+                                <span class="pollutionTitle">PM&#8321;&#8320;</span>
+                                <span class="pollutionData"></span>
+                            </div>
+                        </span>
+                    </div>
                 </div>
             </div>
 
             <div id="pollutionForecastContainer" class="container">
                 <div id="pollutionData" class="dataSection">
+                    <h1 class="sectionHeader">Pollution Forecast - Graph view</h1>
                     <select id="pollutionType" name="pollutionChoose" class="forecastConfigure"  onchange="changePollutionGraph()">
                         <option value="1"><span>AQI</span></option>
                         <option value="2"><span>CO</span></option>
