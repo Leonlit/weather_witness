@@ -1,2 +1,3 @@
-user-agent: *
-disallow: /request.php
+User-agent: *
+Disallow: /request.php
+Sitemap: https://weather-witness.herokuapp.com/sitemap.xml
