@@ -191,18 +191,18 @@ function setupData (data) {
 		feelsLike = feelsLike.toFixed(1);
 		visibility = visibility.toFixed(2);
 
-		temperatureCont.innerHTML = `${temp} &#8451;`;
-		weatherCont.innerHTML = weather;
+		temperatureCont.textContent = `${temp} \u2103`;
+		weatherCont.textContent = weather;
 		mainWeatherIcon.src=iconUrl;
-		locationCont.innerHTML = city + ", " + country;
+		locationCont.textContent = city + ", " + country;
 
-		feelsLikeCont.innerHTML = `${feelsLike} &#8451;`;
-		maxTempCont.innerHTML = `${maxTemp} &#8451;`;
-		minTempCont.innerHTML = `${minTemp} &#8451;`;
-		pressureCont.innerHTML = `${pressure} hpa`;
-		humidityCont.innerHTML = `${humidity} %`;
-		cloudinessCont.innerHTML = `${clouds} %`;
-		visibilityCont.innerHTML = `${visibility} km`;
+		feelsLikeCont.textContent = `${feelsLike} \u2103`;
+		maxTempCont.textContent = `${maxTemp} \u2103`;
+		minTempCont.textContent = `${minTemp} \u2103`;
+		pressureCont.textContent = `${pressure} hpa`;
+		humidityCont.textContent = `${humidity} %`;
+		cloudinessCont.textContent = `${clouds} %`;
+		visibilityCont.textContent = `${visibility} km`;
 		footer.style.position = "relative";
 
 		document.getElementsByTagName("body")[0].style.height = "100%";

@@ -102,7 +102,7 @@ function setForecastTemperature (batch) {
 			<div class="forecastItems">
 				<div>${time}</div>
 				<img class="forecastIcon" src="${iconUrl}"/>
-				<div>${temp} &#8451;</div>
+				<div>${temp} \u2103</div>
 				<div>${pressure} hpa</div>
 			</div>
 		`
