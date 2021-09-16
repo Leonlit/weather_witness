@@ -88,9 +88,9 @@
 					//server down
 					http_response_code(503);
 					//resettting request as the request failed
-					setcookie("lastTimeStamp", $resetTime, null, ROOT_DiR, DOMAIN_NAME, true, true);
-					setcookie("requestCount", $resetTime, null, ROOT_DiR, DOMAIN_NAME, true, true);
-					setcookie("delayCount", $resetTime, null, ROOT_DiR, DOMAIN_NAME, true, true);
+					setcookie("lastTimeStamp", $resetTime, null, true, true);
+					setcookie("requestCount", $resetTime, null, true, true);
+					setcookie("delayCount", $resetTime, null, true, true);
 				}
 			}
 		}else {

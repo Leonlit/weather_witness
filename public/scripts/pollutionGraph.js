@@ -53,7 +53,7 @@ function compileData (json, batch, type) {
         if (currBatch != 0) {
             start = (currBatch - 1) * batchSize;
             end = batchSize * currBatch;
-            if (currBatch == 10) {
+            if (currBatch == 5) {
                 end = json.length;
             }
         }else {
@@ -64,12 +64,16 @@ function compileData (json, batch, type) {
         //extracting the forecast data 
         for (let index = start; index < end ;index++) {
             const currJSON = json[index];
+            if (currJSON == undefined) {
+                continue;
+            }
             data.push(extractPollutionData(currJSON, type));
             //getting the time for which this data is predicted for
             let time = currJSON["dt"];
             //the time final format is hh: mm pm/am-dd/m
             labels.push(getDataDay(time));
         }
+        console.log(data);
     }
     setTimeout(() => {
         drawGraph(data, title, labels, "pollutionChartContainer", "pollutionGraph");
